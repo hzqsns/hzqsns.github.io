@@ -98,7 +98,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hzqsns.github.io/2019/05/15/Leetcode-019/a476f4e932fa4499e22902dcb18edba41feaf9cfe4f17869a90874fbb1fd17f5-file_1555694537876.png">
 <meta property="og:image" content="https://hzqsns.github.io/2019/05/15/Leetcode-019/4e134986ba59f69042b2769b84e3f2682f6745033af7bcabcab42922a58091ba-file_1555694482088.png">
-<meta property="og:updated_time" content="2019-05-15T03:23:08.427Z">
+<meta property="og:updated_time" content="2019-05-15T03:25:46.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Leetcode-019">
 <meta name="twitter:description" content="19. 删除链表的倒数第N个节点难度：medium1234567891011题目描述给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。示例：给定一个链表: 1-&amp;gt;2-&amp;gt;3-&amp;gt;4-&amp;gt;5, 和 n = 2.当删除了倒数第二个节点后，链表变为 1-&amp;gt;2-&amp;gt;3-&amp;gt;5.说明：给定的 n 保证是有效的。  我自己的思路:(两次遍历链表的想法)先定义一个">
@@ -448,8 +448,8 @@
 <p><img src="/2019/05/15/Leetcode-019/a476f4e932fa4499e22902dcb18edba41feaf9cfe4f17869a90874fbb1fd17f5-file_1555694537876.png" alt="删除列表中的第 L - n + 1 个元素"></p>
 <p>Java代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">    ListNode dummy = new ListNode(0);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    int length  = 0;</span><br><span class="line">    ListNode first = head;</span><br><span class="line">    while (first != null) &#123;</span><br><span class="line">        length++;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    length -= n;</span><br><span class="line">    first = dummy;</span><br><span class="line">    while (length &gt; 0) &#123;</span><br><span class="line">        length--;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    first.next = first.next.next;</span><br><span class="line">    return dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>##复杂度分析</p>
-<p>时间复杂度：O(L)O(L)，该算法对列表进行了两次遍历，首先计算了列表的长度 LL 其次找到第 (L - n)(L−n) 个结点。 操作执行了 2L-n2L−n 步，时间复杂度为 O(L)O(L)。</p>
-<p>空间复杂度：O(1)O(1)，我们只用了常量级的额外空间。</p>
+<p>时间复杂度：O(L)，该算法对列表进行了两次遍历，首先计算了列表的长度 LL 其次找到第 (L - n)个结点。 操作执行了 2L-n 步，时间复杂度为 O(L)。</p>
+<p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p>
 <hr>
 <p>###方法二：一次遍历算法</p>
 <p>###算法</p>
@@ -457,8 +457,8 @@
 <p><img src="/2019/05/15/Leetcode-019/4e134986ba59f69042b2769b84e3f2682f6745033af7bcabcab42922a58091ba-file_1555694482088.png" alt="删除链表的倒数第 N 个元素"></p>
 <p>Java代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">    ListNode dummy = new ListNode(0);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    ListNode first = dummy;</span><br><span class="line">    ListNode second = dummy;</span><br><span class="line">    // Advances first pointer so that the gap between first and second is n nodes apart</span><br><span class="line">    for (int i = 1; i &lt;= n + 1; i++) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    // Move first to the end, maintaining the gap</span><br><span class="line">    while (first != null) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">        second = second.next;</span><br><span class="line">    &#125;</span><br><span class="line">    second.next = second.next.next;</span><br><span class="line">    return dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>###复杂度分析</p>
-<p>时间复杂度：O(L)O(L)，该算法对含有 LL 个结点的列表进行了一次遍历。因此时间复杂度为 O(L)O(L)。</p>
-<p>空间复杂度：O(1)O(1)，我们只用了常量级的额外空间。</p>
+<p>时间复杂度：O(L)，该算法对含有 L个结点的列表进行了一次遍历。因此时间复杂度为 O(L)。</p>
+<p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p>
 
       
     </div>
@@ -499,8 +499,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/12/20190512/" rel="next" title="20190512">
-                <i class="fa fa-chevron-left"></i> 20190512
+              <a href="/2019/05/14/Leetcode-018/" rel="next" title="Leetcode-018">
+                <i class="fa fa-chevron-left"></i> Leetcode-018
               </a>
             
           </div>
