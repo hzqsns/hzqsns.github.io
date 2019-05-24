@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Nakano Azure">
 <meta property="og:description" content="P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-24T02:22:16.334Z">
+<meta property="og:updated_time" content="2019-05-24T02:27:11.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luoguOJ-P1141">
 <meta name="twitter:description" content="P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm">
@@ -444,42 +444,7 @@
 <h2 id="同一个联通块所在的格子，能到达的格子数都是相同的。"><a href="#同一个联通块所在的格子，能到达的格子数都是相同的。" class="headerlink" title="同一个联通块所在的格子，能到达的格子数都是相同的。"></a>同一个联通块所在的格子，能到达的格子数都是相同的。</h2><p>这样一看，怎么记忆化就已经很明显了，我们已经用cmp数组标记过了当前搜索的格子所在的联通块，用layer表示，那么我们只要再开一个record数组，将已经遍历过的联通块对应的格子数记录下来，那么搜索到相应联通块里的其它格子时，就不用再搜索了，这是一步很大的优化，最终我提交了修改过的代码，100分ac</p>
 <p>自己遇到的坑：<br>第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方~(但是我懒啊)~<br>第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。</p>
 <hr>
-<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h2><p><code>`</code></p>
-<p>#include&lt;bits/stdc++.h&gt;</p>
-<p>using namespace std;</p>
-<p>const int maxn = 1010;<br>const int maxm = 100010;<br>int num = 0;<br>int layer = 1;<br>int record[maxm];<br>char sum[maxn][maxn];<br>int val[maxn][maxn];//定义一个二维数组才存放n<em>n的迷宫<br>int cmp[maxn][maxn];<br>int n,m;//n表示n</em>n迷宫,m表示询问的点的个数<br>//方向数组<br>int dx[4] = {1,0,-1,0};<br>int dy[4] = {0,-1,0,1};<br>void dfs(int x,int y)<br>{<br>    cmp[x][y] = layer;<br>    record[layer] = ++num;<br>    for(int i = 0;i &lt; 4;i++)<br>    {<br>        int a = x + dx[i],b = y + dy[i];<br>        if(val[a][b]==val[x][y])<br>           continue;<br>        if(cmp[a][b] == layer)<br>            continue;<br>        if(a &gt; 0&amp;&amp;a &lt;= n&amp;&amp;b &gt;0&amp;&amp;b &lt;= n)<br>        {<br>            cmp[a][b] = layer;<br>            dfs(a,b);<br>        }<br>    }</p>
-<p>}</p>
-<p>int main()<br>{<br>    cin&gt;&gt;n&gt;&gt;m;<br>    for(int i = 1;i &lt;= n;i++)<br>    {<br>       for(int j = 1;j &lt;= n;j++)<br>       {<br>           cin&gt;&gt;sum[i][j];<br>       }<br>    }</p>
-<pre><code>for(int i = 1;i &lt;= n;i++)
-{
-   for(int j = 1;j &lt;= n;j++)
-   {
-       (sum[i][j] == &apos;1&apos;)&amp;&amp;(val[i][j] = 1);
-   }
-}
-int sum[maxm];
-for(int i = 0;i &lt; m;i++)
-{
-    num = 0;
-    int temp1,temp2;
-    scanf(&quot;%d %d&quot;,&amp;temp1,&amp;temp2);
-    if(record[cmp[temp1][temp2]] == 0){//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中        
-        dfs(temp1,temp2);
-        sum[i] = record[cmp[temp1][temp2]];
-    }
-    else//遇到相同的联通块直接输出对应的record
-    {
-        sum[i] = record[cmp[temp1][temp2]];
-    }
-    layer++;
-
-}
-for(int i = 0;i &lt; m;i++)
-{
-    cout&lt;&lt;sum[i]&lt;&lt;endl;
-}
-return 0;
-</code></pre><p>}</p>
+<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const int maxn = 1010;</span><br><span class="line">const int maxm = 100010;</span><br><span class="line">int num = 0;</span><br><span class="line">int layer = 1;</span><br><span class="line">int record[maxm];</span><br><span class="line">char sum[maxn][maxn];</span><br><span class="line">int val[maxn][maxn];//定义一个二维数组才存放n*n的迷宫</span><br><span class="line">int cmp[maxn][maxn];</span><br><span class="line">int n,m;//n表示n*n迷宫,m表示询问的点的个数</span><br><span class="line">//方向数组</span><br><span class="line">int dx[4] = &#123;1,0,-1,0&#125;;</span><br><span class="line">int dy[4] = &#123;0,-1,0,1&#125;;</span><br><span class="line">void dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    cmp[x][y] = layer;</span><br><span class="line">    record[layer] = ++num;</span><br><span class="line">    for(int i = 0;i &lt; 4;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int a = x + dx[i],b = y + dy[i];</span><br><span class="line">        if(val[a][b]==val[x][y])</span><br><span class="line">           continue;</span><br><span class="line">        if(cmp[a][b] == layer)</span><br><span class="line">            continue;</span><br><span class="line">        if(a &gt; 0&amp;&amp;a &lt;= n&amp;&amp;b &gt;0&amp;&amp;b &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            cmp[a][b] = layer;</span><br><span class="line">            dfs(a,b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       for(int j = 1;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           cin&gt;&gt;sum[i][j];</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       for(int j = 1;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           (sum[i][j] == &apos;1&apos;)&amp;&amp;(val[i][j] = 1);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int sum[maxm];</span><br><span class="line">    for(int i = 0;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num = 0;</span><br><span class="line">        int temp1,temp2;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;temp1,&amp;temp2);</span><br><span class="line">        if(record[cmp[temp1][temp2]] == 0)&#123;//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中        </span><br><span class="line">            dfs(temp1,temp2);</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        else//遇到相同的联通块直接输出对应的record</span><br><span class="line">        &#123;</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        layer++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 0;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt;sum[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
