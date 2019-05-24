@@ -330,6 +330,211 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/24/luoguOJ-P1141/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/20190515113020.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/24/luoguOJ-P1141/" itemprop="url">luoguOJ-P1141</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T09:36:51+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/洛谷OJ/" itemprop="url" rel="index">
+                    <span itemprop="name">洛谷OJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/24/luoguOJ-P1141/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/24/luoguOJ-P1141/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="P1141-01迷宫"><a href="#P1141-01迷宫" class="headerlink" title="P1141 01迷宫"></a><center>P1141 01迷宫</center></h1><h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a><a href="https://www.luogu.org/problemnew/show/P1141" target="_blank" rel="noopener">传送门</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。</p>
+<p>你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。</p>
+<h1 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h1><h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>第1行为两个正整数n,m。</p>
+<p>下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。</p>
+<p>接下来mm行，每行22个用空格分隔的正整数i,j对应了迷宫中第i行第j列的一个格子，询问从这一格开始能移动到多少格。</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>m行，对于每个询问输出相应答案。</p>
+<h1 id="输入输出样例："><a href="#输入输出样例：" class="headerlink" title="输入输出样例："></a>输入输出样例：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">输入样例#1： </span><br><span class="line">2 2</span><br><span class="line">01</span><br><span class="line">10</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line"></span><br><span class="line">输出样例#1： </span><br><span class="line">4</span><br><span class="line">4</span><br><span class="line">--------------------------------------------------</span><br><span class="line">输入样例#2： </span><br><span class="line">8 4</span><br><span class="line">10010011</span><br><span class="line">01100100</span><br><span class="line">10010011</span><br><span class="line">01011011</span><br><span class="line">10001000</span><br><span class="line">00011011</span><br><span class="line">00101000</span><br><span class="line">00000010</span><br><span class="line">1 2</span><br><span class="line">8 6</span><br><span class="line">6 2</span><br><span class="line">4 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出样例#2： </span><br><span class="line">25</span><br><span class="line">19</span><br><span class="line">1</span><br><span class="line">25</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>定义一个数组val来存放迷宫，定义一个数组cmp来判断是否走过<br>1.这道题一眼看上去就是一个深搜，把01用二维数组存下下来，搜索每一个格子然后判断合理情况，如果遇到不相同的格子就记录<br>然后每遇到一个点就重新memset一下cmp重新开始<br>噼里啪啦一顿dfs交上去，TLE了三个点只有70分</p>
+<p>2.这样做问题出在哪里呢？我把测试数据看了一下，发现很恶心，n和m分别取到了1000和100000，那显然，memset是很耗时间的<br>于是我想到把cmp数组的标记改为layer，代表所搜索的格子所在的不同联通块。<br>这样，每一次去数新一个格子所能联通的块数就只要更新layer，节省了很大一块时间(这样就不用每次memset一次cmp数组我觉得这样的做法很巧妙)<br>成功过掉了第二个点也就是n=1000, m=10000的点</p>
+<p>3.但是还有两个点TLE，说明还要需要改进的地方需要我去思考<br>苦苦思索，是与否有其他优化方法，果然，有一条很明显的但是一早就被我忽略了：</p>
+<h2 id="同一个联通块所在的格子，能到达的格子数都是相同的。"><a href="#同一个联通块所在的格子，能到达的格子数都是相同的。" class="headerlink" title="同一个联通块所在的格子，能到达的格子数都是相同的。"></a>同一个联通块所在的格子，能到达的格子数都是相同的。</h2><p>这样一看，怎么记忆化就已经很明显了，我们已经用cmp数组标记过了当前搜索的格子所在的联通块，用layer表示，那么我们只要再开一个record数组，将已经遍历过的联通块对应的格子数记录下来，那么搜索到相应联通块里的其它格子时，就不用再搜索了，这是一步很大的优化，最终我提交了修改过的代码，100分ac</p>
+<p>自己遇到的坑：<br>第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方~(但是我懒啊)~<br>第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。</p>
+<hr>
+<h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h2><p><code>`</code></p>
+<p>#include&lt;bits/stdc++.h&gt;</p>
+<p>using namespace std;</p>
+<p>const int maxn = 1010;<br>const int maxm = 100010;<br>int num = 0;<br>int layer = 1;<br>int record[maxm];<br>char sum[maxn][maxn];<br>int val[maxn][maxn];//定义一个二维数组才存放n<em>n的迷宫<br>int cmp[maxn][maxn];<br>int n,m;//n表示n</em>n迷宫,m表示询问的点的个数<br>//方向数组<br>int dx[4] = {1,0,-1,0};<br>int dy[4] = {0,-1,0,1};<br>void dfs(int x,int y)<br>{<br>    cmp[x][y] = layer;<br>    record[layer] = ++num;<br>    for(int i = 0;i &lt; 4;i++)<br>    {<br>        int a = x + dx[i],b = y + dy[i];<br>        if(val[a][b]==val[x][y])<br>           continue;<br>        if(cmp[a][b] == layer)<br>            continue;<br>        if(a &gt; 0&amp;&amp;a &lt;= n&amp;&amp;b &gt;0&amp;&amp;b &lt;= n)<br>        {<br>            cmp[a][b] = layer;<br>            dfs(a,b);<br>        }<br>    }</p>
+<p>}</p>
+<p>int main()<br>{<br>    cin&gt;&gt;n&gt;&gt;m;<br>    for(int i = 1;i &lt;= n;i++)<br>    {<br>       for(int j = 1;j &lt;= n;j++)<br>       {<br>           cin&gt;&gt;sum[i][j];<br>       }<br>    }</p>
+<pre><code>for(int i = 1;i &lt;= n;i++)
+{
+   for(int j = 1;j &lt;= n;j++)
+   {
+       (sum[i][j] == &apos;1&apos;)&amp;&amp;(val[i][j] = 1);
+   }
+}
+int sum[maxm];
+for(int i = 0;i &lt; m;i++)
+{
+    num = 0;
+    int temp1,temp2;
+    scanf(&quot;%d %d&quot;,&amp;temp1,&amp;temp2);
+    if(record[cmp[temp1][temp2]] == 0){//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中        
+        dfs(temp1,temp2);
+        sum[i] = record[cmp[temp1][temp2]];
+    }
+    else//遇到相同的联通块直接输出对应的record
+    {
+        sum[i] = record[cmp[temp1][temp2]];
+    }
+    layer++;
+
+}
+for(int i = 0;i &lt; m;i++)
+{
+    cout&lt;&lt;sum[i]&lt;&lt;endl;
+}
+return 0;
+</code></pre><p>}</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/23/20190523/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1787,172 +1992,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/06/20190506/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/20190515113020.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/20190506/" itemprop="url">20190506</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T22:17:48+08:00">
-                2019-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/06/20190506/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/06/20190506/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="预习第一天的感受"><a href="#预习第一天的感受" class="headerlink" title="预习第一天的感受"></a><center>预习第一天的感受</center></h1><p>不开心的第一天嗷，不过早晨做实验是真的混啊2333333，本来以为今天要做很久的实验，看了那么一大堆步骤，结果老师都不让我们去做，给了个粗品要我们直接去提纯，简直太快乐了啊哈哈。</p>
-<p>昨天Trump的一条推特导致今天A股暴跌真的是闻所未闻，都快跌6%了，简直就是股灾啊，看别人评论说的，别人美国总统一句话就能让你一无所有，很真实，股市的风险确实是太大了，我觉得我在大学这个阶段一定要慎之又慎才行，我搞这个心态又不好23333，所以要锻炼自己在金融方面的知识才行呢，做一个知识全面的人才行呢。</p>
-<p>下午就不怎么快乐了，今天开始复习物化了，但是真的是好烦啊，本来就不喜欢物理相关的知识，但是这学期两门专业课都涉及物理，简直让我绝望5555555，还以为就算不怎么好好学考试考好点能拿奖学金呢，可惜这学期估计科科及格都难咯</p>
-<p>下午在自习室从4点一直搞到9点半，除去要去上课签到花了点时间，差不多有将近五个小时的时间都可以学习，但是效率是真的低，在自习室整个人都快自闭了，太安静的环境也不适合去学习，脑阔里面非要听点电音或者轻音乐才能去集中自己的注意力，但是有的时候听多了反而又容易走神23333，真的是很难抉择呢，但是好在是已经开头了，我有信心去准备这次的期中考试，这个星期好好努力吧，争取达到能应付考试的水平就行了，然后下个星期再开始准备学习算法，天天运动，嗯，这学期不能再像之前那样了</p>
-<p>这可是你自己说要过一个不一样的五月啊，成年人就应该信守自己所作出的承诺。</p>
-<p>嘛，今天就写这么多吧，每天写日记写博客真的是让自己很喜欢这种生活，为什么不早点开始坚持记录自己每天的生活呢？嘻嘻</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2000,7 +2044,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
