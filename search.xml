@@ -23,6 +23,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Leetcode-022]]></title>
+    <url>%2F2019%2F05%2F24%2FLeetcode-022%2F</url>
+    <content type="text"><![CDATA[22.括号生成难度:medium123456789101112题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ &quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot;] 思路：应用递归的思路来解决这道题只有当左括号大于右括号的时候才进行递归但其实递归的实质就是栈的实现 代码如下:123456789101112131415161718192021class Solution &#123;public:void val_generateParenthesis(int left,int right,string str,int n,vector&lt;string&gt;&amp; val)&#123; if(left &gt; n || right &gt; n) return ; if(left == n &amp;&amp; right == n) val.push_back(str); if(left &gt;= right)//只有左括号的数目大于右括号再进行递归 &#123; val_generateParenthesis(left+1,right,str+&apos;(&apos;,n,val); val_generateParenthesis(left,right+1,str+&apos;)&apos;,n,val); &#125;&#125; vector&lt;string&gt; generateParenthesis(int n) &#123; vector&lt;string&gt; val; val_generateParenthesis(0,0,&quot;&quot;,n,val); return val; &#125;]]></content>
+      <categories>
+        <category>Leetcode</category>
+      </categories>
+      <tags>
+        <tag>每天ac的算法题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[20190523]]></title>
     <url>%2F2019%2F05%2F23%2F20190523%2F</url>
     <content type="text"><![CDATA[半个月来摸出来一点东西吧上回写日记还是5月12号，一晃眼就已经23号了啊这个五月我过得还是比较充实的，基本上实现了基本预定的目标不管是学习上还是其他方面，但是现在面临的问题也更多了诶多，6月15号的六级考试过了之后，23号就要开始期末考试了今天正好整整一个月的时间吧，不说之前重复的话了，没意思，好好努力吧，争取让充实的五月不忘初心吧 今天晚上又发生了不好的事情呢，我和好朋友又吵架了呢，像个hape一样那么大声在街上吵架。。。简直就像是失了智一样，我发现我有的时候就喜欢这样。。。喜欢跟别人较真，喜欢跟别人死磕，每次都是因为一些小事吵起来真的挺无语的，吵架的时候非要分个对错才行吗？有的时候想想就能明白的道理，自己却不去想不去思考，那再有用的大道理又有什么用呢？ 所以啊抛弃这种幼稚的思想吧，努力去成长为一个大人吧！ 这其中也发生了好多好多事情，我也想借这个机会聊聊我自己的看法，比如中美贸易战以及Trump制裁华为这几件事，让我觉得世界并不太平，Trump的目的可能是和以前的日本一样逼迫中国签订类似广场协议的条约所以去年中兴被制裁，领导人直接就去谈判了，今年华为更加严重反倒没去，说明我们是准备和美国打而不是准备去谈判妥协问题。但是我觉得这个时代自己不能太缺乏知识了，还是要去多了解历史经济相关的知识才行。最近看b站上陈平教授的&lt;&lt;眉山论剑&gt;&gt;，我觉得陈平老师的知识很精辟也很到位，对当前一些热点问题的分析我觉得有自己独特的看法，而且也敢说话，没有架子我决定去买本陈平教授的&lt;&lt;代谢增长论&gt;&gt;，多看一点历史案例和西方的一些兴衰史真的是很有意思啊，丰富自己的知识和阅历，我还从来没有主动迫切的想买一本书的时候啊。。。。其实增加自己的知识水平比打游戏更有意思，我决定大学还有两年要利用好时间去学习更多相关的知识，争取能够早日达到能够在知乎上分析问题得出自己观点的水平吧！ 可能是一个最好的五月，也可能是一个最坏的五月x，具体怎么样全看你自己了。]]></content>
