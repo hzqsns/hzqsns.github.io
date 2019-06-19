@@ -1,267 +1,632 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[Leetcode-033]]></title>
-    <url>%2F2019%2F06%2F09%2FLeetcode-033%2F</url>
-    <content type="text"><![CDATA[33. 搜索旋转排序数组题目描述传送门123456789101112131415161718假设按照升序排序的数组在预先未知的某个点上进行了旋转。( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。你可以假设数组中不存在重复的元素。你的算法时间复杂度必须是 O(log n) 级别。示例 1:输入: nums = [4,5,6,7,0,1,2], target = 0输出: 4示例 2:输入: nums = [4,5,6,7,0,1,2], target = 3输出: -1 思路:数组在某个点进行了旋转，那么原来的数组就不是有序的了，所以我们需要遍历数组来找到那个分界点那么问题来了，怎么才能找到那个分界点呢？ 因为题目要求算法的时间复杂度为 O(log n) 级别,所以我们就不能遍历数组来找到那个分界点 而是应该用二分查找的方式来找到那个分界点才能满足时间复杂度的要求 那么怎么用二分查找来获取那个分界点呢？ 答案就是比较low,mid,high三个点的值的大小比较,如果mid &gt; low,说明low到mid之间是有序的所以令low = mid + 1,否则low到mid之间是无序的，令high = mid 最终知道low == high的时候就找到了分界点，然后再比较分界点之间与target的大小然后再分别到两个区间进行二分查找，可以满足要求 代码如下:1234567891011121314151617181920212223242526class Solution &#123; public int search(int[] nums, int target) &#123; if (nums == null || nums.length == 0) return -1; int left = 0; int right = nums.length - 1; while (left &lt; right) &#123; int mid = left + (right - left) / 2; if (nums[mid] &gt; nums[right]) left = mid + 1; else right = mid; &#125; //System.out.println(left); int split_t = left; left = 0; right = nums.length - 1; if (nums[split_t] &lt;= target &amp;&amp; target &lt;= nums[right]) left = split_t; else right = split_t; while (left &lt;= right) &#123; int mid = left + (right - left) / 2; if (nums[mid] == target) return mid; else if (nums[mid] &gt; target) right = mid - 1; else left = mid + 1; &#125; return -1; &#125;&#125;]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>20190616</title>
+      <link href="/2019/06/16/20190616/"/>
+      <url>/2019/06/16/20190616/</url>
+      
+        <content type="html"><![CDATA[<h1 id="迟到好久以来的日记"><a href="#迟到好久以来的日记" class="headerlink" title="迟到好久以来的日记"></a>迟到好久以来的日记</h1><p>摸了好久啊，可能有半个月了？从放松的时光一跃进入考试周，简直就像是在做梦一样，因为根本就没反应过来<br>因为在我的印象里面这学期实在是过的太快了，从2月份开学一直到现在6月份三个多月的时间就这么被我过去了，感觉毫无意义，因为我发现我自己学习缺乏一个系统的过程，每天去leetcode或者洛谷刷题反而让自己没有多大的提高<br>其实仔细想想也不会很奇怪，缺乏系统有效的体系单纯去刷题的提高是很有限的，所以我觉得暑假应该调整好自己的方向<br>刚才又在看陈平教授的眉山论剑，觉得说的真的是太对了<br>第一就是要关心天下大事，关心社会问题在这个时代要有自己的思考<br>第二就是对于未来自己的专业，不是赶着时髦去选专业，而是选适合自己或者自己喜欢做的事情才是最正确的<br>第三就是个人的进步，说来惭愧，我不止一两次在我日记里面写到了，本来大学刚开始就准备要好好学计算机，结果到现在两年了实在是说不上有多少进步，虽然说确实有很多客观的原因影响自己的学习但是人总不能给自己找借口吧，人就是这样子，不喜欢努力，想着天天躺在床上去就能够进步就能够成为大佬，怎么可能呢哈哈哈哈，看着知乎上那些初高中的小弟弟小妹妹们都比自己实力强，不禁心里想问自己心里难道就不会有压迫感吗，我仔细想了想可能也是因为自己周围的环境所造成的，宿舍的人确实过的太舒服了我感觉自己被他们所同化了，其次就是我自己所说的那句话，自己没有经历过的事情，是不会体会到那种感觉的，就是虽然看到知乎上面有那么多的天坑专业的硕士，博士有那么惨痛的经历，可是自己没有亲身体验过，所以没有那种危机感，但是确实，好的话就要听进去，方向比努力更重要，所以我在这里决定，暑假不能够再浪费了，正好在学校也认识了一个志同道合的朋友，虽然之前学校也认识一个沙雕网友还是我把它劝退了，但是在我看来他并没有那么坚定的决心去劝退去脱坑，对于天坑专业还有种幻想，还觉得自己有很多条后路，所以我不太想跟他一起，所以暑假和新朋友去一起参加培训，一起讨论题目甚至还可以一起去考pat，一起明年去考蓝桥杯，我觉得这是很好的事情，自己也确实需要去主动认识一些人了，毕竟你不主动谁来认识你，谁来和你交朋友呢，因为专业的缘故也没参加大学的社团感觉挺遗憾的，所以自己要亲手去弥补这个遗憾才行呢，在网上认识更多的大佬，同时自己也需要更加努力去提升自己的实力才能够配的上跟别人交朋友的资格呢</p><p>其次就是这次618自己也买了几本书，我发现自己对经济，近代史方面确实还挺感兴趣的，所以之后为了提升自己的人文素养也要去看这方面相关的知识，到知乎上面多浏览，和知乎上的大佬们多讨论，要形成自己的看法，形成自己的观点，到b站上面多看看陈平教授这样的视频去提升自己的素养，而不是整天去打游戏，最后一学期下来甚至整个大学下来都没有什么收获，嗯但也不是说不去打游戏，偶尔打打游戏还是可以的，但是要掌握一个度才行，每天要完成任务比如完成一道算法题，刷了leetcode或者学了一个算法才能够自己打游戏，否则就不行，所以在7月2号考完之后所以应该进入考研的模式了，同时每天也要坚持对英语和数学的学习才行，嗯虽然自己的技能栏还是空空如也，但是我相信只要有信念什么时候都不算晚。</p><p>说到底道理谁不知道呢，关键就是大学里面实在是没有自己喜欢做的事情，只有赶着这个时代的潮流了，想起看过吴军博士写过的《浪潮之巅》，确实心潮澎湃，生活在这个变革的时代，不去顺应潮流去做点什么事情，难道不会感到遗憾么，所以坚定自己的决心去当一名geek不也是挺酷的事吗，但其实对自己来说，可能不逼一逼自己就根本就没有危机感和压力感，所以暑假和朋友要好好讨论讨论自己未来的道路了。</p><p>嗯，下个星期就是复习周了所以当前的主要目标就是要应付完这个学期才行，起码及格才行吧，但是能考高一点就高一点，就算自己以后不从事化学这方面的事情，绩点高一点对自己也是无害的。所以加油吧，最后的半个月的时间，需要自己去好好的专注到专业课的方面了，在最后这几天好好努力一把吧，在自习室要提升自己学习的效率了，等考完了再来写日记好好规划下自己吧！</p>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190528]]></title>
-    <url>%2F2019%2F05%2F28%2F20190528%2F</url>
-    <content type="text"><![CDATA[两周年回顾嗯这个打算这个星期写完吧，好好总结和反思一下自己，希望未来能够以此引以为戒。 今天还是开了两周年的班会，不知不觉已经两年了，我也从一个新生成为了一个老学长油条了呢青春，就是在不知不觉中慢慢流逝的呢今天的班会上说了些莫名其妙的话，其实根本都不是我内心里面的真实想法，嘛，毕竟这种东西只能对亲密的人说呢 好吧，那现在我好好总结下我这两年的生活吧17年高考完毕之后，填志愿，那时自己也是真的挺傻的，填志愿都不知道去找几个对应专业的学长学姐问问具体的情况，自己在知乎上就随便搜了几个热门的专业确实是想去学计算机和电气相关的专业，可以填六个志愿，最后一个不知道填什么就随便填了化学，于是乎，命运就这样跟我开了个巨大的玩笑，让我的生活发生了巨大的转折 没错呢，分数不够计算机和电气的专业，于是进了化学系，当时的我确实已经产生了后悔的感觉了，但是这种感觉并不强烈，嗯因为自己没有那种强烈的危机感，自己根本就不知道未来的人生计划到底怎么样，于是像个傻子一样没有目的一样的生活，但是自己给自己定的目标就是要远离化学的坑，说来惭愧，过了两年了自己的编程水平并没有什么明显的提升，但是我并不后悔因为后悔也没用了 大一两个学期都是满满的课，每天上课指纹签到，每天晚上都有晚自习，怎么说呢那段时间还是挺让人怀念的吧，如果对于一个好好学习的学生的话确实挺充实的，有我喜欢的微积分的课和vb的课可以上，别的科目虽然不怎么喜欢但是当时自己没有什么别的想法，还是挺充实的吧，说实话那段时间确实还在经常抱怨什么的，因为确实很累，但是回过头来现在这样懒散的生活反而导致自己没有了原来的动力了。仔细回想了下大一真的没有做什么事情，最大的遗憾可能就是错过了计算机协会吧，其实我内心是想进入一个社团去体验一下大学生活的，但是很可惜，当时自己没什么技能也没什么实力所以也没有进入。(其实内心是炒鸡后悔的，错过了认识一大群可爱的人的机会)第二个遗憾的事情可能就是没有好好努力学习知识了吧，把自己的绩点搞上去达到专业的前15%就可以申请转专业了，因为当时自己也不知道转专业的条件和限制，等到了大二去问导员才知道只能大一上学期才能转专业，然而到了大二下学期才知道学校又稍微放宽了大一的转专业的限制，不需要成绩达到前15%就可以申请(所以又错过了一次又一次的机会) 不知道为什么呢，人生就是这样的戏剧性，一次又一次的错过，一直有一件事想搞明白，造成这样的原因到底是因为运气呢还是命中注定呢，不管是大学，高中，甚至是初中，可以改变我命运或者说是人生道路的明明有好几个，但是都被我完美的错过或者说没抓住机会，我真应该好好反思下自己为什么会一而再再而三的犯同样的错误了。 第三个可能做得唯一一件有意义的事情就是去考了计算机二级的证书吧，说来也搞笑，当初自己大一上就报了计算机二级考试，还报了两门，一门C语言和一门office，结果自己复习了好多天，考office还遇到的是原题，结果最后考出来两门都没有过，当时真的是，自己去查成绩真的是想死的心都有了，因为还是自己叫另外一个同学去报考的，他也报了两门，结果别人两门都过了，自己两门都没有过，这种巨大的落差真的是让自己感觉好难受，是的，人生本来就是一直在和别人进行比较的时光，我本来心态也一直不好，当时真的是想去跳楼之类的，但是现在想起来这算什么呢，人生的挫折多了去了，可能就是因为要经历过很多很多事情才能锻炼出自己强大的内心吧。嗯，然后下半年又去报了一门C语言，还是自己一个人去的，万幸，这次终于过了，虽然没能拿到优秀，但是良好也挺不错了，总之这次过了之后自己的内心才能有所释怀，毕竟是大学的第一个证书啊，然后我自己下定决心，趁着大学剩下的时间要把能考的证书全部考了(flag无疑) 第四个不好的事情可能就是大一下的无机化学了吧，这个给我的印象挺深的，无机的一次期中考试，考完之后我在全班是倒数第二，这个成绩真的是震惊到我了，可以说是第一次不完全意义上的挂科了吧，然而让我想到我室友的挂科的惨状，下个学期莫名其妙多了一门课要去学，还有补考，那真的是炒鸡痛苦啊，然后我下定决定好好学，万幸最后居然过了，这次给我的警告让我知道了大学决不能挂科啊，不然带来的后果简直就是太痛苦了。 emmmmm好像没了呢，大一好像就这些给自己深刻印象的事情了。 大一的暑假，可真的是太混了，在暑假打了两个月的游戏，说好要学习也没怎么学(间接导致了我现在的现状)想出去旅游也找不到人可以一起出去玩，那时候真的是孤独和寂寞啊，现实中也找不到人可以一起玩，网上也没多少人可以说话，我也不知道当时我是怎么过来的。 然后就进入了大二吧，大二刚进来的时候就进行了所谓的实训，快乐了半个月吧，去博物馆参观和去化工厂参观，说实话其实就是一个走流程的东西，根本就学不到什么东西，去参观化工厂给自己的感受就是又苦又累的生活，我自己下定决心以后要远离这种生活呢。然后大二的课也是好多好多除了好多实验就是好多无意义的课了，当然还有我最讨厌的大物了说起来我也不知道为什么按理来说数学好的人物理不会差到哪里去，但是我偏偏是相反的那一个了，数学还行吧，但是物理真的是巨差无比，哈哈哈我好像不喜欢那种抽象出数学模型的东西。可能我做的最明智的一个决定就是去参加数学竞赛了吧，说巧不巧，其实我之前也不知道这个消息的，还是我一个朋友告诉了我想跟我一起参加比赛之后才有这个想法要去参加一下比赛，嗯买了一本那个黄书去学，每天晚上去学那个知识，真的是炒鸡痛苦，因为我真的是很不喜欢证明题，然后就准备了几个星期去参加初赛，说实话我到现在都不知道是怎么跟我算的成绩，我明明感觉我初赛考的稀烂。。。。然后就告诉我过了，然后要我去参加复赛不过那次经历真的让我超喜欢啊，出去代表打比赛什么的，真的是好有成就感，什么东西都能找学校去报销，和一个同学在酒店住了一晚上hhh那天晚上真的是好美妙啊，好像晚上八点就复习不下去了，从第一天晚上的八点睡到第二天的七点，足足睡了十二个小时，这可能是我这辈子睡的最久的一次了，然而第二天复赛的题目真的好难啊，我好多题都看不懂，最后还是草草的虽然写了然后就交卷了，然后再和别人一起回学校。嗯最后出结果我居然还是考了个省一，真的是在我的意料之外啊，虽然不那么完美，但是对于误打误撞就获奖的我还算挺幸福的了，从此我也知道要好好学习只有自己的实力不断的提升才能自信的去面对任何困难(还有一个惊喜就是前几天突然告诉我省一原来还有奖金hhhh，意外之中的收获吧，但是不知道多久才能打到我的卡上qaq) 之后印象深刻的事情可能就是元旦晚会了吧，不知道为什么呢我就是想参加表演呢，因为感觉自己大学确实没参加过什么精彩的事情呢，于是就和几个室友和同学一起去表演了一个话剧，啊，每天晚上上完晚自习都去练习，动作什么的都要练好练到位，现在想想真的是挺辛苦呢，其实是挺浪费时间的。到了上台的那一天真的是，说实话因为其他人的节目都挺精彩反而我们的节目不那么精彩了，所以没能在同学的记忆里面留下深刻的印象，说实话我挺灰心的，因为付出小于回报，自己辛辛苦苦练了几个星期的节目还不如别人一个女装的印象深刻xd，但是总之还算是很美好的一个回忆了。 然后就是这个学期，大二下学期，可能是最舒服的一个学期了，课也没多少，我也经常逃课去自习，自己可以利用的时间真的是多多了，但是很可惜啊，从三月份到五月份，整整三个月的时间我的水平还是没什么长进，还是停留在数据结构这上面很久了(说到这个真的是对自己好气好气，有的时候不逼一逼自己根本就不行)但是这个学期说实话我并不觉得轻松，因为有三门跟物理相关的专业课要去考试，今天已经2号了，24号就要考第一门了，留给我的时间已经不多了，我决定就算要复习每天也要坚持学习算法，这个绝对不能断，自己给自己买的专栏要看，要实现的算法要坚持自己去实现一遍才行，再加上昨天到的xm3耳机，不能再找借口去放松什么的了，争取重新到达高三那时候的水平，不能再安逸下去了。对了还有15号的6级考试，这个也要认真的去准备，争取一次过，不能让明年考研的时候还被这个困扰。 好了，星期二就开始想写的这个东西我今天终于摸完了，说实话这两年其实不那么精彩，我在大学认识的人也太少了，可以获得的信息也太少了，以后要主动去认识更多更有趣的人才行呢，改变别人不如改变自己，主动去认识别人主动和别人交朋友才能充实自己嘛，虽然有时候会遇到尴尬，但是自己不主动就不会有故事呢！在网上也是这样，争取到知乎上认识更多的小可爱(划掉)qaq哼唧嗯，总结篇就写这么多吧，过几天再写关于未来具体的计划和要达成的目标吧。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-033</title>
+      <link href="/2019/06/09/Leetcode-033/"/>
+      <url>/2019/06/09/Leetcode-033/</url>
+      
+        <content type="html"><![CDATA[<h1 id="33-搜索旋转排序数组"><a href="#33-搜索旋转排序数组" class="headerlink" title="33. 搜索旋转排序数组"></a>33. 搜索旋转排序数组</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p><a href="https://leetcode-cn.com/problems/search-in-rotated-sorted-array/" target="_blank" rel="noopener">传送门</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">假设按照升序排序的数组在预先未知的某个点上进行了旋转。</span><br><span class="line"></span><br><span class="line">( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。</span><br><span class="line"></span><br><span class="line">搜索一个给定的目标值，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。</span><br><span class="line"></span><br><span class="line">你可以假设数组中不存在重复的元素。</span><br><span class="line"></span><br><span class="line">你的算法时间复杂度必须是 O(log n) 级别。</span><br><span class="line"></span><br><span class="line">示例 1:</span><br><span class="line"></span><br><span class="line">输入: nums = [4,5,6,7,0,1,2], target = 0</span><br><span class="line">输出: 4</span><br><span class="line">示例 2:</span><br><span class="line"></span><br><span class="line">输入: nums = [4,5,6,7,0,1,2], target = 3</span><br><span class="line">输出: -1</span><br></pre></td></tr></table></figure></p><p><img src="/2019/06/09/Leetcode-033/73723541_p0_master1200.jpg" alt="不开心"></p><hr><a id="more"></a><p>思路:<br>数组在某个点进行了旋转，那么原来的数组就不是有序的了，所以我们需要遍历数组来找到那个分界点<br>那么问题来了，怎么才能找到那个分界点呢？</p><p>因为题目要求算法的时间复杂度为 O(log n) 级别,所以我们就不能遍历数组来找到那个分界点</p><p>而是应该用二分查找的方式来找到那个分界点才能满足时间复杂度的要求</p><p>那么怎么用二分查找来获取那个分界点呢？</p><p>答案就是比较low,mid,high三个点的值的大小比较,如果mid &gt; low,说明low到mid之间是有序的<br>所以令low = mid + 1,否则low到mid之间是无序的，令high = mid</p><p>最终知道low == high的时候就找到了分界点，然后再比较分界点之间与target的大小<br>然后再分别到两个区间进行二分查找，可以满足要求</p><p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">    public int search(int[] nums, int target) &#123;</span><br><span class="line">        if (nums == null || nums.length == 0) return -1;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int right = nums.length - 1;</span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            int mid = left + (right - left) / 2;</span><br><span class="line">            if (nums[mid] &gt; nums[right]) left = mid + 1;</span><br><span class="line">            else right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        //System.out.println(left);</span><br><span class="line">        int split_t = left;</span><br><span class="line">        left = 0;</span><br><span class="line">        right = nums.length - 1;</span><br><span class="line">        if (nums[split_t] &lt;= target &amp;&amp; target &lt;= nums[right]) left = split_t;</span><br><span class="line">        else right = split_t;</span><br><span class="line">        while (left &lt;= right) &#123;</span><br><span class="line">            int mid = left + (right - left) / 2;</span><br><span class="line">            if (nums[mid] == target) return mid;</span><br><span class="line">            else if (nums[mid] &gt; target) right = mid - 1;</span><br><span class="line">            else left = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[luoguOJ-P1141]]></title>
-    <url>%2F2019%2F05%2F24%2FluoguOJ-P1141%2F</url>
-    <content type="text"><![CDATA[P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm行，每行22个用空格分隔的正整数i,j对应了迷宫中第i行第j列的一个格子，询问从这一格开始能移动到多少格。 输出格式：m行，对于每个询问输出相应答案。 输入输出样例：1234567891011121314151617181920212223242526272829303132输入样例#1： 2 201101 12 2输出样例#1： 44--------------------------------------------------输入样例#2： 8 410010011011001001001001101011011100010000001101100101000000000101 28 66 24 3输出样例#2： 2519125 思路：定义一个数组val来存放迷宫，定义一个数组cmp来判断是否走过1.这道题一眼看上去就是一个深搜，把01用二维数组存下下来，搜索每一个格子然后判断合理情况，如果遇到不相同的格子就记录然后每遇到一个点就重新memset一下cmp重新开始噼里啪啦一顿dfs交上去，TLE了三个点只有70分 2.这样做问题出在哪里呢？我把测试数据看了一下，发现很恶心，n和m分别取到了1000和100000，那显然，memset是很耗时间的于是我想到把cmp数组的标记改为layer，代表所搜索的格子所在的不同联通块。这样，每一次去数新一个格子所能联通的块数就只要更新layer，节省了很大一块时间(这样就不用每次memset一次cmp数组我觉得这样的做法很巧妙)成功过掉了第二个点也就是n=1000, m=10000的点 3.但是还有两个点TLE，说明还要需要改进的地方需要我去思考苦苦思索，是与否有其他优化方法，果然，有一条很明显的但是一早就被我忽略了： 同一个联通块所在的格子，能到达的格子数都是相同的。这样一看，怎么记忆化就已经很明显了，我们已经用cmp数组标记过了当前搜索的格子所在的联通块，用layer表示，那么我们只要再开一个record数组，将已经遍历过的联通块对应的格子数记录下来，那么搜索到相应联通块里的其它格子时，就不用再搜索了，这是一步很大的优化，最终我提交了修改过的代码，100分ac 自己遇到的坑：第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方~(但是我懒啊)~第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。 代码如下:12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 1010;const int maxm = 100010;int num = 0;int layer = 1;int record[maxm];char sum[maxn][maxn];int val[maxn][maxn];//定义一个二维数组才存放n*n的迷宫int cmp[maxn][maxn];int n,m;//n表示n*n迷宫,m表示询问的点的个数//方向数组int dx[4] = &#123;1,0,-1,0&#125;;int dy[4] = &#123;0,-1,0,1&#125;;void dfs(int x,int y)&#123; cmp[x][y] = layer; record[layer] = ++num; for(int i = 0;i &lt; 4;i++) &#123; int a = x + dx[i],b = y + dy[i]; if(val[a][b]==val[x][y]) continue; if(cmp[a][b] == layer) continue; if(a &gt; 0&amp;&amp;a &lt;= n&amp;&amp;b &gt;0&amp;&amp;b &lt;= n) &#123; cmp[a][b] = layer; dfs(a,b); &#125; &#125;&#125;int main()&#123; cin&gt;&gt;n&gt;&gt;m; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; cin&gt;&gt;sum[i][j]; &#125; &#125; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; (sum[i][j] == &apos;1&apos;)&amp;&amp;(val[i][j] = 1); &#125; &#125; int sum[maxm]; for(int i = 0;i &lt; m;i++) &#123; num = 0; int temp1,temp2; scanf(&quot;%d %d&quot;,&amp;temp1,&amp;temp2); if(record[cmp[temp1][temp2]] == 0)&#123;//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中 dfs(temp1,temp2); sum[i] = record[cmp[temp1][temp2]]; &#125; else//遇到相同的联通块直接输出对应的record &#123; sum[i] = record[cmp[temp1][temp2]]; &#125; layer++; &#125; for(int i = 0;i &lt; m;i++) &#123; cout&lt;&lt;sum[i]&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190528</title>
+      <link href="/2019/05/28/20190528/"/>
+      <url>/2019/05/28/20190528/</url>
+      
+        <content type="html"><![CDATA[<h1 id="两周年回顾"><a href="#两周年回顾" class="headerlink" title="两周年回顾"></a><center>两周年回顾</center></h1><p>嗯这个打算这个星期写完吧，好好总结和反思一下自己，希望未来能够以此引以为戒。</p><p>今天还是开了两周年的班会，不知不觉已经两年了，我也从一个新生成为了一个老<del>学长</del>油条了呢<br>青春，就是在不知不觉中慢慢流逝的呢<br>今天的班会上说了些莫名其妙的话，其实根本都不是我内心里面的真实想法，嘛，毕竟这种东西只能对亲密的人说呢</p><p>好吧，那现在我好好总结下我这两年的生活吧<br><img src="/2019/05/28/20190528/74842026_p0_master1200.jpg" alt><br><a id="more"></a><br>17年高考完毕之后，填志愿，那时自己也是真的挺傻的，填志愿都不知道去找几个对应专业的学长学姐问问具体的情况，自己在知乎上就随便搜了几个热门的专业<br>确实是想去学计算机和电气相关的专业，可以填六个志愿，最后一个不知道填什么就随便填了化学，于是乎，命运就这样跟我开了个巨大的玩笑，让我的生活发生了巨大的转折</p><p>没错呢，分数不够计算机和电气的专业，于是进了化学系，当时的我确实已经产生了后悔的感觉了，但是这种感觉并不强烈，嗯因为自己没有那种强烈的危机感，自己根本就不知道未来的人生计划到底怎么样，于是像个傻子一样没有目的一样的生活，但是自己给自己定的目标就是要远离化学的坑，说来惭愧，过了两年了自己的编程水平并没有什么明显的提升，但是我并不后悔<del>因为后悔也没用了</del></p><p>大一两个学期都是满满的课，每天上课指纹签到，每天晚上都有晚自习，怎么说呢那段时间还是挺让人怀念的吧，如果对于一个好好学习的学生的话确实挺充实的，有我喜欢的微积分的课和vb的课可以上，别的科目虽然不怎么喜欢但是当时自己没有什么别的想法，还是挺充实的吧，说实话那段时间确实还在经常抱怨什么的，因为确实很累，但是回过头来现在这样懒散的生活反而导致自己没有了原来的动力了。<br>仔细回想了下大一真的没有做什么事情，最大的遗憾可能就是错过了计算机协会吧，其实我内心是想进入一个社团去体验一下大学生活的，但是很可惜，当时自己没什么技能也没什么实力所以也没有进入。(其实内心是炒鸡后悔的，错过了认识一大群可爱的人的机会)<br>第二个遗憾的事情可能就是没有好好努力学习知识了吧，把自己的绩点搞上去达到专业的前15%就可以申请转专业了，因为当时自己也不知道转专业的条件和限制，等到了大二去问导员才知道只能大一上学期才能转专业，然而到了大二下学期才知道学校又稍微放宽了大一的转专业的限制，不需要成绩达到前15%就可以申请(所以又错过了一次又一次的机会)</p><p>不知道为什么呢，人生就是这样的戏剧性，一次又一次的错过，一直有一件事想搞明白，造成这样的原因到底是因为运气呢还是命中注定呢，不管是大学，高中，甚至是初中，可以改变我命运或者说是人生道路的明明有好几个，但是都被我完美的错过或者说没抓住机会，我真应该好好反思下自己为什么会一而再再而三的犯同样的错误了。</p><p>第三个可能做得唯一一件有意义的事情就是去考了计算机二级的证书吧，说来也搞笑，当初自己大一上就报了计算机二级考试，还报了两门，一门C语言和一门office，结果自己复习了好多天，考office还遇到的是原题，结果最后考出来两门都没有过，当时真的是，自己去查成绩真的是想死的心都有了，因为还是自己叫另外一个同学去报考的，他也报了两门，结果别人两门都过了，自己两门都没有过，这种巨大的落差真的是让自己感觉好难受，是的，人生本来就是一直在和别人进行比较的时光，我本来心态也一直不好，当时真的是想去跳楼之类的，但是现在想起来这算什么呢，人生的挫折多了去了，可能就是因为要经历过很多很多事情才能锻炼出自己强大的内心吧。<br>嗯，然后下半年又去报了一门C语言，还是自己一个人去的，万幸，这次终于过了，虽然没能拿到优秀，但是良好也挺不错了，总之这次过了之后自己的内心才能有所释怀，毕竟是大学的第一个证书啊，然后我自己下定决心，趁着大学剩下的时间要把能考的证书全部考了(flag无疑)</p><p>第四个不好的事情可能就是大一下的无机化学了吧，这个给我的印象挺深的，无机的一次期中考试，考完之后我在全班是倒数第二，这个成绩真的是震惊到我了，可以说是第一次不完全意义上的挂科了吧，然而让我想到我室友的挂科的惨状，下个学期莫名其妙多了一门课要去学，还有补考，那真的是炒鸡痛苦啊，然后我下定决定好好学，万幸最后居然过了，这次给我的警告让我知道了大学决不能挂科啊，不然带来的后果简直就是太痛苦了。</p><p>emmmmm好像没了呢，大一好像就这些给自己深刻印象的事情了。</p><p>大一的暑假，可真的是太混了，在暑假打了两个月的游戏，说好要学习也没怎么学(间接导致了我现在的现状)想出去旅游也找不到人可以一起出去玩，那时候真的是孤独和寂寞啊，现实中也找不到人可以一起玩，网上也没多少人可以说话，我也不知道当时我是怎么过来的。</p><p>然后就进入了大二吧，大二刚进来的时候就进行了所谓的实训，快乐了半个月吧，去博物馆参观和去化工厂参观，说实话其实就是一个走流程的东西，根本就学不到什么东西，去参观化工厂给自己的感受就是又苦又累的生活，我自己下定决心以后要远离这种生活呢。<br>然后大二的课也是好多好多除了好多实验就是好多无意义的课了，当然还有我最讨厌的大物了<br>说起来我也不知道为什么按理来说数学好的人物理不会差到哪里去，但是我偏偏是相反的那一个了，数学还行吧，但是物理真的是巨差无比，哈哈哈我好像不喜欢那种抽象出数学模型的东西。<br>可能我做的最明智的一个决定就是去参加数学竞赛了吧，说巧不巧，其实我之前也不知道这个消息的，还是我一个朋友告诉了我想跟我一起参加比赛之后才有这个想法要去参加一下比赛，嗯买了一本那个黄书去学，每天晚上去学那个知识，真的是炒鸡痛苦，因为我真的是很不喜欢证明题，然后就准备了几个星期去参加初赛，说实话我到现在都不知道是怎么跟我算的成绩，我明明感觉我初赛考的稀烂。。。。然后就告诉我过了，然后要我去参加复赛<br>不过那次经历真的让我超喜欢啊，出去代表打比赛什么的，真的是好有成就感，什么东西都能找学校去报销，和一个同学在酒店住了一晚上hhh那天晚上真的是好美妙啊，好像晚上八点就复习不下去了，从第一天晚上的八点睡到第二天的七点，足足睡了十二个小时，这可能是我这辈子睡的最久的一次了，然而第二天复赛的题目真的好难啊，我好多题都看不懂，最后还是草草的虽然写了然后就交卷了，然后再和别人一起回学校。<br>嗯最后出结果我居然还是考了个省一，真的是在我的意料之外啊，虽然不那么完美，但是对于误打误撞就获奖的我还算挺幸福的了，从此我也知道要好好学习只有自己的实力不断的提升才能自信的去面对任何困难(还有一个惊喜就是前几天突然告诉我省一原来还有奖金hhhh，意外之中的收获吧，但是不知道多久才能打到我的卡上qaq)</p><p>之后印象深刻的事情可能就是元旦晚会了吧，不知道为什么呢我就是想参加表演呢，因为感觉自己大学确实没参加过什么精彩的事情呢，于是就和几个室友和同学一起去表演了一个话剧，啊，每天晚上上完晚自习都去练习，动作什么的都要练好练到位，现在想想真的是挺辛苦呢，其实是挺浪费时间的。<br>到了上台的那一天真的是，说实话因为其他人的节目都挺精彩反而我们的节目不那么精彩了，所以没能在同学的记忆里面留下深刻的印象，说实话我挺灰心的，因为付出小于回报，自己辛辛苦苦练了几个星期的节目还不如别人一个女装的印象深刻xd，但是总之还算是很美好的一个回忆了。</p><p>然后就是这个学期，大二下学期，可能是最舒服的一个学期了，课也没多少，我也经常逃课去自习，自己可以利用的时间真的是多多了，但是很可惜啊，从三月份到五月份，整整三个月的时间我的水平还是没什么长进，还是停留在数据结构这上面很久了(说到这个真的是对自己好气好气，有的时候不逼一逼自己根本就不行)<br>但是这个学期说实话我并不觉得轻松，因为有三门跟物理相关的专业课要去考试，今天已经2号了，24号就要考第一门了，留给我的时间已经不多了，我决定就算要复习每天也要坚持学习算法，这个绝对不能断，自己给自己买的专栏要看，要实现的算法要坚持自己去实现一遍才行，再加上昨天到的xm3耳机，不能再找借口去放松什么的了，争取重新到达高三那时候的水平，不能再安逸下去了。<br>对了还有15号的6级考试，这个也要认真的去准备，争取一次过，不能让明年考研的时候还被这个困扰。</p><hr><p>好了，星期二就开始想写的这个东西我今天终于摸完了，说实话这两年其实不那么精彩，我在大学认识的人也太少了，可以获得的信息也太少了，以后要主动去认识更多更有趣的人才行呢，改变别人不如改变自己，主动去认识别人主动和别人交朋友才能充实自己嘛，虽然有时候会遇到尴尬，但是自己不主动就不会有故事呢！<br>在网上也是这样，争取到知乎上认识更多的小可爱(划掉)qaq哼唧<br>嗯，总结篇就写这么多吧，过几天再写关于未来具体的计划和要达成的目标吧。</p>]]></content>
+      
+      
       <categories>
-        <category>洛谷OJ</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Leetcode-022]]></title>
-    <url>%2F2019%2F05%2F24%2FLeetcode-022%2F</url>
-    <content type="text"><![CDATA[22.括号生成难度:medium123456789101112题目描述给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。例如，给出 n = 3，生成结果为：[ &quot;((()))&quot;, &quot;(()())&quot;, &quot;(())()&quot;, &quot;()(())&quot;, &quot;()()()&quot;] 思路：应用递归的思路来解决这道题只有当左括号大于右括号的时候才进行递归但其实递归的实质就是栈的实现 代码如下:123456789101112131415161718192021class Solution &#123;public:void val_generateParenthesis(int left,int right,string str,int n,vector&lt;string&gt;&amp; val)&#123; if(left &gt; n || right &gt; n) return ; if(left == n &amp;&amp; right == n) val.push_back(str); if(left &gt;= right)//只有左括号的数目大于右括号再进行递归 &#123; val_generateParenthesis(left+1,right,str+&apos;(&apos;,n,val); val_generateParenthesis(left,right+1,str+&apos;)&apos;,n,val); &#125;&#125; vector&lt;string&gt; generateParenthesis(int n) &#123; vector&lt;string&gt; val; val_generateParenthesis(0,0,&quot;&quot;,n,val); return val; &#125;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>luoguOJ-P1141</title>
+      <link href="/2019/05/24/luoguOJ-P1141/"/>
+      <url>/2019/05/24/luoguOJ-P1141/</url>
+      
+        <content type="html"><![CDATA[<h1 id="P1141-01迷宫"><a href="#P1141-01迷宫" class="headerlink" title="P1141 01迷宫"></a><center>P1141 01迷宫</center></h1><h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a><a href="https://www.luogu.org/problemnew/show/P1141" target="_blank" rel="noopener">传送门</a></h2><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。</p><p>你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。</p><h1 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h1><h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>第1行为两个正整数n,m。</p><p>下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。</p><p>接下来mm行，每行22个用空格分隔的正整数i,j对应了迷宫中第i行第j列的一个格子，询问从这一格开始能移动到多少格。</p><h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>m行，对于每个询问输出相应答案。</p><h1 id="输入输出样例："><a href="#输入输出样例：" class="headerlink" title="输入输出样例："></a>输入输出样例：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">输入样例#1： </span><br><span class="line">2 2</span><br><span class="line">01</span><br><span class="line">10</span><br><span class="line">1 1</span><br><span class="line">2 2</span><br><span class="line"></span><br><span class="line">输出样例#1： </span><br><span class="line">4</span><br><span class="line">4</span><br><span class="line">--------------------------------------------------</span><br><span class="line">输入样例#2： </span><br><span class="line">8 4</span><br><span class="line">10010011</span><br><span class="line">01100100</span><br><span class="line">10010011</span><br><span class="line">01011011</span><br><span class="line">10001000</span><br><span class="line">00011011</span><br><span class="line">00101000</span><br><span class="line">00000010</span><br><span class="line">1 2</span><br><span class="line">8 6</span><br><span class="line">6 2</span><br><span class="line">4 3</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出样例#2： </span><br><span class="line">25</span><br><span class="line">19</span><br><span class="line">1</span><br><span class="line">25</span><br></pre></td></tr></table></figure><hr><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>定义一个数组val来存放迷宫，定义一个数组cmp来判断是否走过<br>1.这道题一眼看上去就是一个深搜，把01用二维数组存下下来，搜索每一个格子然后判断合理情况，如果遇到不相同的格子就记录<br>然后每遇到一个点就重新memset一下cmp重新开始<br>噼里啪啦一顿dfs交上去，TLE了三个点只有70分</p><p>2.这样做问题出在哪里呢？我把测试数据看了一下，发现很恶心，n和m分别取到了1000和100000，那显然，memset是很耗时间的<br>于是我想到把cmp数组的标记改为layer，代表所搜索的格子所在的不同联通块。<br>这样，每一次去数新一个格子所能联通的块数就只要更新layer，节省了很大一块时间(这样就不用每次memset一次cmp数组我觉得这样的做法很巧妙)<br>成功过掉了第二个点也就是n=1000, m=10000的点</p><p>3.但是还有两个点TLE，说明还要需要改进的地方需要我去思考<br>苦苦思索，是与否有其他优化方法，果然，有一条很明显的但是一早就被我忽略了：</p><h2 id="同一个联通块所在的格子，能到达的格子数都是相同的。"><a href="#同一个联通块所在的格子，能到达的格子数都是相同的。" class="headerlink" title="同一个联通块所在的格子，能到达的格子数都是相同的。"></a>同一个联通块所在的格子，能到达的格子数都是相同的。</h2><p>这样一看，怎么记忆化就已经很明显了，我们已经用cmp数组标记过了当前搜索的格子所在的联通块，用layer表示，那么我们只要再开一个record数组，将已经遍历过的联通块对应的格子数记录下来，那么搜索到相应联通块里的其它格子时，就不用再搜索了，这是一步很大的优化，最终我提交了修改过的代码，100分ac</p><p>自己遇到的坑：<br>第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方~(但是我懒啊)~<br>第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。</p><hr><h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const int maxn = 1010;</span><br><span class="line">const int maxm = 100010;</span><br><span class="line">int num = 0;</span><br><span class="line">int layer = 1;</span><br><span class="line">int record[maxm];</span><br><span class="line">char sum[maxn][maxn];</span><br><span class="line">int val[maxn][maxn];//定义一个二维数组才存放n*n的迷宫</span><br><span class="line">int cmp[maxn][maxn];</span><br><span class="line">int n,m;//n表示n*n迷宫,m表示询问的点的个数</span><br><span class="line">//方向数组</span><br><span class="line">int dx[4] = &#123;1,0,-1,0&#125;;</span><br><span class="line">int dy[4] = &#123;0,-1,0,1&#125;;</span><br><span class="line">void dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    cmp[x][y] = layer;</span><br><span class="line">    record[layer] = ++num;</span><br><span class="line">    for(int i = 0;i &lt; 4;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int a = x + dx[i],b = y + dy[i];</span><br><span class="line">        if(val[a][b]==val[x][y])</span><br><span class="line">           continue;</span><br><span class="line">        if(cmp[a][b] == layer)</span><br><span class="line">            continue;</span><br><span class="line">        if(a &gt; 0&amp;&amp;a &lt;= n&amp;&amp;b &gt;0&amp;&amp;b &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            cmp[a][b] = layer;</span><br><span class="line">            dfs(a,b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       for(int j = 1;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           cin&gt;&gt;sum[i][j];</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       for(int j = 1;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           (sum[i][j] == &apos;1&apos;)&amp;&amp;(val[i][j] = 1);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int sum[maxm];</span><br><span class="line">    for(int i = 0;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num = 0;</span><br><span class="line">        int temp1,temp2;</span><br><span class="line">        scanf(&quot;%d %d&quot;,&amp;temp1,&amp;temp2);</span><br><span class="line">        if(record[cmp[temp1][temp2]] == 0)&#123;//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中        </span><br><span class="line">            dfs(temp1,temp2);</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        else//遇到相同的联通块直接输出对应的record</span><br><span class="line">        &#123;</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        layer++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 0;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cout&lt;&lt;sum[i]&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> 洛谷OJ </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190523]]></title>
-    <url>%2F2019%2F05%2F23%2F20190523%2F</url>
-    <content type="text"><![CDATA[半个月来摸出来一点东西吧上回写日记还是5月12号，一晃眼就已经23号了啊这个五月我过得还是比较充实的，基本上实现了基本预定的目标不管是学习上还是其他方面，但是现在面临的问题也更多了诶多，6月15号的六级考试过了之后，23号就要开始期末考试了今天正好整整一个月的时间吧，不说之前重复的话了，没意思，好好努力吧，争取让充实的五月不忘初心吧 今天晚上又发生了不好的事情呢，我和好朋友又吵架了呢，像个hape一样那么大声在街上吵架。。。简直就像是失了智一样，我发现我有的时候就喜欢这样。。。喜欢跟别人较真，喜欢跟别人死磕，每次都是因为一些小事吵起来真的挺无语的，吵架的时候非要分个对错才行吗？有的时候想想就能明白的道理，自己却不去想不去思考，那再有用的大道理又有什么用呢？ 所以啊抛弃这种幼稚的思想吧，努力去成长为一个大人吧！ 这其中也发生了好多好多事情，我也想借这个机会聊聊我自己的看法，比如中美贸易战以及Trump制裁华为这几件事，让我觉得世界并不太平，Trump的目的可能是和以前的日本一样逼迫中国签订类似广场协议的条约所以去年中兴被制裁，领导人直接就去谈判了，今年华为更加严重反倒没去，说明我们是准备和美国打而不是准备去谈判妥协问题。但是我觉得这个时代自己不能太缺乏知识了，还是要去多了解历史经济相关的知识才行。最近看b站上陈平教授的&lt;&lt;眉山论剑&gt;&gt;，我觉得陈平老师的知识很精辟也很到位，对当前一些热点问题的分析我觉得有自己独特的看法，而且也敢说话，没有架子我决定去买本陈平教授的&lt;&lt;代谢增长论&gt;&gt;，多看一点历史案例和西方的一些兴衰史真的是很有意思啊，丰富自己的知识和阅历，我还从来没有主动迫切的想买一本书的时候啊。。。。其实增加自己的知识水平比打游戏更有意思，我决定大学还有两年要利用好时间去学习更多相关的知识，争取能够早日达到能够在知乎上分析问题得出自己观点的水平吧！ 可能是一个最好的五月，也可能是一个最坏的五月x，具体怎么样全看你自己了。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-022</title>
+      <link href="/2019/05/24/Leetcode-022/"/>
+      <url>/2019/05/24/Leetcode-022/</url>
+      
+        <content type="html"><![CDATA[<h1 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22.括号生成"></a><center>22.括号生成</center></h1><h2 id="难度-medium"><a href="#难度-medium" class="headerlink" title="难度:medium"></a>难度:medium</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">题目描述</span><br><span class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</span><br><span class="line"></span><br><span class="line">例如，给出 n = 3，生成结果为：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  &quot;((()))&quot;,</span><br><span class="line">  &quot;(()())&quot;,</span><br><span class="line">  &quot;(())()&quot;,</span><br><span class="line">  &quot;()(())&quot;,</span><br><span class="line">  &quot;()()()&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure><hr><p>思路：应用递归的思路来解决这道题<br>只有当左括号大于右括号的时候才进行递归<br>但其实递归的实质就是栈的实现</p><hr><p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">void val_generateParenthesis(int left,int right,string str,int n,vector&lt;string&gt;&amp; val)</span><br><span class="line">&#123;</span><br><span class="line">    if(left &gt; n || right &gt; n)</span><br><span class="line">    return ;</span><br><span class="line">    if(left == n &amp;&amp; right == n)</span><br><span class="line">    val.push_back(str);</span><br><span class="line">    if(left &gt;= right)//只有左括号的数目大于右括号再进行递归</span><br><span class="line">    &#123;</span><br><span class="line">       val_generateParenthesis(left+1,right,str+&apos;(&apos;,n,val);</span><br><span class="line">       val_generateParenthesis(left,right+1,str+&apos;)&apos;,n,val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">vector&lt;string&gt; generateParenthesis(int n) &#123;</span><br><span class="line">       vector&lt;string&gt; val;</span><br><span class="line">       val_generateParenthesis(0,0,&quot;&quot;,n,val);</span><br><span class="line">       return val;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>随手写的一点东西</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[luoguOJ-P1443]]></title>
-    <url>%2F2019%2F05%2F23%2FluoguOJ-P1443%2F</url>
-    <content type="text"><![CDATA[P1443 马的遍历题目描述有一个n*m的棋盘(1&lt; n,m &lt;=400)，在某个点上有一个马,要求你计算出马到达棋盘上任意一个点最少要走几步 输入输出格式输入格式：一行四个数据，棋盘的大小和马的坐标 输出格式：一个n*m的矩阵，代表马到达某个点最少要走几步（左对齐，宽5格，不能到达则输出-1） 1234567891011121314151617181920#输入输出样例输入样例#1： 3 3 1 1输出样例#1： 0 3 2 3 -1 1 2 1 4输入样例#2：6 9 1 1输出样例#2：0 3 2 3 2 3 4 5 4 3 4 1 2 3 4 3 4 5 2 1 4 3 2 3 4 5 4 3 2 3 2 3 4 3 4 5 2 3 2 3 4 3 4 5 4 3 4 3 4 3 4 5 4 5 思考:这题就是一道很典型的bfs的题目根据题目给的首节点，来存入队列里面定义方向数组来模拟马走的八个方向然后把首节点存入队列，然后取出首节点，依次遍历八个方向，然后如果可以就Map2 = Map1 +1这样的话根据这个递推公式可以推出所有可以走的点最后还记得定义一个path数组来判断是否走过就行了 这道题目里面的坑:题目要左对齐宽五格所以要printf(“%-5d”,Map[i][j]) 代码如下:123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;bits/stdc++.h&gt;using namespace std;//P1443 马的遍历int n,m;//定义const int maxn = 410;//定义方向数组来定义马走的八个方向int dx[8] = &#123;1,2,2,1,-2,-1,-2,-1&#125;;int dy[8] = &#123;2,1,-1,-2,1,2,-1,-2&#125;;int Map[maxn][maxn];//定义一个数组记录棋盘上的int path[maxn][maxn];//定义一个路径来判断是否走过当前路径struct Node&#123;//定义一个结构体才存放棋盘坐标的值 int x,y;&#125;;queue&lt;Node&gt; val;//定义一个来存放结点void bfs(Node s)//传入结点&#123; val.push(s); Map[s.x][s.y] = 0;//定义开始为0，其余的结点都是依照这个点而来的 path[s.x][s.y] = 1;//记录路径为走过 while(!val.empty())//如果队列里面不为空则继续循环 &#123; Node temp = val.front(); val.pop(); for(int i = 0;i &lt; 8;i++)//八个方向来进行探测 &#123; Node cmp;//定义一个中间变量来存放数据 cmp.x = temp.x + dx[i]; cmp.y = temp.y + dy[i]; if(path[cmp.x][cmp.y] != 0||cmp.x&lt;1||cmp.x&gt;n||cmp.y&lt;1||cmp.y&gt;m) continue; path[cmp.x][cmp.y] = 1;//记录为走过 Map[cmp.x][cmp.y] = Map[temp.x][temp.y] + 1; val.push(cmp); &#125; &#125;&#125;int main()&#123; memset(Map,-1,sizeof(Map));//定义Map上所有结点为-1，如果这个值不会改变则说明这个点根本走不到 Node s; cin&gt;&gt;n&gt;&gt;m&gt;&gt;s.x&gt;&gt;s.y; bfs(s); for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= m;j++) &#123; printf(&quot;%-5d&quot;,Map[i][j]); &#125; cout&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190523</title>
+      <link href="/2019/05/23/20190523/"/>
+      <url>/2019/05/23/20190523/</url>
+      
+        <content type="html"><![CDATA[<h1 id="半个月来摸出来一点东西吧"><a href="#半个月来摸出来一点东西吧" class="headerlink" title="半个月来摸出来一点东西吧"></a>半个月来摸出来一点东西吧</h1><p>上回写日记还是5月12号，一晃眼就已经23号了啊<br>这个五月我过得还是比较充实的，基本上实现了基本预定的目标<br>不管是学习上还是其他方面，但是现在面临的问题也更多了<br>诶多，6月15号的六级考试过了之后，23号就要开始期末考试了<br>今天正好整整一个月的时间吧，不说之前重复的话了，没意思，好好努力吧，争取让充实的五月不忘初心吧</p><p>今天晚上又发生了不好的事情呢，我和好朋友又吵架了呢，像个hape一样那么大声在街上吵架。。。简直就像是失了智一样，我发现我有的时候就喜欢这样。。。喜欢跟别人较真，喜欢跟别人死磕，每次都是因为一些小事吵起来真的挺无语的，吵架的时候非要分个对错才行吗？有的时候想想就能明白的道理，自己却不去想不去思考，那再有用的大道理又有什么用呢？</p><p>所以啊抛弃这种幼稚的思想吧，努力去成长为一个大人吧！</p><p>这其中也发生了好多好多事情，我也想借这个机会聊聊我自己的看法，比如中美贸易战以及Trump制裁华为这几件事，让我觉得世界并不太平，Trump的目的可能是和以前的日本一样逼迫中国签订类似广场协议的条约<br>所以去年中兴被制裁，领导人直接就去谈判了，今年华为更加严重反倒没去，说明我们是准备和美国打而不是准备去谈判妥协问题。<br>但是我觉得这个时代自己不能太缺乏知识了，还是要去多了解历史经济相关的知识才行。<br>最近看b站上陈平教授的&lt;&lt;眉山论剑&gt;&gt;，我觉得陈平老师的知识很精辟也很到位，对当前一些热点问题的分析我觉得有自己独特的看法，而且也敢说话，没有架子<br>我决定去买本陈平教授的&lt;&lt;代谢增长论&gt;&gt;，多看一点历史案例和西方的一些兴衰史真的是很有意思啊，丰富自己的知识和阅历，我还从来没有主动迫切的想买一本书的时候啊。。。。<br>其实增加自己的知识水平比打游戏更有意思，我决定大学还有两年要利用好时间去学习更多相关的知识，争取能够早日达到能够在知乎上分析问题得出自己观点的水平吧！</p><p>可能是一个最好的五月，也可能是一个最坏的五月x，具体怎么样全看你自己了。</p>]]></content>
+      
+      
       <categories>
-        <category>洛谷OJ</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[luoguOJ-P1162]]></title>
-    <url>%2F2019%2F05%2F20%2FluoguOJ-P1162%2F</url>
-    <content type="text"><![CDATA[P1162 填涂颜色123456789101112131415题目描述由数字0组成的方阵中，有一任意形状闭合圈，闭合圈由数字11构成，围圈时只走上下左右44个方向。现要求把闭合圈内的所有空间都填写成22.例如：6×6的方阵（n=6），涂色前和涂色后的方阵如下：0 0 0 0 0 00 0 1 1 1 10 1 1 0 0 11 1 0 0 0 11 0 0 0 0 11 1 1 1 1 1-----------0 0 0 0 0 00 0 1 1 1 10 1 1 2 2 11 1 2 2 2 11 2 2 2 2 11 1 1 1 1 1 输入输出格式输入格式：每组测试数据第一行一个整数n(1&lt;=n&lt;=30)接下来n行，由0和1组成的n×n的方阵。 方阵内只有一个闭合圈，圈内至少有一个0。 输出格式：已经填好数字2的完整方阵。 输入输出样例12345678910111213141516输入样例#1： 60 0 0 0 0 00 0 1 1 1 10 1 1 0 0 11 1 0 0 0 11 0 0 0 0 11 1 1 1 1 1输出样例#1： 0 0 0 0 0 00 0 1 1 1 10 1 1 2 2 11 1 2 2 2 11 2 2 2 2 11 1 1 1 1 1 说明: 1&lt;=n&lt;=30 思路:定义一个a数组来接受方阵，然后定义一个b数组，在a数组的外围套一层边界，也就是套一层0，这样做的目的是为了让dfs边界的时候能够把闭合圈以外的部分都能够标记(也就是染色) 然后定义方向数组，从(0,0)开始往四个方向依次寻找两个边界中间的部分然后标记，然后b数组对应没染色的地方就是a数组方阵闭合圈里面要找的 代码如下:1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 40;//定义最大的边界int a[maxn][maxn];//用来接收方阵的数组int b[maxn][maxn];//把方阵外面套一层边界,便于dfs寻找边界int N;//N表示N * N的方阵//方向数组,依次为右下左上int dx[4] = &#123;1,0,-1,0&#125;;int dy[4] = &#123;0,-1,0,1&#125;;void dfs(int x,int y)&#123; //当dfs寻找值碰到外边界和内边界时返回上一层 if(x &lt; 0|| x &gt; N+1||y &lt; 0||y &gt; N+1||b[x][y] != 0) &#123; return ; &#125; //如果没碰到边界,继续搜索,令两个边界中间的值为2,并沿着四个方向继续搜索 else &#123; b[x][y] = 1; for(int i = 0;i &lt; 4;i++) &#123; dfs((x + dx[i]),(y + dy[i])); &#125; &#125;&#125;int main()&#123; cin&gt;&gt;N; //输入方阵 for(int i = 1;i &lt;= N;i++) &#123; for(int j = 1;j &lt;=N;j++) &#123; cin&gt;&gt;a[i][j]; &#125; &#125; for(int i = 1;i &lt;= N;i++) &#123; for(int j = 1;j &lt;=N;j++) &#123; if(a[i][j] == 1) b[i][j] = 2; &#125; &#125; dfs(0,0);//对加过边界的b数组进行搜索 for(int i = 1;i &lt;= N;i++) &#123; for(int j = 1;j &lt;=N;j++) &#123; if(b[i][j] == 0) &#123; a[i][j] = 2; &#125; cout&lt;&lt;a[i][j]&lt;&lt;&quot; &quot;; &#125; cout&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 随手写的一点东西 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>luoguOJ-P1443</title>
+      <link href="/2019/05/23/luoguOJ-P1443/"/>
+      <url>/2019/05/23/luoguOJ-P1443/</url>
+      
+        <content type="html"><![CDATA[<h1 id="P1443-马的遍历"><a href="#P1443-马的遍历" class="headerlink" title="P1443 马的遍历"></a><center>P1443 马的遍历</center></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一个n*m的棋盘(1&lt; n,m &lt;=400)，在某个点上有一个马,要求你计算出马到达棋盘上任意一个点最少要走几步</p><h1 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h1><h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>一行四个数据，棋盘的大小和马的坐标</p><h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>一个n*m的矩阵，代表马到达某个点最少要走几步（左对齐，宽5格，不能到达则输出-1）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#输入输出样例</span><br><span class="line"></span><br><span class="line">输入样例#1： </span><br><span class="line">3 3 1 1</span><br><span class="line"></span><br><span class="line">输出样例#1： </span><br><span class="line">0    3    2    </span><br><span class="line">3    -1   1    </span><br><span class="line">2    1    4</span><br><span class="line"></span><br><span class="line">输入样例#2：</span><br><span class="line">6 9 1 1</span><br><span class="line"></span><br><span class="line">输出样例#2：</span><br><span class="line">0 3 2 3 2 3 4 5 4 </span><br><span class="line">3 4 1 2 3 4 3 4 5 </span><br><span class="line">2 1 4 3 2 3 4 5 4 </span><br><span class="line">3 2 3 2 3 4 3 4 5 </span><br><span class="line">2 3 2 3 4 3 4 5 4 </span><br><span class="line">3 4 3 4 3 4 5 4 5</span><br></pre></td></tr></table></figure><hr><p>思考:<br>这题就是一道很典型的bfs的题目<br>根据题目给的首节点，来存入队列里面<br>定义方向数组来模拟马走的八个方向<br>然后把首节点存入队列，然后取出首节点，依次遍历八个方向，然后如果可以就Map2 = Map1 +1<br>这样的话根据这个递推公式可以推出所有可以走的点<br>最后还记得定义一个path数组来判断是否走过就行了</p><p>这道题目里面的坑:<br>题目要左对齐宽五格所以要printf(“%-5d”,Map[i][j])</p><hr><p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//P1443 马的遍历</span><br><span class="line">int n,m;//定义</span><br><span class="line">const int maxn = 410;</span><br><span class="line">//定义方向数组来定义马走的八个方向</span><br><span class="line">int dx[8] = &#123;1,2,2,1,-2,-1,-2,-1&#125;;</span><br><span class="line">int dy[8] = &#123;2,1,-1,-2,1,2,-1,-2&#125;;</span><br><span class="line">int Map[maxn][maxn];//定义一个数组记录棋盘上的</span><br><span class="line">int path[maxn][maxn];//定义一个路径来判断是否走过当前路径</span><br><span class="line">struct Node&#123;//定义一个结构体才存放棋盘坐标的值</span><br><span class="line">     int x,y;</span><br><span class="line">&#125;;</span><br><span class="line">queue&lt;Node&gt; val;//定义一个来存放结点</span><br><span class="line">void bfs(Node s)//传入结点</span><br><span class="line">&#123;</span><br><span class="line">    val.push(s);</span><br><span class="line">    Map[s.x][s.y] = 0;//定义开始为0，其余的结点都是依照这个点而来的</span><br><span class="line">    path[s.x][s.y] = 1;//记录路径为走过</span><br><span class="line">    while(!val.empty())//如果队列里面不为空则继续循环</span><br><span class="line">    &#123;</span><br><span class="line">        Node temp = val.front();</span><br><span class="line">        val.pop();</span><br><span class="line">        for(int i = 0;i &lt; 8;i++)//八个方向来进行探测</span><br><span class="line">        &#123;</span><br><span class="line">            Node cmp;//定义一个中间变量来存放数据</span><br><span class="line">            cmp.x = temp.x + dx[i];</span><br><span class="line">            cmp.y = temp.y + dy[i];</span><br><span class="line">            if(path[cmp.x][cmp.y] != 0||cmp.x&lt;1||cmp.x&gt;n||cmp.y&lt;1||cmp.y&gt;m)</span><br><span class="line">                continue;</span><br><span class="line">            path[cmp.x][cmp.y] = 1;//记录为走过</span><br><span class="line">            Map[cmp.x][cmp.y] = Map[temp.x][temp.y] + 1;</span><br><span class="line">            val.push(cmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    memset(Map,-1,sizeof(Map));//定义Map上所有结点为-1，如果这个值不会改变则说明这个点根本走不到</span><br><span class="line">    Node s;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;s.x&gt;&gt;s.y;</span><br><span class="line">    bfs(s);</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">             printf(&quot;%-5d&quot;,Map[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>洛谷OJ</category>
+          
+          <category> 洛谷OJ </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Leetcode-019]]></title>
-    <url>%2F2019%2F05%2F15%2FLeetcode-019%2F</url>
-    <content type="text"><![CDATA[19. 删除链表的倒数第N个节点难度：medium1234567891011题目描述给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。示例：给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.说明：给定的 n 保证是有效的。 我自己的思路:(两次遍历链表的想法)先定义一个num遍历链表记录结点的总数，然后定义一个cmp = 0，当再次遍历到num - n -1时就表明这个时候的结点是在要删除结点的前一个结点，然后再进行删除操作 这题遇到的坑：不知道leetcode到底有没有头结点，结果最后发现没有头结点，head对应的就是第一个结点，最后定义了一个newhead做头结点来进行操作，如果 1234567891011121314151617181920212223242526272829303132333435/** * Definition for singly-linked list. * struct ListNode &#123; * int val; * ListNode *next; * ListNode(int x) : val(x), next(NULL) &#123;&#125; * &#125;; */class Solution &#123;public: ListNode* removeNthFromEnd(ListNode* head, int n) &#123; ListNode* newhead = new ListNode(0); newhead-&gt;next = head; int num = 0,cmp = 0; ListNode *temp1,*temp2; temp1 = newhead; temp2 = newhead; while(temp1 != NULL)//统计链表的结点数 &#123; temp1 = temp1-&gt;next; num++; &#125; while(cmp != num - n -1 )//定位到要删除结点的前一个结点 &#123; temp2 = temp2-&gt;next; cmp++; &#125; ListNode * flag = new ListNode(0); flag = temp2-&gt;next; temp2-&gt;next = flag-&gt;next; return newhead-&gt;next; &#125;&#125;; 官方的题解思路： ###方法一：两次遍历算法 ###思路 我们注意到这个问题可以容易地简化成另一个问题：删除从列表开头数起的第 (L - n + 1)(L−n+1) 个结点，其中 LL 是列表的长度。只要我们找到列表的长度 LL，这个问题就很容易解决。 ###算法 首先我们将添加一个哑结点作为辅助，该结点位于列表头部。哑结点用来简化某些极端情况，例如列表中只含有一个结点，或需要删除列表的头部。在第一次遍历中，我们找出列表的长度 LL。然后设置一个指向哑结点的指针，并移动它遍历列表，直至它到达第 (L - n)(L−n) 个结点那里。我们把第 (L - n)(L−n) 个结点的 next 指针重新链接至第 (L - n + 2)(L−n+2) 个结点，完成这个算法。 Java代码如下:123456789101112131415161718public ListNode removeNthFromEnd(ListNode head, int n) &#123; ListNode dummy = new ListNode(0); dummy.next = head; int length = 0; ListNode first = head; while (first != null) &#123; length++; first = first.next; &#125; length -= n; first = dummy; while (length &gt; 0) &#123; length--; first = first.next; &#125; first.next = first.next.next; return dummy.next;&#125; ##复杂度分析 时间复杂度：O(L)，该算法对列表进行了两次遍历，首先计算了列表的长度 LL 其次找到第 (L - n)个结点。 操作执行了 2L-n 步，时间复杂度为 O(L)。 空间复杂度：O(1)，我们只用了常量级的额外空间。 ###方法二：一次遍历算法 ###算法 上述算法可以优化为只使用一次遍历。我们可以使用两个指针而不是一个指针。第一个指针从列表的开头向前移动 n+1n+1 步，而第二个指针将从列表的开头出发。现在，这两个指针被 nn 个结点分开。我们通过同时移动两个指针向前来保持这个恒定的间隔，直到第一个指针到达最后一个结点。此时第二个指针将指向从最后一个结点数起的第 nn 个结点。我们重新链接第二个指针所引用的结点的 next 指针指向该结点的下下个结点。 Java代码如下:1234567891011121314151617public ListNode removeNthFromEnd(ListNode head, int n) &#123; ListNode dummy = new ListNode(0); dummy.next = head; ListNode first = dummy; ListNode second = dummy; // Advances first pointer so that the gap between first and second is n nodes apart for (int i = 1; i &lt;= n + 1; i++) &#123; first = first.next; &#125; // Move first to the end, maintaining the gap while (first != null) &#123; first = first.next; second = second.next; &#125; second.next = second.next.next; return dummy.next;&#125; ###复杂度分析 时间复杂度：O(L)，该算法对含有 L个结点的列表进行了一次遍历。因此时间复杂度为 O(L)。 空间复杂度：O(1)，我们只用了常量级的额外空间。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>luoguOJ-P1162</title>
+      <link href="/2019/05/20/luoguOJ-P1162/"/>
+      <url>/2019/05/20/luoguOJ-P1162/</url>
+      
+        <content type="html"><![CDATA[<h1 id="P1162-填涂颜色"><a href="#P1162-填涂颜色" class="headerlink" title="P1162 填涂颜色"></a><center>P1162 填涂颜色</center></h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">题目描述</span><br><span class="line">由数字0组成的方阵中，有一任意形状闭合圈，闭合圈由数字11构成，围圈时只走上下左右44个方向。现要求把闭合圈内的所有空间都填写成22.例如：6×6的方阵（n=6），涂色前和涂色后的方阵如下：</span><br><span class="line">0 0 0 0 0 0</span><br><span class="line">0 0 1 1 1 1</span><br><span class="line">0 1 1 0 0 1</span><br><span class="line">1 1 0 0 0 1</span><br><span class="line">1 0 0 0 0 1</span><br><span class="line">1 1 1 1 1 1</span><br><span class="line">-----------</span><br><span class="line">0 0 0 0 0 0</span><br><span class="line">0 0 1 1 1 1</span><br><span class="line">0 1 1 2 2 1</span><br><span class="line">1 1 2 2 2 1</span><br><span class="line">1 2 2 2 2 1</span><br><span class="line">1 1 1 1 1 1</span><br></pre></td></tr></table></figure><h2 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h2><h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每组测试数据第一行一个整数n(1&lt;=n&lt;=30)<br>接下来n行，由0和1组成的n×n的方阵。</p><p>方阵内只有一个闭合圈，圈内至少有一个0。</p><h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>已经填好数字2的完整方阵。</p><h3 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">输入样例#1： </span><br><span class="line">6</span><br><span class="line">0 0 0 0 0 0</span><br><span class="line">0 0 1 1 1 1</span><br><span class="line">0 1 1 0 0 1</span><br><span class="line">1 1 0 0 0 1</span><br><span class="line">1 0 0 0 0 1</span><br><span class="line">1 1 1 1 1 1</span><br><span class="line"></span><br><span class="line">输出样例#1： </span><br><span class="line">0 0 0 0 0 0</span><br><span class="line">0 0 1 1 1 1</span><br><span class="line">0 1 1 2 2 1</span><br><span class="line">1 1 2 2 2 1</span><br><span class="line">1 2 2 2 2 1</span><br><span class="line">1 1 1 1 1 1</span><br></pre></td></tr></table></figure><p>说明: 1&lt;=n&lt;=30</p><hr><h2 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h2><p>定义一个a数组来接受方阵，然后定义一个b数组，在a数组的外围套一层边界，也就是套一层0，这样做的目的是为了让dfs边界的时候能够把闭合圈以外的部分都能够标记(也就是染色)</p><p>然后定义方向数组，从(0,0)开始往四个方向依次寻找两个边界中间的部分然后标记，然后b数组对应没染色的地方就是a数组方阵闭合圈里面要找的</p><hr><p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int maxn = 40;//定义最大的边界</span><br><span class="line">int a[maxn][maxn];//用来接收方阵的数组</span><br><span class="line">int b[maxn][maxn];//把方阵外面套一层边界,便于dfs寻找边界</span><br><span class="line">int N;//N表示N * N的方阵</span><br><span class="line">//方向数组,依次为右下左上</span><br><span class="line">int dx[4] = &#123;1,0,-1,0&#125;;</span><br><span class="line">int dy[4] = &#123;0,-1,0,1&#125;;</span><br><span class="line"></span><br><span class="line">void dfs(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    //当dfs寻找值碰到外边界和内边界时返回上一层</span><br><span class="line">    if(x &lt; 0|| x &gt; N+1||y &lt; 0||y &gt; N+1||b[x][y] != 0)</span><br><span class="line">    &#123;</span><br><span class="line">        return ;</span><br><span class="line">    &#125;</span><br><span class="line">    //如果没碰到边界,继续搜索,令两个边界中间的值为2,并沿着四个方向继续搜索</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        b[x][y] = 1;</span><br><span class="line">        for(int i = 0;i &lt; 4;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            dfs((x + dx[i]),(y + dy[i]));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;N;</span><br><span class="line">    //输入方阵</span><br><span class="line">    for(int i = 1;i &lt;= N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;=N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;a[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;=N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(a[i][j] == 1)</span><br><span class="line">                b[i][j] = 2;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(0,0);//对加过边界的b数组进行搜索</span><br><span class="line">    for(int i = 1;i &lt;= N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;=N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(b[i][j] == 0)</span><br><span class="line">            &#123;</span><br><span class="line">                a[i][j] = 2;</span><br><span class="line">            &#125;</span><br><span class="line">            cout&lt;&lt;a[i][j]&lt;&lt;&quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> 洛谷OJ </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Leetcode-018]]></title>
-    <url>%2F2019%2F05%2F14%2FLeetcode-018%2F</url>
-    <content type="text"><![CDATA[18.四数之和难度: medium1234567891011121314151617题目描述:给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。注意：答案中不可以包含重复的四元组。示例：给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。满足要求的四元组集合为：[ [-1, 0, 0, 1], [-2, -1, 1, 2], [-2, 0, 0, 2]] 思路:回顾一下三数之和的思路:三数之和的主要思路在于双指针的遍历先把数组从小到大排序，然后再从nums[k]开始从左往右进行遍历因为a + b + c = target此时只要 b + c = target - a相等的话就算找到了然后就是相当于定义两个双指针分别对应 b 和 cint i = k+1int j = nums.length() - 1然后 i , j从k的右边到数组的边界，从两头分别开始进行遍历如果nums[i] + nums[j] &lt; (target -nums[k]) 那么就说明i还需要更大一点才能相等,i++如果nums[i] + nums[j] &gt; (target -nums[k]) 那么就说明j还需要更小一点才能相等,j–最后nums[i] + nums[j] == (target -nums[k]) 的时候记录数据这个时候进行去重的操作，因为第一次相等之后，如果i,j,k后面还有重复的数字的话那么就会有重复的结果那么如果遇到符合条件的重复数组就i++,j–,k++去重 四数之和==&gt;三数之和==&gt;两数之和跟三数之和类似，多了层循环遍历数组，同时也需要注意数组的去重操作1234567891011121314151617181920212223242526272829303132333435363738394041class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) &#123; vector&lt;vector&lt;int&gt;&gt; res; sort(nums.begin(),nums.end()); for(int k=0;k&lt;nums.size();k++)&#123; int i = k + 1; int j = nums.size() - 1; while(i &lt; j)&#123; int value = nums[i] + nums[j]; if(value &gt; (0-nums[k]))&#123; j--; &#125;else if(value &lt; 0-nums[k])&#123; i++; &#125;else&#123; vector&lt;int&gt; list; list.push_back(nums[k]); list.push_back(nums[i]); list.push_back(nums[j]); res.push_back(list); while(i&lt;j &amp;&amp; nums[i] == nums[i+1])&#123; i++; &#125; while(i&lt;j &amp;&amp; nums[j] == nums[j-1])&#123; j--; &#125; i++; j--; &#125; &#125; while(k&lt;nums.size()-1 &amp;&amp; nums[k] == nums[k+1])&#123; k++; &#125; &#125; return res; &#125;&#125;;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-019</title>
+      <link href="/2019/05/15/Leetcode-019/"/>
+      <url>/2019/05/15/Leetcode-019/</url>
+      
+        <content type="html"><![CDATA[<h1 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19. 删除链表的倒数第N个节点"></a><center>19. 删除链表的倒数第N个节点</center></h1><h2 id="难度：medium"><a href="#难度：medium" class="headerlink" title="难度：medium"></a>难度：medium</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">题目描述</span><br><span class="line">给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.</span><br><span class="line"></span><br><span class="line">当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.</span><br><span class="line">说明：</span><br><span class="line"></span><br><span class="line">给定的 n 保证是有效的。</span><br></pre></td></tr></table></figure><hr><p>我自己的思路:<br>(两次遍历链表的想法)<br>先定义一个num遍历链表记录结点的总数，然后定义一个cmp = 0，当再次遍历到num - n -1时就表明这个时候的结点是在要删除结点的前一个结点，然后再进行删除操作</p><p>这题遇到的坑：不知道leetcode到底有没有头结点，结果最后发现没有头结点，head对应的就是第一个结点，最后定义了一个newhead做头结点来进行操作，如果</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* removeNthFromEnd(ListNode* head, int n) &#123;</span><br><span class="line">    ListNode* newhead = new ListNode(0);</span><br><span class="line">    newhead-&gt;next = head;       </span><br><span class="line">    int num = 0,cmp = 0;</span><br><span class="line">    ListNode *temp1,*temp2;    </span><br><span class="line">    temp1 = newhead;</span><br><span class="line">    temp2 = newhead;</span><br><span class="line">    while(temp1 != NULL)//统计链表的结点数</span><br><span class="line">    &#123;</span><br><span class="line">        temp1 = temp1-&gt;next;</span><br><span class="line">        num++;</span><br><span class="line">    &#125;    </span><br><span class="line">     while(cmp != num - n -1 )//定位到要删除结点的前一个结点</span><br><span class="line">    &#123;</span><br><span class="line">        temp2 = temp2-&gt;next;</span><br><span class="line">        cmp++;</span><br><span class="line">    &#125;   </span><br><span class="line">    ListNode * flag = new ListNode(0);</span><br><span class="line">    flag = temp2-&gt;next;</span><br><span class="line">    temp2-&gt;next = flag-&gt;next;</span><br><span class="line">    </span><br><span class="line">    return newhead-&gt;next; </span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><hr><p>官方的题解思路：</p><p>###方法一：两次遍历算法</p><p>###思路</p><p>我们注意到这个问题可以容易地简化成另一个问题：删除从列表开头数起的第 (L - n + 1)(L−n+1) 个结点，其中 LL 是列表的长度。只要我们找到列表的长度 LL，这个问题就很容易解决。</p><p>###算法</p><p>首先我们将添加一个哑结点作为辅助，该结点位于列表头部。哑结点用来简化某些极端情况，例如列表中只含有一个结点，或需要删除列表的头部。在第一次遍历中，我们找出列表的长度 LL。然后设置一个指向哑结点的指针，并移动它遍历列表，直至它到达第 (L - n)(L−n) 个结点那里。我们把第 (L - n)(L−n) 个结点的 next 指针重新链接至第 (L - n + 2)(L−n+2) 个结点，完成这个算法。</p><p><img src="/2019/05/15/Leetcode-019/a476f4e932fa4499e22902dcb18edba41feaf9cfe4f17869a90874fbb1fd17f5-file_1555694537876.png" alt="删除列表中的第 L - n + 1 个元素"></p><p>Java代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">    ListNode dummy = new ListNode(0);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    int length  = 0;</span><br><span class="line">    ListNode first = head;</span><br><span class="line">    while (first != null) &#123;</span><br><span class="line">        length++;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    length -= n;</span><br><span class="line">    first = dummy;</span><br><span class="line">    while (length &gt; 0) &#123;</span><br><span class="line">        length--;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    first.next = first.next.next;</span><br><span class="line">    return dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>##复杂度分析</p><p>时间复杂度：O(L)，该算法对列表进行了两次遍历，首先计算了列表的长度 LL 其次找到第 (L - n)个结点。 操作执行了 2L-n 步，时间复杂度为 O(L)。</p><p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p><hr><p>###方法二：一次遍历算法</p><p>###算法</p><p>上述算法可以优化为只使用一次遍历。我们可以使用两个指针而不是一个指针。第一个指针从列表的开头向前移动 n+1n+1 步，而第二个指针将从列表的开头出发。现在，这两个指针被 nn 个结点分开。我们通过同时移动两个指针向前来保持这个恒定的间隔，直到第一个指针到达最后一个结点。此时第二个指针将指向从最后一个结点数起的第 nn 个结点。我们重新链接第二个指针所引用的结点的 next 指针指向该结点的下下个结点。</p><p><img src="/2019/05/15/Leetcode-019/4e134986ba59f69042b2769b84e3f2682f6745033af7bcabcab42922a58091ba-file_1555694482088.png" alt="删除链表的倒数第 N 个元素"></p><p>Java代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public ListNode removeNthFromEnd(ListNode head, int n) &#123;</span><br><span class="line">    ListNode dummy = new ListNode(0);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    ListNode first = dummy;</span><br><span class="line">    ListNode second = dummy;</span><br><span class="line">    // Advances first pointer so that the gap between first and second is n nodes apart</span><br><span class="line">    for (int i = 1; i &lt;= n + 1; i++) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    // Move first to the end, maintaining the gap</span><br><span class="line">    while (first != null) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">        second = second.next;</span><br><span class="line">    &#125;</span><br><span class="line">    second.next = second.next.next;</span><br><span class="line">    return dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>###复杂度分析</p><p>时间复杂度：O(L)，该算法对含有 L个结点的列表进行了一次遍历。因此时间复杂度为 O(L)。</p><p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190512]]></title>
-    <url>%2F2019%2F05%2F12%2F20190512%2F</url>
-    <content type="text"><![CDATA[一点点小总结吧迟到了两天才有时间写个总结，我也真是懒啊hhh忙碌复习一周的感觉简直就是要了我的命，从零开始学习令我厌恶的化学真的是让我作呕可是我又能有什么办法呢(笑)，为了不挂科，也只能用心的去学了呢，每天一有空就去自习室简直就是让人窒息啊，就感觉提前进入了复习周一样难受啊，不过以后每个周末都要好好努力复习了呢 总之总之，期中考试终于over了，接下来是新の五月的生活啊虽然已经过了一半了，但是也要好好的充实才行呢 这几天又发生了几件让我不开心的事情呢，果然不是每个人都是善意的呢，有的人不喜欢被主动勾搭，有的人不喜欢和我说话，真的是好遗憾呢 诶多诶多，这每天记流水账一样的日记简直就是让我想吐啊233333，果然每天还是应该乱写点想写的东西才好吗 啰里啰嗦了半天还是决定以后如果有意义的事情再来写日记吧233333那么就这样吧今天，希望以后能继续写更多有意义的东西呢]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-018</title>
+      <link href="/2019/05/14/Leetcode-018/"/>
+      <url>/2019/05/14/Leetcode-018/</url>
+      
+        <content type="html"><![CDATA[<h1 id="18-四数之和"><a href="#18-四数之和" class="headerlink" title="18.四数之和"></a><center>18.四数之和</center></h1><h2 id="难度-medium"><a href="#难度-medium" class="headerlink" title="难度: medium"></a>难度: medium</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">题目描述:</span><br><span class="line">给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。</span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">答案中不可以包含重复的四元组。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。</span><br><span class="line"></span><br><span class="line">满足要求的四元组集合为：</span><br><span class="line">[</span><br><span class="line">  [-1,  0, 0, 1],</span><br><span class="line">  [-2, -1, 1, 2],</span><br><span class="line">  [-2,  0, 0, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure><hr><p>思路:<br>回顾一下三数之和的思路:<br>三数之和的主要思路在于双指针的遍历<br>先把数组从小到大排序，然后再从nums[k]开始从左往右进行遍历<br>因为a + b + c = target<br>此时只要 b + c = target - a相等的话就算找到了<br>然后就是相当于定义两个双指针分别对应 b 和 c<br>int i = k+1<br>int j = nums.length() - 1<br>然后 i , j从k的右边到数组的边界，从两头分别开始进行遍历<br>如果nums[i] + nums[j] &lt; (target -nums[k]) 那么就说明i还需要更大一点才能相等,i++<br>如果nums[i] + nums[j] &gt; (target -nums[k]) 那么就说明j还需要更小一点才能相等,j–<br>最后nums[i] + nums[j] == (target -nums[k]) 的时候记录数据<br>这个时候进行去重的操作，因为第一次相等之后，如果i,j,k后面还有重复的数字的话那么就会有重复的结果<br>那么如果遇到符合条件的重复数组就i++,j–,k++去重</p><hr><p>四数之和==&gt;三数之和==&gt;两数之和<br>跟三数之和类似，多了层循环遍历数组，同时也需要注意数组的去重操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res;</span><br><span class="line">        sort(nums.begin(),nums.end());</span><br><span class="line"></span><br><span class="line">        for(int k=0;k&lt;nums.size();k++)&#123;</span><br><span class="line">            int i = k + 1;</span><br><span class="line">            int j = nums.size() - 1;</span><br><span class="line">            while(i &lt; j)&#123;</span><br><span class="line">                int value = nums[i] + nums[j];</span><br><span class="line">                if(value &gt; (0-nums[k]))&#123;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;else if(value &lt; 0-nums[k])&#123;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125;else&#123;</span><br><span class="line">                    vector&lt;int&gt; list;</span><br><span class="line">                    list.push_back(nums[k]);</span><br><span class="line">                    list.push_back(nums[i]);</span><br><span class="line">                    list.push_back(nums[j]);</span><br><span class="line">                    res.push_back(list);</span><br><span class="line">                    while(i&lt;j &amp;&amp; nums[i] == nums[i+1])&#123;</span><br><span class="line">                        i++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    while(i&lt;j &amp;&amp; nums[j] == nums[j-1])&#123;</span><br><span class="line">                        j--;</span><br><span class="line">                    &#125;</span><br><span class="line">                    i++;</span><br><span class="line">                    j--;</span><br><span class="line">                &#125;                </span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            while(k&lt;nums.size()-1 &amp;&amp; nums[k] == nums[k+1])&#123;</span><br><span class="line">                    k++;</span><br><span class="line">            &#125;</span><br><span class="line">           </span><br><span class="line">                </span><br><span class="line">        &#125;</span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190509]]></title>
-    <url>%2F2019%2F05%2F09%2F20190509%2F</url>
-    <content type="text"><![CDATA[令人绝望的星期四嗯，一个星期唯一没课的一天，硬是自己把自己搞自闭了，早晨7点本来只想趴着休息会，结果睡着睡着就睡到九点半了，唔，然后一个上午相当于啥都没干，中午又睡了个觉磨磨蹭蹭到三点钟才起床去自习室，然后到自习室混了7个多小时到十点左右再回来 结构真的是好难啊，好多东西我都搞不懂，还有一天多的时间去学，还有物化这块硬骨头要啃，呜，这个星期过了我就好好做人，游戏都删掉的我要过一个不一样的五月！ by Azure]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190512</title>
+      <link href="/2019/05/12/20190512/"/>
+      <url>/2019/05/12/20190512/</url>
+      
+        <content type="html"><![CDATA[<h1 id="一点点小总结吧"><a href="#一点点小总结吧" class="headerlink" title="一点点小总结吧"></a><center>一点点小总结吧</center></h1><p>迟到了两天才有时间写个总结，我也真是懒啊hhh<br>忙碌复习一周的感觉简直就是要了我的命，从零开始学习令我厌恶的化学真的是让我作呕<br>可是我又能有什么办法呢(笑)，为了不挂科，也只能用心的去学了呢，每天一有空就去自习室简直就是让人窒息啊，就感觉提前进入了复习周一样难受啊，不过以后每个周末都要好好努力复习了呢</p><p>总之总之，期中考试终于over了，接下来是新の五月的生活啊<br>虽然已经过了一半了，但是也要好好的充实才行呢</p><p>这几天又发生了几件让我不开心的事情呢，果然不是每个人都是善意的呢，有的人不喜欢被主动勾搭，有的人不喜欢和我说话，真的是好遗憾呢</p><p>诶多诶多，这每天记流水账一样的日记简直就是让我想吐啊233333，果然每天还是应该乱写点想写的东西才好吗</p><p>啰里啰嗦了半天还是决定以后如果有意义的事情再来写日记吧233333<br>那么就这样吧今天，希望以后能继续写更多有意义的东西呢</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190508]]></title>
-    <url>%2F2019%2F05%2F08%2F20190508%2F</url>
-    <content type="text"><![CDATA[星期三的烦恼嗷今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。 早晨日常逃课，但是早晨学习的效率是真的低啊，又困又要学习，真的是好难熬啊嗷嗷，期中考试的一周真的是难受难受难受难受的要死了，一个星期要学完前面几个月的知识我真是个天才哈哈哈哈哈哈嗝才怪，希望这星期能应付完期中考试吧，再准备其他比赛。 晚上真的是没心思学习了，晚上看汉堡王做活动没忍住买了四五十的外卖呜呜呜，我真的是败家玩意嗷，还口口声声说减肥呜，估计又要胖回去了，嗯嗯这一定是最后一次，嗯最后一次啦，以后为了减肥可不能再这样了5555555 最后就是不能理解为什么要晚上停电维修，唔，明明早晨宿舍都没人它不去检修，非要晚上还没睡觉的时候就停电检修，搞不懂电力部门在想什么 那么今天就这样吧，晚安啦，希望明天没课的一天我能复习完物化和结构的大部分。 by Azure]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190509</title>
+      <link href="/2019/05/09/20190509/"/>
+      <url>/2019/05/09/20190509/</url>
+      
+        <content type="html"><![CDATA[<h1 id="令人绝望的星期四"><a href="#令人绝望的星期四" class="headerlink" title="令人绝望的星期四"></a><center>令人绝望的星期四</center></h1><p>嗯，一个星期唯一没课的一天，硬是自己把自己搞自闭了，早晨7点本来只想趴着休息会，结果睡着睡着就睡到九点半了，唔，然后一个上午相当于啥都没干，中午又睡了个觉磨磨蹭蹭到三点钟才起床去自习室，然后到自习室混了7个多小时到十点左右再回来</p><p>结构真的是好难啊，好多东西我都搞不懂，还有一天多的时间去学，还有物化这块硬骨头要啃，呜，这个星期过了我就好好做人，游戏都删掉的我要过一个不一样的五月！</p><pre><code>by Azure</code></pre>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190507]]></title>
-    <url>%2F2019%2F05%2F07%2F20190507%2F</url>
-    <content type="text"><![CDATA[今日份的记事今天真的是不一样的一天呢 早晨日常去上体育课，本来以为要体测做引体向上，结果那个老师是个明白人233333，我本来一个也做不了的qaq结果挂上面抖了抖就给我算满分了hhhhh，然后测完中途就溜回去洗了个澡就休息了，嗯挺不错的。 中午倒是发生了一些事情让我有点害怕，中午日常吃饱饭，但是一站起来就感觉胃特别不舒服，还好我室友给了我胃药缓解多了，但是以后必须得格外注意了，不能吃的太饱233333 下午好不容易起来去自习室，但是感觉还是效率不是太高，好在今天把物化第二章复习完了，接下来就是明天继续复习第三章和去写期中考试卷子了，嗯感觉这个星期如果熬过去感觉这次的考试是可以挺过去的。 晚上倒是发生了很多愉快的事情，和同一类人聊天是真的愉快，说什么话都能很快就明白根本不用多费口舌，别人说什么东西也能很快就能懂意思，不仅仅是一起讨论问题还是去探讨一些别的话题，我们在一起聊天是真的很开心很开心！希望以后多和这样的好朋友在一起为未来的前途努力吧！说实话真的是很烦为什么没分配到一个宿舍里面啊真的是，我现在越来越讨厌我的室友了，真的不是一类人，只会天天打游戏，应付考试应付别人，关键是还喜欢影响别人，等着瞧吧，再过两年我们走着瞧咯。 这个星期复习完专业课后要重新开始学习算法，英语和数学，嗯一个也不能拉下，尤其是已经把游戏全部都卸载掉了，嗯五月初自己说过的话千万不能再忘了，已经失去太多的东西了好像已经没有再可以失去的了，一起学习的朋友晚上熬夜到三点中还在做leetcode，感觉自己跟别人比起来真的是太舒服了，要找回原来的那种状态，要去让每一天都充实起来才行！加油吧，每天都不忘初心方得始终。 by Azure]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190508</title>
+      <link href="/2019/05/08/20190508/"/>
+      <url>/2019/05/08/20190508/</url>
+      
+        <content type="html"><![CDATA[<h1 id="星期三的烦恼嗷"><a href="#星期三的烦恼嗷" class="headerlink" title="星期三的烦恼嗷"></a><center>星期三的烦恼嗷</center></h1><p>今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。</p><p>早晨日常逃课，但是早晨学习的效率是真的低啊，又困又要学习，真的是好难熬啊嗷嗷，期中考试的一周真的是难受难受难受难受的要死了，一个星期要学完前面几个月的知识我真是个天才哈哈哈哈哈哈嗝才怪，希望这星期能应付完期中考试吧，再准备其他比赛。</p><p>晚上真的是没心思学习了，晚上看汉堡王做活动没忍住买了四五十的外卖呜呜呜，我真的是败家玩意嗷，还口口声声说减肥呜，估计又要胖回去了，嗯嗯这一定是最后一次，嗯最后一次啦，以后为了减肥可不能再这样了5555555</p><p>最后就是不能理解为什么要晚上停电维修，唔，明明早晨宿舍都没人它不去检修，非要晚上还没睡觉的时候就停电检修，搞不懂电力部门在想什么</p><p>那么今天就这样吧，晚安啦，希望明天没课的一天我能复习完物化和结构的大部分。<br>                           by Azure</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190506]]></title>
-    <url>%2F2019%2F05%2F06%2F20190506%2F</url>
-    <content type="text"><![CDATA[预习第一天的感受不开心的第一天嗷，不过早晨做实验是真的混啊2333333，本来以为今天要做很久的实验，看了那么一大堆步骤，结果老师都不让我们去做，给了个粗品要我们直接去提纯，简直太快乐了啊哈哈。 昨天Trump的一条推特导致今天A股暴跌真的是闻所未闻，都快跌6%了，简直就是股灾啊，看别人评论说的，别人美国总统一句话就能让你一无所有，很真实，股市的风险确实是太大了，我觉得我在大学这个阶段一定要慎之又慎才行，我搞这个心态又不好23333，所以要锻炼自己在金融方面的知识才行呢，做一个知识全面的人才行呢。 下午就不怎么快乐了，今天开始复习物化了，但是真的是好烦啊，本来就不喜欢物理相关的知识，但是这学期两门专业课都涉及物理，简直让我绝望5555555，还以为就算不怎么好好学考试考好点能拿奖学金呢，可惜这学期估计科科及格都难咯 下午在自习室从4点一直搞到9点半，除去要去上课签到花了点时间，差不多有将近五个小时的时间都可以学习，但是效率是真的低，在自习室整个人都快自闭了，太安静的环境也不适合去学习，脑阔里面非要听点电音或者轻音乐才能去集中自己的注意力，但是有的时候听多了反而又容易走神23333，真的是很难抉择呢，但是好在是已经开头了，我有信心去准备这次的期中考试，这个星期好好努力吧，争取达到能应付考试的水平就行了，然后下个星期再开始准备学习算法，天天运动，嗯，这学期不能再像之前那样了 这可是你自己说要过一个不一样的五月啊，成年人就应该信守自己所作出的承诺。 嘛，今天就写这么多吧，每天写日记写博客真的是让自己很喜欢这种生活，为什么不早点开始坚持记录自己每天的生活呢？嘻嘻]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190507</title>
+      <link href="/2019/05/07/20190507/"/>
+      <url>/2019/05/07/20190507/</url>
+      
+        <content type="html"><![CDATA[<h1 id="今日份的记事"><a href="#今日份的记事" class="headerlink" title="今日份的记事"></a><center>今日份的记事</center></h1><p>今天真的是不一样的一天呢</p><p>早晨日常去上体育课，本来以为要体测做引体向上，结果那个老师是个明白人233333，我本来一个也做不了的qaq结果挂上面抖了抖就给我算满分了hhhhh，然后测完中途就溜回去洗了个澡就休息了，嗯挺不错的。</p><p>中午倒是发生了一些事情让我有点害怕，中午日常吃饱饭，但是一站起来就感觉胃特别不舒服，还好我室友给了我胃药缓解多了，但是以后必须得格外注意了，不能吃的太饱233333</p><p>下午好不容易起来去自习室，但是感觉还是效率不是太高，好在今天把物化第二章复习完了，接下来就是明天继续复习第三章和去写期中考试卷子了，嗯感觉这个星期如果熬过去感觉这次的考试是可以挺过去的。</p><p>晚上倒是发生了很多愉快的事情，和同一类人聊天是真的愉快，说什么话都能很快就明白根本不用多费口舌，别人说什么东西也能很快就能懂意思，不仅仅是一起讨论问题还是去探讨一些别的话题，我们在一起聊天是真的很开心很开心！希望以后多和这样的好朋友在一起为未来的前途努力吧！说实话真的是很烦为什么没分配到一个宿舍里面啊真的是，我现在越来越讨厌我的室友了，真的不是一类人，只会天天打游戏，应付考试应付别人，关键是还喜欢影响别人，等着瞧吧，再过两年我们走着瞧咯。</p><p>这个星期复习完专业课后要重新开始学习算法，英语和数学，嗯一个也不能拉下，尤其是已经把游戏全部都卸载掉了，嗯五月初自己说过的话千万不能再忘了，已经失去太多的东西了好像已经没有再可以失去的了，一起学习的朋友晚上熬夜到三点中还在做leetcode，感觉自己跟别人比起来真的是太舒服了，要找回原来的那种状态，要去让每一天都充实起来才行！加油吧，每天都不忘初心方得始终。<br>                                       by Azure</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[20190505]]></title>
-    <url>%2F2019%2F05%2F05%2F20190505%2F</url>
-    <content type="text"><![CDATA[今日份的不知所云嗯，五一假期后的第一天上学，感觉还行吧，感觉自己的状态有所回升呢，但是感觉还是要加把劲呢，还有一个星期从零开始准备期中考试啊，真的是最不舒服的一个星期要来了呢 今天真的是莫名其妙的惊喜呢，空间里面突然有个大佬加我，真的是猜不透呢，不是一个世界的人原来想接触我这样的普通人吗？感觉别人的思想真的是不一样呢，想去顶级名校，想去拯救整个社会，想去改造别人的思想，想去像儒家一样去兼济天下，唉，可惜呢，只有生存无忧才会去想这些事呢，继承家产，到大城市的地方有几套房，我如果有这么好的家室就好了啊，有钱可以买自己想买的东西，也没有学业，事业上面的压力就好了，可是啊，这只能存在于幻想之中呢，现实就是我出身一个十八线小城市，没车没房，家里也没钱，唯一值得庆幸的就是父母都挺开明的，知道自己没什么知识，敢于让我自己去做决定，自己去做决定自己未来的人生道路，我觉得这也是不幸中的万幸了吧！ 还有一件事就是我今天才知道我的一个室友前几天刚脱单，这几天又找到了新的女友，怎么说呢，别人大学都谈了三次了我还一次都没有，怎么说呢，从小到大我可能对感情都没有概念吧，被老师把恋爱这个选项在脑海中删除了(其实也有小学到高中越来越丑越来越胖的原因)，但是谁不渴望爱情呢，不说那么奢侈的东西吧，我其实渴望被关心，渴望和别人每天聊天，渴望和别人分享自己的快乐和烦恼，谁喜欢孤独呢，孤独都不是被逼的吗？如果遇到合适的人和志同道合的人，谁又想一个人呢。 诶多，不知不觉又写了这么多，我也不知道自己天天在说什么，但是感觉日常写日记真的让自己感觉很棒，我会继续坚持下去的，记录自己生活的点点滴滴，这样的感觉真的很棒，等我觉得哪天我的东西可以分享给别人的话就会给你们看的，毕竟日记也不是不可以分享给别人的东西，我也希望有人来看我每天生活的点点滴滴，希望以后能遇到更多更棒的朋友！ by Azure]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190506</title>
+      <link href="/2019/05/06/20190506/"/>
+      <url>/2019/05/06/20190506/</url>
+      
+        <content type="html"><![CDATA[<h1 id="预习第一天的感受"><a href="#预习第一天的感受" class="headerlink" title="预习第一天的感受"></a><center>预习第一天的感受</center></h1><p>不开心的第一天嗷，不过早晨做实验是真的混啊2333333，本来以为今天要做很久的实验，看了那么一大堆步骤，结果老师都不让我们去做，给了个粗品要我们直接去提纯，简直太快乐了啊哈哈。</p><p>昨天Trump的一条推特导致今天A股暴跌真的是闻所未闻，都快跌6%了，简直就是股灾啊，看别人评论说的，别人美国总统一句话就能让你一无所有，很真实，股市的风险确实是太大了，我觉得我在大学这个阶段一定要慎之又慎才行，我搞这个心态又不好23333，所以要锻炼自己在金融方面的知识才行呢，做一个知识全面的人才行呢。</p><p>下午就不怎么快乐了，今天开始复习物化了，但是真的是好烦啊，本来就不喜欢物理相关的知识，但是这学期两门专业课都涉及物理，简直让我绝望5555555，还以为就算不怎么好好学考试考好点能拿奖学金呢，可惜这学期估计科科及格都难咯</p><p>下午在自习室从4点一直搞到9点半，除去要去上课签到花了点时间，差不多有将近五个小时的时间都可以学习，但是效率是真的低，在自习室整个人都快自闭了，太安静的环境也不适合去学习，脑阔里面非要听点电音或者轻音乐才能去集中自己的注意力，但是有的时候听多了反而又容易走神23333，真的是很难抉择呢，但是好在是已经开头了，我有信心去准备这次的期中考试，这个星期好好努力吧，争取达到能应付考试的水平就行了，然后下个星期再开始准备学习算法，天天运动，嗯，这学期不能再像之前那样了</p><p>这可是你自己说要过一个不一样的五月啊，成年人就应该信守自己所作出的承诺。</p><p>嘛，今天就写这么多吧，每天写日记写博客真的是让自己很喜欢这种生活，为什么不早点开始坚持记录自己每天的生活呢？嘻嘻</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Leetcode-002]]></title>
-    <url>%2F2019%2F05%2F04%2FLeetcode-002%2F</url>
-    <content type="text"><![CDATA[2. 两数相加难度 : medium题目描述:给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。12345示例：输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807 分析：两个非空的链表表示两个非负的整数，既然是按照逆序的方式来储存，那么就应该对两个链表分别从头开始遍历进行加和操作 用x,y来分别取出两个数对应的数位,用carry来记录是否需要进位先令carry = 0,再计算sum = x + y + carry;如果 sum &gt;= 10,则令carry = 1再让 sum % 10来组成新的数的每一位如果其中一个链表有数可以取出,而另一个链表的下一位为NULL则令为NULL的那一条链表对应的x或者y为0即可 然后最后结束的时候如果carry还为 1,说明最后还多出来一位,则应该再额外多进1。 自己在这题中遇到的问题:Leetcode给的构造函数(struct跟class一样啊，我真的是有点傻了)既然它给的有构造函数ListNode(int x) : val(x), next(NULL) {}则初始化对象的时候一定要调用,那么定义新的结点的时候就一定需要一个初始值(比如0),否则会报错。 代码如下:1234567891011121314151617181920212223242526272829303132333435363738394041424344/** * Definition for singly-linked list. * struct ListNode &#123; * int val; * ListNode *next; * ListNode(int x) : val(x), next(NULL) &#123;&#125; * &#125;; */class Solution &#123;public: ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123; ListNode *p1,*p2,*p3; ListNode *l3 = new ListNode(0); p1 = l1; p2 = l2; p3 = l3; int carry = 0; while(p1 != NULL || p2 != NULL) &#123; //如果对应的数位为NULL,则直接令其为0 int x = (p1 != NULL) ? p1-&gt;val : 0; int y = (p2 != NULL) ? p2-&gt;val : 0; int sum = x + y + carry; (sum / 10)? (carry = 1): (carry = 0); ListNode *s = new ListNode(0);//定义一个新的结点来存放结果,一定要初始化才行 s-&gt;val = sum % 10; p3-&gt;next = s; p3 = s; (p1 != NULL) &amp;&amp; (p1 = p1-&gt;next);//代替if的语句 (p2 != NULL) &amp;&amp; (p2 = p2-&gt;next); &#125; if(carry)//如果最后carry还为1,则说明还需进一位 &#123; ListNode *s = new ListNode(0); s-&gt;val = 1; p3-&gt;next = s; p3 = s; p3-&gt;next = NULL; &#125; l3 = l3-&gt;next; return l3; &#125;&#125;;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>20190505</title>
+      <link href="/2019/05/05/20190505/"/>
+      <url>/2019/05/05/20190505/</url>
+      
+        <content type="html"><![CDATA[<h1 id="今日份的不知所云"><a href="#今日份的不知所云" class="headerlink" title="今日份的不知所云"></a><center>今日份的不知所云</center></h1><p>嗯，五一假期后的第一天上学，感觉还行吧，感觉自己的状态有所回升呢，但是感觉还是要加把劲呢，还有一个星期从零开始准备期中考试啊，真的是最不舒服的一个星期要来了呢</p><p>今天真的是莫名其妙的惊喜呢，空间里面突然有个大佬加我，真的是猜不透呢，不是一个世界的人原来想接触我这样的普通人吗？感觉别人的思想真的是不一样呢，想去顶级名校，想去拯救整个社会，想去改造别人的思想，想去像儒家一样去兼济天下，唉，可惜呢，只有生存无忧才会去想这些事呢，继承家产，到大城市的地方有几套房，我如果有这么好的家室就好了啊，有钱可以买自己想买的东西，也没有学业，事业上面的压力就好了，可是啊，这只能存在于幻想之中呢，现实就是我出身一个十八线小城市，没车没房，家里也没钱，唯一值得庆幸的就是父母都挺开明的，知道自己没什么知识，敢于让我自己去做决定，自己去做决定自己未来的人生道路，我觉得这也是不幸中的万幸了吧！</p><p>还有一件事就是我今天才知道我的一个室友前几天刚脱单，这几天又找到了新的女友，怎么说呢，别人大学都谈了三次了我还一次都没有，怎么说呢，从小到大我可能对感情都没有概念吧，被老师把恋爱这个选项在脑海中删除了(其实也有小学到高中越来越丑越来越胖的原因)，但是谁不渴望爱情呢，不说那么奢侈的东西吧，我其实渴望被关心，渴望和别人每天聊天，渴望和别人分享自己的快乐和烦恼，谁喜欢孤独呢，孤独都不是被逼的吗？如果遇到合适的人和志同道合的人，谁又想一个人呢。</p><p>诶多，不知不觉又写了这么多，我也不知道自己天天在说什么，但是感觉日常写日记真的让自己感觉很棒，我会继续坚持下去的，记录自己生活的点点滴滴，这样的感觉真的很棒，等我觉得哪天我的东西可以分享给别人的话就会给你们看的，毕竟日记也不是不可以分享给别人的东西，我也希望有人来看我每天生活的点点滴滴，希望以后能遇到更多更棒的朋友！<br>                                         by Azure</p>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[新の开始？]]></title>
-    <url>%2F2019%2F05%2F04%2F20190504%2F</url>
-    <content type="text"><![CDATA[新の开始胡乱写一些自己都看不懂的话重新再来，从头开始真的是令人怀念的话语啊,上一次说这个话是高考前一百多天的时候,结果说完也没有多么努力去改变自己的命运,结果自己到了今天这个地步,如今,实在是没有什么可以再失去的东西了 青春？梦想？努力？奋斗？再为自己的年轻付出巨大的代价之后才会后悔,可是又能有什么用呢？一次又一次的悔恨,一次又一次的失败，我实在是厌倦这样的生活了,不知道两年前的自己怎么也想不到今天会到这种地步吧，不仅什么也不会，而且也缺少朋友，缺少能天天和我一起说话的人 孤独？谁又喜欢孤独呢，谁希望自己被逼成这样呢，孤独的人也渴望和朋友一起聊天，一起分享每天的欢乐，一起诉说每天的烦恼，这是我梦想中的生活啊。 然而，每天简直就是有无穷无尽的烦恼，不仅是学业上还是生活中。经过了两年的时间，自己还是啥都不会，虽然早就下定了转行的决心，但是相比跟我年龄一样的科班的人，差距还是巨大，只有每天付出比他们更多的努力才能让自己变得更强生活上，每天被室友吵得心烦，天天只会打游戏，混日子，每个星期还要去实验室跟老师搬砖还浑然不知未来的处境如何，真的是感觉可悲，真不知道再过两年他们会有什么感受。 想起了高中班主任跟我说的话，眼界决定境界，态度决定高度，这句话我现在细想起来还真的是太对了，但可惜我两样都没有论眼界，从小城市出身的我真的是眼界太低，见识也太低了，居然稀里糊涂的报了化学这个天坑专业，高中还以为化学挺有意思的，谁知道大学完全是两个完全相反的学科，跳进了坑真的是感觉自己蠢到极点。论态度，我明知道每天自己该干嘛，却还是天天摸鱼，喜欢看b站，喜欢逛知乎，喜欢玩游戏，反正每天除了学习真的是一堆事都能做，但是只要学习就容易犯困，提不起劲，这个学期把没用的课都翘了好好学算法，学相关一堆知识可以学，但是我还是喜欢浪费时间，整天摸鱼，然后从2月份一直到现在，我真的忍受不了了，必须做出一点改变来才行了，不然就算再给两年的时间给自己也是白费。 已经20岁了，不再是一个小孩子了，是时候该为自己的未来，为自己的前途好好考虑一下了，人不是为自己而活，你还要付出很多很多东西才行，不说那么远，就说为了将来自己幸福的生活现在也应该要好好行动了。嗯，今天把游戏全都卸载了，时间是宝贵的，再也经不起我这样浪费了，两个月的时间，我想重新调整自己的状态，该去自习室去自习室，该休息休息，以后每天十一点上床睡觉，决不熬夜，只有晚上睡好了早晨才有精神去学习，去做其他事情。这个月，再也不能跟自己开玩笑了。总结下最近应该准备的东西吧1.英语六级，每天背10-15个单词2.物理化学，结构化学复习，先把期中考试撑过了再说吧。3.每天一篇算法题目(期中考试前可酌情减少)4.订阅的专栏每天阅读两到三篇文章，有问题多跟小伙伴去讨论5.知乎上多跟别人互动交流，诶多自己不主动怎么会有更多的朋友呢emmmm，如果可以每个星期摸出一篇高质量的回答吧！争取把点赞数和关注数都上去吧，多跟别人到想法下面去互动吧！6.Linux入门吧，再不入门说不过去了。7.继续算法的学习，这个每天不能丢。8.运动也不能停，但是可视情况减少相应的跑步次数来去学习。 嗯，就写这么多吧，现在好像也总算养成了写博客写日记的习惯了，希望再过一年两年的自己再回过头来看不会后悔吧！加油啊]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-002</title>
+      <link href="/2019/05/04/Leetcode-002/"/>
+      <url>/2019/05/04/Leetcode-002/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h1><h3 id="难度-medium"><a href="#难度-medium" class="headerlink" title="难度 : medium"></a>难度 : medium</h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述:"></a>题目描述:</h5><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p><p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p><p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"></span><br><span class="line">输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)</span><br><span class="line">输出：7 -&gt; 0 -&gt; 8</span><br><span class="line">原因：342 + 465 = 807</span><br></pre></td></tr></table></figure></p><hr><p>分析：两个非空的链表表示两个非负的整数，既然是按照逆序的方式来储存，那么就应该对两个链表分别从头开始遍历进行加和操作</p><p>用x,y来分别取出两个数对应的数位,用carry来记录是否需要进位<br>先令carry = 0,再计算sum = x + y + carry;<br>如果 sum &gt;= 10,则令carry = 1<br>再让 sum % 10来组成新的数的每一位<br>如果其中一个链表有数可以取出,而另一个链表的下一位为NULL<br>则令为NULL的那一条链表对应的x或者y为0即可</p><p>然后最后结束的时候如果carry还为 1,说明最后还多出来一位,则应该再额外多进1。</p><hr><p>自己在这题中遇到的问题:<br>Leetcode给的构造函数(struct跟class一样啊，我真的是有点傻了)<br>既然它给的有构造函数<br><code>ListNode(int x) : val(x), next(NULL) {}</code><br>则初始化对象的时候一定要调用,那么定义新的结点的时候就一定需要一个初始值(比如0),否则会报错。</p><hr><p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) &#123;</span><br><span class="line">  ListNode *p1,*p2,*p3;</span><br><span class="line">  ListNode *l3 = new ListNode(0);      </span><br><span class="line">  p1 = l1;</span><br><span class="line">  p2 = l2;</span><br><span class="line">  p3 = l3;</span><br><span class="line">  int carry = 0;</span><br><span class="line">  while(p1 != NULL || p2 != NULL)</span><br><span class="line">  &#123;</span><br><span class="line">      //如果对应的数位为NULL,则直接令其为0</span><br><span class="line">      int x = (p1 != NULL) ? p1-&gt;val : 0;</span><br><span class="line">      int y = (p2 != NULL) ? p2-&gt;val : 0;</span><br><span class="line">      int sum = x + y + carry;</span><br><span class="line">      (sum / 10)? (carry = 1): (carry = 0);</span><br><span class="line">      ListNode *s = new ListNode(0);//定义一个新的结点来存放结果,一定要初始化才行</span><br><span class="line">      s-&gt;val = sum % 10;</span><br><span class="line">      p3-&gt;next = s;</span><br><span class="line">      p3 = s;</span><br><span class="line">      (p1 != NULL) &amp;&amp; (p1 = p1-&gt;next);//代替if的语句</span><br><span class="line">      (p2 != NULL) &amp;&amp; (p2 = p2-&gt;next);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  if(carry)//如果最后carry还为1,则说明还需进一位</span><br><span class="line">  &#123;</span><br><span class="line">      ListNode *s = new ListNode(0);</span><br><span class="line">      s-&gt;val = 1;</span><br><span class="line">      p3-&gt;next = s;</span><br><span class="line">      p3 = s;</span><br><span class="line">      p3-&gt;next = NULL;</span><br><span class="line">  &#125;</span><br><span class="line">  l3 = l3-&gt;next;</span><br><span class="line">  return l3;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>不知道自己在说些什么</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[五一假期的一点感想]]></title>
-    <url>%2F2019%2F05%2F02%2F20190502%2F</url>
-    <content type="text"><![CDATA[五一假期的一点感想阿拉阿拉，这个学期最舒服的一个月快要走到尽头了呢，从四月份的清明假一直到现在的劳动节假期，整整一个月的时间，每天逃课每天玩手机，每天想干嘛就干嘛，现在再让我回想起去年天天满课的时光，我都不知道我是怎么度过来的emmmmm 这个月主要有两个烦人的事情，第一个就是期中考试吧，虽说已经知道结构期中考试可能不算成绩吧，但是这也不是我逃避它的借口，嗯要花时间去重新学起来，还有一个就是物化了，物化期中考试老师都很认真，所以我也要去认真的去准备它，起码不能挂科吧，额，所以最近要开始找回上学期的那种状态咯诶多我想想啊，从5号到10号这六天时间要复习预习准备考试，怎么想都够呛，额，为了准备它我还额外到网上买了学习指导和习题解答，这尼玛还不及格那就真的是自己的问题了，好好加油吧。 还有一个烦的就是体测了，虽说上个星期刚测完一千米，但是下个星期还要去测引体向上，我我我没臂力真的一个也做不来啊qaq，诶多，期末还要考颠球什么的，要是体育也挂科了那多丢人qaq 嗯，嗯因为长假的缘故我又到学校外面订了两个晚上的酒店准备放松下自我，准备去试试新买的小裙子什么的，诶多说实话我还从来都没试过呢xd，嗯我喜欢安静的环境，想和别人打游戏语音也不会吵到别人，也不会有傻逼室友来吵我烦我，所以说对于我来说，我适合独居生活而不是群居！ 哼唧，如果以后能跟喜欢的人一起合居就好了qaq，嘛，既然已经知道自己放假不可能好好学习了，那还不如玩的爽一点呢，诶多，就写这么多吧，以后估计要经常写日记了hhh]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>新の开始？</title>
+      <link href="/2019/05/04/20190504/"/>
+      <url>/2019/05/04/20190504/</url>
+      
+        <content type="html"><![CDATA[<h1 id="新の开始"><a href="#新の开始" class="headerlink" title="新の开始"></a>新の开始</h1><h2 id="胡乱写一些自己都看不懂的话"><a href="#胡乱写一些自己都看不懂的话" class="headerlink" title="胡乱写一些自己都看不懂的话"></a>胡乱写一些自己都看不懂的话</h2><h3 id="重新再来，从头开始"><a href="#重新再来，从头开始" class="headerlink" title="重新再来，从头开始"></a>重新再来，从头开始</h3><p>真的是令人怀念的话语啊,上一次说这个话是高考前一百多天的时候,结果说完也没有多么努力去改变自己的命运,结果自己到了今天这个地步,如今,实在是没有什么可以再失去的东西了</p><p>青春？梦想？努力？奋斗？再为自己的年轻付出巨大的代价之后才会后悔,可是又能有什么用呢？一次又一次的悔恨,一次又一次的失败，我实在是厌倦这样的生活了,不知道两年前的自己怎么也想不到今天会到这种地步吧，不仅什么也不会，而且也缺少朋友，缺少能天天和我一起说话的人</p><p>孤独？谁又喜欢孤独呢，谁希望自己被逼成这样呢，孤独的人也渴望和朋友一起聊天，一起分享每天的欢乐，一起诉说每天的烦恼，这是我梦想中的生活啊。</p><p>然而，每天简直就是有无穷无尽的烦恼，不仅是学业上还是生活中。<br>经过了两年的时间，自己还是啥都不会，虽然早就下定了转行的决心，但是相比跟我年龄一样的科班的人，差距还是巨大，只有每天付出比他们更多的努力才能让自己变得更强<br>生活上，每天被室友吵得心烦，天天只会打游戏，混日子，每个星期还要去实验室跟老师搬砖还浑然不知未来的处境如何，真的是感觉可悲，真不知道再过两年他们会有什么感受。</p><p>想起了高中班主任跟我说的话，眼界决定境界，态度决定高度，这句话我现在细想起来还真的是太对了，但可惜我两样都没有<br>论眼界，从小城市出身的我真的是眼界太低，见识也太低了，居然稀里糊涂的报了化学这个天坑专业，高中还以为化学挺有意思的，谁知道大学完全是两个完全相反的学科，跳进了坑真的是感觉自己蠢到极点。<br>论态度，我明知道每天自己该干嘛，却还是天天摸鱼，喜欢看b站，喜欢逛知乎，喜欢玩游戏，反正每天除了学习真的是一堆事都能做，但是只要学习就容易犯困，提不起劲，这个学期把没用的课都翘了好好学算法，学相关一堆知识可以学，但是我还是喜欢浪费时间，整天摸鱼，然后从2月份一直到现在，我真的忍受不了了，必须做出一点改变来才行了，不然就算再给两年的时间给自己也是白费。</p><p>已经20岁了，不再是一个小孩子了，是时候该为自己的未来，为自己的前途好好考虑一下了，人不是为自己而活，你还要付出很多很多东西才行，不说那么远，就说为了将来自己幸福的生活现在也应该要好好行动了。<br>嗯，今天把游戏全都卸载了，时间是宝贵的，再也经不起我这样浪费了，两个月的时间，我想重新调整自己的状态，该去自习室去自习室，该休息休息，以后每天十一点上床睡觉，决不熬夜，只有晚上睡好了早晨才有精神去学习，去做其他事情。<br>这个月，再也不能跟自己开玩笑了。<br>总结下最近应该准备的东西吧<br>1.英语六级，每天背10-15个单词<br>2.物理化学，结构化学复习，先把期中考试撑过了再说吧。<br>3.每天一篇算法题目(期中考试前可酌情减少)<br>4.订阅的专栏每天阅读两到三篇文章，有问题多跟小伙伴去讨论<br>5.知乎上多跟别人互动交流，诶多自己不主动怎么会有更多的朋友呢emmmm，如果可以每个星期摸出一篇高质量的回答吧！争取把点赞数和关注数都上去吧，多跟别人到想法下面去互动吧！<br>6.Linux入门吧，再不入门说不过去了。<br>7.继续算法的学习，这个每天不能丢。<br>8.运动也不能停，但是可视情况减少相应的跑步次数来去学习。</p><p>嗯，就写这么多吧，现在好像也总算养成了写博客写日记的习惯了，希望再过一年两年的自己再回过头来看不会后悔吧！加油啊</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>随手写的一点东西</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Leetcode-206]]></title>
-    <url>%2F2019%2F04%2F29%2FLeetcode-206%2F</url>
-    <content type="text"><![CDATA[206. 反转链表难度:easy反转一个单链表。 示例: 输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL进阶:你可以迭代或递归地反转链表。你能否用两种方法解决这道题？ 自己的解法：思路:至少需要三个结点p1,p2,p3来完成链表的逆序首先从链表头部开始，建立三个临时节点的引用，分别为p1，p2，p3。它们分别指向头节点、第二个节点、第三个节点。实现链表逆序的完整步骤如下：1.以p2节点为视角，把p2节点原本指向p3的next指针倒转，指向p1。2.三个临时节点引用p1，p2，p3分别向后移动一格位置。3.重复第1步的工作，以p2节点为视角，把p2节点原本指向p3的next指针倒转，指向p1。4.重复第2步的工作，三个临时节点引用p1，p2，p3分别向后移动一格位置。5.继续像这样子迭代下去，一直到p2是空为止。6.最后，把head节点的next指向空，成为逆序链表的尾节点。并且把p1赋值给head，让p1所在的节点成为逆序链表的头节点。 实现代码如下:方法1：迭代1234567891011121314151617181920212223242526272829303132333435/** * Definition for singly-linked list. * struct ListNode &#123; * int val; * ListNode *next; * ListNode(int x) : val(x), next(NULL) &#123;&#125; * &#125;; */class Solution &#123;public: ListNode* reverseList(ListNode* head) &#123; if(head == NULL || head-&gt;next == NULL) &#123; return head;//当头结点为空，或者它的下一个结点为空的话，返回head &#125; ListNode *p1,*p2,*p3;//声明三个中间变量来交换 p1 = head; p2 = head-&gt;next; p3 = NULL; while(p2 != NULL) &#123; p3 = p2-&gt;next; p2-&gt;next = p1; p1 = p2; p2 = p3; &#125; head-&gt;next = NULL; head = p1; return head; &#125; &#125;; 方法2: 递归递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？假设列表为：n1 → … → nk-1 → nk → nk+1 → … → nm → Ø 若从节点 nk+1 到 nm 已经被反转，而我们正处于 nk。 n1 → … → nk-1 → nk → nk+1 ← … ← nm 我们希望 nk+1 的下一个节点指向 nk。 所以，nk.next.next = nk; 要小心的是 n1 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。 实现代码如下:1234567public ListNode reverseList(ListNode head) &#123; if (head == null || head.next == null) return head; ListNode p = reverseList(head.next); head.next.next = head; head.next = null; return p;&#125; 复杂度分析 时间复杂度：O(n)。假设n是列表的长度，那么时间复杂度为O(n)。 空间复杂度：O(n)。由于使用递归，将会使用隐式栈空间。递归深度可能会达到n层。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 不知道自己在说些什么 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>五一假期的一点感想</title>
+      <link href="/2019/05/02/20190502/"/>
+      <url>/2019/05/02/20190502/</url>
+      
+        <content type="html"><![CDATA[<h1 id="五一假期的一点感想"><a href="#五一假期的一点感想" class="headerlink" title="五一假期的一点感想"></a><center>五一假期的一点感想</center></h1><p>阿拉阿拉，这个学期最舒服的一个月快要走到尽头了呢，从四月份的清明假一直到现在的劳动节假期，整整一个月的时间，每天逃课每天玩手机，每天想干嘛就干嘛，现在再让我回想起去年天天满课的时光，我都不知道我是怎么度过来的emmmmm</p><p>这个月主要有两个烦人的事情，第一个就是期中考试吧，虽说已经知道结构期中考试可能不算成绩吧，但是这也不是我逃避它的借口，嗯要花时间去重新学起来，还有一个就是物化了，物化期中考试老师都很认真，所以我也要去认真的去准备它，起码不能挂科吧，额，所以最近要开始找回上学期的那种状态咯<br>诶多我想想啊，从5号到10号这六天时间要<del>复习</del>预习准备考试，怎么想都够呛，额，为了准备它我还额外到网上买了学习指导和习题解答，这尼玛还不及格那就真的是自己的问题了，好好加油吧。</p><p>还有一个烦的就是体测了，虽说上个星期刚测完一千米，但是下个星期还要去测引体向上，我我我没臂力真的一个也做不来啊qaq，诶多，期末还要考颠球什么的，要是体育也挂科了那多丢人qaq</p><p>嗯，嗯因为长假的缘故我又到学校外面订了两个晚上的酒店准备放松下自我，准备去试试新买的小裙子什么的，诶多说实话我还从来都没试过呢xd，嗯我喜欢安静的环境，想和别人打游戏语音也不会吵到别人，也不会有傻逼室友来吵我烦我，所以说对于我来说，我适合独居生活而不是群居！</p><p>哼唧，如果以后能跟喜欢的人一起合居就好了qaq，嘛，既然已经知道自己放假不可能好好学习了，那还不如玩的爽一点呢，诶多，就写这么多吧，以后估计要经常写日记了hhh</p>]]></content>
+      
+      
       <categories>
-        <category>Leetcode</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[第九周小结]]></title>
-    <url>%2F2019%2F04%2F28%2F%E7%AC%AC%E4%B9%9D%E5%91%A8%E5%B0%8F%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[第九周小结不知不觉，一个星期又过去了，好像还是老样子，还是那么喜欢摸鱼，还是那么喜欢混，可能是上几个学期的努力过头了吧，这个学期实在是太轻松了，人就是这样，有的时候没有外部的压力可能就不逼自己，道理谁都懂，可谁都喜欢去犯懒，谁都喜欢去打游戏，看剧之类的，学习的过程是枯燥的，在这个漫长的过程中学习所能得到的正反馈太少了，所以本来从17年高考结束开始就决定学编程，到现在19年快两年了感觉根本没什么长进，我自己都觉得自己是个傻逼。 方向不对，再多努力也是白费，前几天看扬叔写的小说真的是触目惊心，王奋斗不努力吗？并不是他不努力，只是他一步又一步的犯错，本来人试错的成本就已经很高了，更何况还一而再再而三的试错？ 没错，王奋斗的经历确实有点夸张，但正是因为这种夸张作者才想要深切的告诉我们，天坑专业不是一般人能读的啊，不管是学术界还是工业界，不管是去当导师廉价的劳动力还是去化工厂做危险的工作，我觉得都是不可接受的，所以更加坚定了我脱坑搞CS的决心 可怜我那几个室友，现在天天去实验室搬砖像个傻子一样，一点觉悟都没有，等过几年再看看他们是什么处境吧 顺手记录下这个星期所发生的大事吧星期一没上物化课，在宿舍摸了一整天，勉强完成了当天的任务 星期二上了体育课，把假条也给了老师看了，重新去踢了足球比赛但是是真的累啊，不知道为什么每天晚上运动了那么久，结果去比赛还是累的要死。但是下个星期二要测一千米啊啊啊啊，说实话挺烦的。 星期三上午去自习的效率还行，可能这是唯一让我感到满意的一天了吧，晚上去公园茂玩了一晚上，也挺开心的吧，虽然公园茂那里的小吃并不让我特别感兴趣 星期四一天没课，下午我又没去自习，本来是早就要跟基友一起去自习的，但是却都不互相监督，真的是无语呢，所以啊挺想找个跟我一样的人一起去考研一起去学习，甚至能一起恋爱呢(~大雾~) 星期五这一天可真的太无语了，早晨睡了一早晨不说，下午第一次准备去逃马原课，第一次去逃老师就点名，还是基友和我室友一起帮忙说我请假了才搞定的这事，现在想想就心有余悸，如果当时我一开始就冲过去就好了，真的是不幸中的万幸了晚上去找到了我五一订的酒店的位置，看起来还不错吧，物超所值，差不多是花了上回出去住一晚上的价钱住了两个晚上，期待出去住呢还去丹尼斯购物了一波，说实话有点小失望吧，其实大超市也没什么东西好买的，就买了两盒饼干和一点小零食，唯一让我开心的就是里面有卖仲景香菇酱的吧，以后可以不用到网上买了嘻嘻，然后又去公园茂转了一圈，转了半天都不知道吃什么，最后结果去吃了渔粉，说实话不是很好吃，而且也不值这个价55555555，最后是出去花了一百多真的是败家啊，以后要开始省钱了呢星期六一天啥也没做，又浪了一整天，晚上还花了40点了汉堡王的外卖，而且因为天气的原因这一个星期都没跑步，我真的是太草了今天星期天，上午摸过去，下去去自习室吧，晚上签个到去跑步然后就结束这一个星期吧 诶多这个星期买了小裙子订了酒店还有各种乱七八糟的居然花了1k了，这么抠门的我居然能花这么多，其实是心痛死了啊啊啊啊啊啊啊啊，如果不是上个月发现了闲鱼上可以赚点小钱现在我岂不是更穷5555555555555，而且最近闲鱼上买东西的越来越少了，我应该要想点办法去卖更多的东西了，诶多争取以后一个月起码有2K才行？ 所以继续明确一下下个星期的目标和每天的任务吧，不多也不少，但是每天要坚持完成，没完成就给自己惩罚！每天的任务:1.开始准备6级考试，每天十五个英语单词，期中考试过后每天还要两篇阅读理解2.张宇1000题每天五题3.洛谷OJ or Leetcode 每天一题4.程序员小灰 or 极客时间 每天一章5.微信小程序(这个比赛我将信将疑了，因为感觉学JavaScript和那个好费劲，但毕竟是我提出的计划，嘛有时间就去看看吧)6.王道数据结构开始看，题目也开始做吧7.准备期中考试，物化重点复习，结构次重点复习。(五一看看能不能复习一哈子，然后5.11之前复习完) 好了，总结和感悟就这么多吧，以后争取至少每个星期写篇日记吧，还要把刷过的每一道题都放到博客上来，嗯，过几天再把评论区和其他东西完善一下，如果可以的话再搞个域名就更好了，那么Azure加油吧！你现在不是一个人在战斗呢。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 随手写的一点东西 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Leetcode-206</title>
+      <link href="/2019/04/29/Leetcode-206/"/>
+      <url>/2019/04/29/Leetcode-206/</url>
+      
+        <content type="html"><![CDATA[<h1 id="206-反转链表"><a href="#206-反转链表" class="headerlink" title="206. 反转链表"></a>206. 反转链表</h1><h3 id="难度-easy"><a href="#难度-easy" class="headerlink" title="难度:easy"></a>难度:easy</h3><p>反转一个单链表。</p><p>示例:</p><p>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL<br>进阶:<br>你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p><hr><p>自己的解法：<br>思路:至少需要三个结点p1,p2,p3来完成链表的逆序<br>首先从链表头部开始，建立三个临时节点的引用，分别为p1，p2，p3。它们分别指向头节点、第二个节点、第三个节点。<br>实现链表逆序的完整步骤如下：<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429174100.png" alt><br>1.以p2节点为视角，把p2节点原本指向p3的next指针倒转，指向p1。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173342.jpg" alt><br>2.三个临时节点引用p1，p2，p3分别向后移动一格位置。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173345.jpg" alt><br>3.重复第1步的工作，以p2节点为视角，把p2节点原本指向p3的next指针倒转，指向p1。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173348.jpg" alt><br>4.重复第2步的工作，三个临时节点引用p1，p2，p3分别向后移动一格位置。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173351.jpg" alt><br>5.继续像这样子迭代下去，一直到p2是空为止。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173354.jpg" alt><br>6.最后，把head节点的next指向空，成为逆序链表的尾节点。并且把p1赋值给head，让p1所在的节点成为逆序链表的头节点。<br><img src="/2019/04/29/Leetcode-206/微信图片_20190429173356.jpg" alt></p><p>实现代码如下:<br>方法1：迭代<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">        if(head == NULL || head-&gt;next == NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        return head;//当头结点为空，或者它的下一个结点为空的话，返回head</span><br><span class="line">    &#125;</span><br><span class="line">    ListNode *p1,*p2,*p3;//声明三个中间变量来交换</span><br><span class="line">    p1 = head;</span><br><span class="line">    p2 = head-&gt;next;</span><br><span class="line">    p3 = NULL;</span><br><span class="line"></span><br><span class="line">    while(p2 != NULL)</span><br><span class="line">    &#123;</span><br><span class="line">        p3 = p2-&gt;next;</span><br><span class="line">        p2-&gt;next = p1;</span><br><span class="line">        p1 = p2;</span><br><span class="line">        p2 = p3;</span><br><span class="line">    &#125;</span><br><span class="line">    head-&gt;next = NULL;</span><br><span class="line">    head = p1;</span><br><span class="line">    return head;  </span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><hr><p>方法2: 递归<br>递归版本稍微复杂一些，其关键在于反向工作。假设列表的其余部分已经被反转，现在我该如何反转它前面的部分？假设列表为：n1 → … → nk-1 → nk → nk+1 → … → nm → Ø</p><p>若从节点 nk+1 到 nm 已经被反转，而我们正处于 nk。</p><p>n1 → … → nk-1 → nk → nk+1 ← … ← nm</p><p>我们希望 nk+1 的下一个节点指向 nk。</p><p>所以，nk.next.next = nk;</p><p>要小心的是 n1 的下一个必须指向 Ø 。如果你忽略了这一点，你的链表中可能会产生循环。如果使用大小为 2 的链表测试代码，则可能会捕获此错误。</p><p>实现代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public ListNode reverseList(ListNode head) &#123;</span><br><span class="line">    if (head == null || head.next == null) return head;</span><br><span class="line">    ListNode p = reverseList(head.next);</span><br><span class="line">    head.next.next = head;</span><br><span class="line">    head.next = null;</span><br><span class="line">    return p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>复杂度分析</p><p>时间复杂度：O(n)。假设n是列表的长度，那么时间复杂度为O(n)。</p><p>空间复杂度：O(n)。由于使用递归，将会使用隐式栈空间。递归深度可能会达到n层。</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> Leetcode </category>
+          
       </categories>
-      <tags>
-        <tag>随手写的一点东西</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[洛谷Oj-P1101]]></title>
-    <url>%2F2019%2F04%2F24%2FluoguOj-P1101%2F</url>
-    <content type="text"><![CDATA[洛谷OJ-P1101P1101 单词方阵题目描述给一n×n的字母方阵，内可能蕴含多个“yizhong”单词。单词在方阵中是沿着同一方向连续摆放的。摆放可沿着 8 个方向的任一方向，同一单词摆放时不再改变方向，单词与单词之间可以交叉,因此有可能共用字母。输出时，将不是单词的字母用*代替，以突出显示单词。例如：12345678910输入： 8 输出： qyizhong *yizhong gydthkjy gy****** nwidghji n*i***** orbzsfgz o**z**** hhgrhwth h***h*** zzzzzozo z****o** iwdfrgng i*****n* yyyygggg y******g 输入输出格式输入格式：第一行输入一个数n。(7≤n≤100)。 第二行开始输入n×n的字母矩阵。 输出格式： 突出显示单词的n×n矩阵。思路：1.用两个数组来表示八个方向const int dx_shift[10] = {1,1,0,-1,-1,-1,0,1};const int dy_shift[10] = {0,-1,-1,-1,0,1,1,1};2.在搜索到y之后沿着一个方向搜索izhong，直至不跳出边界为止，搜索完毕如果符合条件记录到另外一个数组中3.j是步长，这里的j正好对应了yizhong 的第j位 所以正好可以对应起来dx = x + j dx_shift[i];dy = y + j dy_shift[i]; 完整代码如下123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384//P1101 单词方阵int n;//n * n的矩阵//方向数组表示八个方向const int dx_shift[10] = &#123;1,1,0,-1,-1,-1,0,1&#125;;const int dy_shift[10] = &#123;0,-1,-1,-1,0,1,1,1&#125;;int dx,dy;const int maxn = 110;const string cmp = &quot;yizhong&quot;;char Map[maxn][maxn],result[maxn][maxn];void dfs(int x,int y)//x,y表示当前点的坐标&#123; for(int i = 0;i &lt; 8;i++)//枚举八个方向 &#123; int flag = 1; for(int j = 1;j &lt;= 6;j++)//对同一方向连续探索6次,直至全部符合izhong为止 &#123; dx = x + j * dx_shift[i]; dy = y + j * dy_shift[i]; if(dx &lt; 1 || dx &gt; n || dy &lt; 1 || dy &gt; n)//若越界直接跳出循环,换一种方向继续尝试 &#123; flag = 0; break; &#125; if(Map[dx][dy] != cmp[j])//如果探索的第j位不符合也跳出循环进行下一次搜索 &#123; flag = 0; break; &#125; &#125; if(flag == 0) &#123; continue; &#125; else//符合条件记录到数组中 &#123; result[x][y] = &apos;y&apos;; for(int j = 1;j &lt;= 6;j++) &#123; dx = x + j * dx_shift[i]; dy = y + j * dy_shift[i]; result[dx][dy] = Map[dx][dy]; &#125; &#125; &#125;&#125;int main()&#123; cin&gt;&gt;n; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; cin&gt;&gt;Map[i][j]; &#125; &#125; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; result[i][j] = &apos;*&apos;; &#125; &#125; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; if(Map[i][j] == &apos;y&apos;)//如果搜索到y就进行搜索 &#123; dfs(i,j); &#125; &#125; &#125; for(int i = 1;i &lt;= n;i++) &#123; for(int j = 1;j &lt;= n;j++) &#123; cout&lt;&lt;result[i][j]; &#125; cout&lt;&lt;endl; &#125; return 0;&#125;]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第九周小结</title>
+      <link href="/2019/04/28/%E7%AC%AC%E4%B9%9D%E5%91%A8%E5%B0%8F%E7%BB%93/"/>
+      <url>/2019/04/28/%E7%AC%AC%E4%B9%9D%E5%91%A8%E5%B0%8F%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="第九周小结"><a href="#第九周小结" class="headerlink" title="第九周小结"></a>第九周小结</h1><p>不知不觉，一个星期又过去了，好像还是老样子，还是那么喜欢摸鱼，还是那么喜欢混，可能是上几个学期的努力过头了吧，这个学期实在是太轻松了，人就是这样，有的时候没有外部的压力可能就不逼自己，道理谁都懂，可谁都喜欢去犯懒，谁都喜欢去打游戏，看剧之类的，学习的过程是枯燥的，在这个漫长的过程中学习所能得到的正反馈太少了，所以本来从17年高考结束开始就决定学编程，到现在19年快两年了感觉根本没什么长进，我自己都觉得自己是个傻逼。</p><p>方向不对，再多努力也是白费，前几天看扬叔写的小说真的是触目惊心，王奋斗不努力吗？并不是他不努力，只是他一步又一步的犯错，本来人试错的成本就已经很高了，更何况还一而再再而三的试错？</p><p>没错，王奋斗的经历确实有点夸张，但正是因为这种夸张作者才想要深切的告诉我们，天坑专业不是一般人能读的啊，不管是学术界还是工业界，不管是去当导师廉价的劳动力还是去化工厂做危险的工作，我觉得都是不可接受的，所以更加坚定了我脱坑搞CS的决心</p><p>可怜我那几个室友，现在天天去实验室搬砖像个傻子一样，一点觉悟都没有，等过几年再看看他们是什么处境吧</p><hr><p>顺手记录下这个星期所发生的大事吧<br>星期一没上物化课，在宿舍摸了一整天，勉强完成了当天的任务</p><p>星期二上了体育课，把假条也给了老师看了，重新去踢了足球比赛<br>但是是真的累啊，不知道为什么每天晚上运动了那么久，结果去比赛还是累的要死。<br>但是下个星期二要测一千米啊啊啊啊，说实话挺烦的。</p><p>星期三上午去自习的效率还行，可能这是唯一让我感到满意的一天了吧，晚上去公园茂玩了一晚上，也挺开心的吧，虽然公园茂那里的小吃并不让我特别感兴趣</p><p>星期四一天没课，下午我又没去自习，本来是早就要跟基友一起去自习的，但是却都不互相监督，真的是无语呢，所以啊挺想找个跟我一样的人一起去考研一起去学习，甚至能一起恋爱呢(~大雾~)</p><p>星期五这一天可真的太无语了，早晨睡了一早晨不说，下午第一次准备去逃马原课，第一次去逃老师就点名，还是基友和我室友一起帮忙说我请假了才搞定的这事，现在想想就心有余悸，如果当时我一开始就冲过去就好了，真的是不幸中的万幸了<br>晚上去找到了我五一订的酒店的位置，看起来还不错吧，物超所值，差不多是花了上回出去住一晚上的价钱住了两个晚上，期待出去住呢<br>还去丹尼斯购物了一波，说实话有点小失望吧，其实大超市也没什么东西好买的，就买了两盒饼干和一点小零食，唯一让我开心的就是里面有卖仲景香菇酱的吧，以后可以不用到网上买了嘻嘻，然后又去公园茂转了一圈，转了半天都不知道吃什么，最后结果去吃了渔粉，说实话不是很好吃，而且也不值这个价55555555，最后是出去花了一百多真的是败家啊，以后要开始省钱了呢<br>星期六一天啥也没做，又浪了一整天，晚上还花了40点了汉堡王的外卖，而且因为天气的原因这一个星期都没跑步，我真的是太草了<br>今天星期天，上午摸过去，下去去自习室吧，晚上签个到去跑步然后就结束这一个星期吧</p><p>诶多这个星期买了小裙子订了酒店还有各种乱七八糟的居然花了1k了，这么抠门的我居然能花这么多，其实是心痛死了啊啊啊啊啊啊啊啊，如果不是上个月发现了闲鱼上可以赚点小钱现在我岂不是更穷5555555555555，而且最近闲鱼上买东西的越来越少了，我应该要想点办法去卖更多的东西了，诶多争取以后一个月起码有2K才行？</p><p>所以继续明确一下下个星期的目标和每天的任务吧，不多也不少，但是每天要坚持完成，没完成就给自己惩罚！<br>每天的任务:<br>1.开始准备6级考试，每天十五个英语单词，期中考试过后每天还要两篇阅读理解<br>2.张宇1000题每天五题<br>3.洛谷OJ or Leetcode 每天一题<br>4.程序员小灰 or 极客时间 每天一章<br>5.微信小程序(这个比赛我将信将疑了，因为感觉学JavaScript和那个好费劲，但毕竟是我提出的计划，嘛有时间就去看看吧)<br>6.王道数据结构开始看，题目也开始做吧<br>7.准备期中考试，物化重点复习，结构次重点复习。(五一看看能不能复习一哈子，然后5.11之前复习完)</p><hr><p>好了，总结和感悟就这么多吧，以后争取至少每个星期写篇日记吧，还要把刷过的每一道题都放到博客上来，嗯，过几天再把评论区和其他东西完善一下，如果可以的话再搞个域名就更好了，那么Azure加油吧！你现在不是一个人在战斗呢。</p>]]></content>
+      
+      
       <categories>
-        <category>洛谷OJ</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>每天ac的算法题</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[第八周小结]]></title>
-    <url>%2F2019%2F04%2F20%2F%E7%AC%AC%E5%85%AB%E5%91%A8%E5%B0%8F%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[记录一下这个星期发生的事情和心得吧星期二上午的体育课运气也太差了，从来都不点名的老师居然这次点名了555555555，害得我要去p一张请假条才行，星期三的早晨的效率挺高的，虽然逃了课。。。可是导员去查了前几个班的签到情况==，这尼玛谁顶得住啊，以后逃课要小心了、、、、今天看扬叔发的想法感觉好有道理 “学生上课的时候不听讲会被认为是违反课堂纪律，我如果觉得上课说话，那属于影响别人上课，但是我上课睡觉，看手机，只要我不发出声，那就不算违反课堂纪律”“你可以说是对老师的不尊重，但是学生是没得选的，如果双方都有平等的选择地位，我不喜欢我可以走，可以不来上课，但是我现在必须要来上课，你就不能以不尊重为理由批评我上课不听讲”“事实上，许多学生开始自己看公开课，看优质教材，用脚投票”是啊，因为劝退的原因我上课不能听讲，老师还经常要点我发言来误会我，有的时候想想也真的很气，不过他说的话真的深感认同 我可以去看那些更好的公开课，何必要把时间浪费在你身上呢？这个星期又很好的摸了一个星期呢，反正每个星期天的豪言壮志，最后都会被自己的懒惰所无情的击败呢 可能是这学期的课过得实在是太轻松了吧，导致自己好像找不会上学期的那种状态了，甚至可以说在学编程方面连寒假的状态都不如了。 可是呢，人可能就是这样的一种动物啊，总喜欢为自己找借口，遇到什么事情都喜欢自我安慰，真的是太脆弱了呢，既然选择了这条艰苦的道路，那么就应该不后悔不放弃嘛，再苦再累又能如何呢？那些厉害的大佬可能这一辈子都追不上了，但是这就是自己可以不继续每天学习的理由吗？ 所以啊，已经过去了8个星期了，差不多两个月了，还有三个月，诶多，中间还要准备期中期末考试，啊真的是烦人，这学期的课我一点底都没有，跟物理相关的课程我就是白痴一个啊啊啊啊啊，反正再怎么样混了两年了，再混可能都毕不了业考不上研了，真是羡慕那些好好学习上课努力认真听讲，晚上回去天天打游戏，考试好好考就能搞个好绩点，然后保研爽一年什么的 哈哈哈哈哈，既然没有了这个选项那就不要天天幻想这啊那了，每天做好自己才是最重要的，所以啊，一定要坚持下去啊Azure，你不是为了你自己而活啊 下个星期的任务吧：1.每天一道算法题(leetcode / 洛谷OJ)2.这个星期一定要学会dfs和bfs算法！！！！！再拖我是狗3.继续学习JavaScript，完成微信小程序的比赛4.每天看一章程序员小灰关于算法的文章，不懂的一定要自己打出来才行！！！5.自己手打代码！自己手打代码！自己手打代码！重要的事情说三遍！6.王道数据结构继续阅读7.张宇数学1000题每天写至少5题！！！8.不要再说什么时间多了，要做的事情一堆呢！9.预习物理化学的内容，把期中考试先过了再说]]></content>
+      
+      
+        <tags>
+            
+            <tag> 随手写的一点东西 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>洛谷Oj-P1101</title>
+      <link href="/2019/04/24/luoguOj-P1101/"/>
+      <url>/2019/04/24/luoguOj-P1101/</url>
+      
+        <content type="html"><![CDATA[<h1 id="洛谷OJ-P1101"><a href="#洛谷OJ-P1101" class="headerlink" title="洛谷OJ-P1101"></a>洛谷OJ-P1101</h1><h2 id="P1101-单词方阵"><a href="#P1101-单词方阵" class="headerlink" title="P1101 单词方阵"></a>P1101 单词方阵</h2><p>题目描述<br>给一n×n的字母方阵，内可能蕴含多个“yizhong”单词。单词在方阵中是沿着同一方向连续摆放的。摆放可沿着 8 个方向的任一方向，同一单词摆放时不再改变方向，单词与单词之间可以交叉,因此有可能共用字母。输出时，将不是单词的字母用*代替，以突出显示单词。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">    8                     输出：</span><br><span class="line">    qyizhong              *yizhong</span><br><span class="line">    gydthkjy              gy******</span><br><span class="line">    nwidghji              n*i*****</span><br><span class="line">    orbzsfgz              o**z****</span><br><span class="line">    hhgrhwth              h***h***</span><br><span class="line">    zzzzzozo              z****o**</span><br><span class="line">    iwdfrgng              i*****n*</span><br><span class="line">    yyyygggg              y******g</span><br></pre></td></tr></table></figure></p><p>输入输出格式<br>输入格式：<br>第一行输入一个数n。(7≤n≤100)。</p><p>第二行开始输入n×n的字母矩阵。</p><p>输出格式：</p><h2 id="突出显示单词的n×n矩阵。"><a href="#突出显示单词的n×n矩阵。" class="headerlink" title="突出显示单词的n×n矩阵。"></a>突出显示单词的n×n矩阵。</h2><p>思路：<br>1.用两个数组来表示八个方向<br>const int dx_shift[10] = {1,1,0,-1,-1,-1,0,1};<br>const int dy_shift[10] = {0,-1,-1,-1,0,1,1,1};<br>2.在搜索到y之后沿着一个方向搜索izhong，直至不跳出边界为止，搜索完毕如果符合条件记录到另外一个数组中<br>3.j是步长，这里的j正好对应了yizhong 的第j位 所以正好可以对应起来<br>dx = x + j <em> dx_shift[i];<br>dy = y + j </em> dy_shift[i];</p><hr><h3 id="完整代码如下"><a href="#完整代码如下" class="headerlink" title="完整代码如下"></a>完整代码如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">//P1101 单词方阵</span><br><span class="line">int n;//n * n的矩阵</span><br><span class="line">//方向数组表示八个方向</span><br><span class="line">const int dx_shift[10] = &#123;1,1,0,-1,-1,-1,0,1&#125;;</span><br><span class="line">const int dy_shift[10] = &#123;0,-1,-1,-1,0,1,1,1&#125;;</span><br><span class="line">int dx,dy;</span><br><span class="line">const int maxn = 110;</span><br><span class="line">const string cmp = &quot;yizhong&quot;;</span><br><span class="line">char Map[maxn][maxn],result[maxn][maxn];</span><br><span class="line">void dfs(int x,int y)//x,y表示当前点的坐标</span><br><span class="line">&#123;</span><br><span class="line">    for(int i = 0;i &lt; 8;i++)//枚举八个方向</span><br><span class="line">    &#123;</span><br><span class="line">       int flag = 1;</span><br><span class="line">       for(int j = 1;j &lt;= 6;j++)//对同一方向连续探索6次,直至全部符合izhong为止</span><br><span class="line">       &#123;</span><br><span class="line">           dx = x + j * dx_shift[i];</span><br><span class="line">           dy = y + j * dy_shift[i];</span><br><span class="line">           if(dx &lt; 1 || dx &gt; n || dy &lt; 1 || dy &gt; n)//若越界直接跳出循环,换一种方向继续尝试</span><br><span class="line">           &#123;</span><br><span class="line">               flag = 0;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">           if(Map[dx][dy] != cmp[j])//如果探索的第j位不符合也跳出循环进行下一次搜索</span><br><span class="line">           &#123;</span><br><span class="line">               flag = 0;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       if(flag == 0)</span><br><span class="line">       &#123;</span><br><span class="line">           continue;</span><br><span class="line">       &#125;</span><br><span class="line">       else//符合条件记录到数组中</span><br><span class="line">       &#123;</span><br><span class="line">           result[x][y] = &apos;y&apos;;</span><br><span class="line">         for(int j = 1;j &lt;= 6;j++)</span><br><span class="line">         &#123;</span><br><span class="line">           dx = x + j * dx_shift[i];</span><br><span class="line">           dy = y + j * dy_shift[i];</span><br><span class="line">           result[dx][dy] = Map[dx][dy];</span><br><span class="line">         &#125;</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;Map[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            result[i][j] = &apos;*&apos;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(Map[i][j] == &apos;y&apos;)//如果搜索到y就进行搜索</span><br><span class="line">            &#123;</span><br><span class="line">                dfs(i,j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;result[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 洛谷OJ </category>
+          
       </categories>
-      <tags>
-        <tag>记录自己的心得体会</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[漫评《ようこそ実力至上主義の教室へ》]]></title>
-    <url>%2F2019%2F04%2F14%2F20190414%2F</url>
-    <content type="text"><![CDATA[很遗憾前年7月的番昨天才被我偶然所发现，然后花了一天不到的时间就补完了，动画里面看到堀北就想起了雪乃，看到路哥就想起了大老师，然而看下来才知道这部番跟春物完全不同，春物是以校园恋爱为主题描述一群正常高中生的生活，而实教是以校园为背景展开一场斗智斗勇的作品，前者偏重于青春的描写，后者偏重于对人性的刻画 大老师和路哥(二老师)也是表面看上去差不多但其实完全不同的两个人，路哥心黑大老师心白。 路哥：我不是，我没有大老师：我也不是谦虚，这锅我背了。 大老师花式自爆收获后宫，而路哥则是个性冷淡，这也不难理解，动画最后一集本以为路哥会在铃音最虚弱的时候闪亮登场，击败坏人，获得美人芳心，迎娶白富美自此走上人生巅峰。然而路哥却开启王之蔑视，他把除了他之外所有人都当成了他赢得胜利的棋子，他根本不相信任何人，动画也随之戛然而止，还有很多东西都没讲清楚，过了两年也没出第二季也让人感觉深感遗憾。这也不难理解，因为从小说喵了个咪只有男主没有女主，动画还是强行魔改小说把铃音当做女主来写，之后几卷就没有铃音的戏份了，所以第二季很难做出来(脑瘫作者就不能跟这个作品好好写个女主吗) 之所以很喜欢这部番，感觉它把学校同学关系的那种真实感描写了出来，你所能看到的只是一个人的表面，很多人其实都是表里不一的，更不用说那些伪善的人了，每个人都喜欢隐藏自己的真实的一面，表里如一的堀北和人格分裂的桔梗就形成了鲜明的对比，路哥也是，表面上一副面瘫脸人畜无害的模样，实际上他把每个人都当做棋子，只要最终赢得胜利的人是他就行了。 引用逼乎上的评价，“有实力者不滥用实力，无实力者也能生存的反实力至上主义教室”嗯我觉得也是对这番最贴切的描述了 同时顺便期待下今年春物的第三季吧，嗯，希望能遇到更多这样有意思的动画。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 每天ac的算法题 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第八周小结</title>
+      <link href="/2019/04/20/%E7%AC%AC%E5%85%AB%E5%91%A8%E5%B0%8F%E7%BB%93/"/>
+      <url>/2019/04/20/%E7%AC%AC%E5%85%AB%E5%91%A8%E5%B0%8F%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h1 id="记录一下这个星期发生的事情和心得吧"><a href="#记录一下这个星期发生的事情和心得吧" class="headerlink" title="记录一下这个星期发生的事情和心得吧"></a>记录一下这个星期发生的事情和心得吧</h1><p>星期二上午的体育课运气也太差了，从来都不点名的老师居然这次点名了555555555，害得我要去p一张请假条才行，星期三的早晨的效率挺高的，虽然逃了课。。。可是导员去查了前几个班的签到情况==，这尼玛谁顶得住啊，以后逃课要小心了、、、、今天看扬叔发的想法感觉好有道理</p><blockquote><blockquote><p>“学生上课的时候不听讲会被认为是违反课堂纪律，我如果觉得上课说话，那属于影响别人上课，但是我上课睡觉，看手机，只要我不发出声，那就不算违反课堂纪律”<br>“你可以说是对老师的不尊重，但是学生是没得选的，如果双方都有平等的选择地位，我不喜欢我可以走，可以不来上课，但是我现在必须要来上课，你就不能以不尊重为理由批评我上课不听讲”<br>“事实上，许多学生开始自己看公开课，看优质教材，用脚投票”<br>是啊，因为劝退的原因我上课不能听讲，老师还经常要点我发言来误会我，有的时候想想也真的很气，不过他说的话真的深感认同</p></blockquote></blockquote><h2 id="我可以去看那些更好的公开课，何必要把时间浪费在你身上呢？"><a href="#我可以去看那些更好的公开课，何必要把时间浪费在你身上呢？" class="headerlink" title="我可以去看那些更好的公开课，何必要把时间浪费在你身上呢？"></a>我可以去看那些更好的公开课，何必要把时间浪费在你身上呢？</h2><p>这个星期又很好的摸了一个星期呢，反正每个星期天的豪言壮志，最后都会被自己的懒惰所无情的击败呢</p><p>可能是这学期的课过得实在是太轻松了吧，导致自己好像找不会上学期的那种状态了，甚至可以说在学编程方面连寒假的状态都不如了。</p><p>可是呢，人可能就是这样的一种动物啊，总喜欢为自己找借口，遇到什么事情都喜欢自我安慰，真的是太脆弱了呢，既然选择了这条艰苦的道路，那么就应该不后悔不放弃嘛，再苦再累又能如何呢？那些厉害的大佬可能这一辈子都追不上了，但是这就是自己可以不继续每天学习的理由吗？</p><p>所以啊，已经过去了8个星期了，差不多两个月了，还有三个月，诶多，中间还要准备期中期末考试，啊真的是烦人，这学期的课我一点底都没有，跟物理相关的课程我就是白痴一个啊啊啊啊啊，反正再怎么样混了两年了，再混可能都毕不了业考不上研了，真是羡慕那些好好学习上课努力认真听讲，晚上回去天天打游戏，考试好好考就能搞个好绩点，然后保研爽一年什么的</p><p>哈哈哈哈哈，既然没有了这个选项那就不要天天幻想这啊那了，每天做好自己才是最重要的，所以啊，一定要坚持下去啊Azure，你不是为了你自己而活啊</p><p>下个星期的任务吧：<br>1.每天一道算法题(leetcode / 洛谷OJ)<br>2.这个星期一定要学会dfs和bfs算法！！！！！再拖我是狗<br>3.继续学习JavaScript，完成微信小程序的比赛<br>4.每天看一章程序员小灰关于算法的文章，不懂的一定要自己打出来才行！！！<br>5.自己手打代码！自己手打代码！自己手打代码！重要的事情说三遍！<br>6.王道数据结构继续阅读<br>7.张宇数学1000题每天写至少5题！！！<br>8.不要再说什么时间多了，要做的事情一堆呢！<br>9.预习物理化学的内容，把期中考试先过了再说</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>漫评</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[4月份不再摸鱼]]></title>
-    <url>%2F2019%2F04%2F07%2Fdailylife%2F</url>
-    <content type="text"><![CDATA[#4月份再摸鱼我是狗&gt;#懒真的是一种病，更可况还是懒癌晚期的我(划掉)，我的博客好像一个月前就弄好了吧，结果现在才想起来要写第一篇日志hhh无药可救了喵。 哼唧，重新看了看自己上个月立下的一个个flag，再摸鱼可能都毕不了业了呢，所以啊，azure从下个星期开始就要好好努力咯，虽然在学校没什么可以一起交流的人，室友也只会天天打游戏，像个傻子一样学化学，放假了还要跟导师免费搬砖，沦为廉价的劳动力还一副理所当然的样子，哼唧，我可不能变成这样呢，答应过别人不做一个普通人(真的是很奇怪的要求呢) 所以我再这么摸鱼下去就是混吃等死了，认识很多大佬每天都那么努力，再看看自己真的是，无话可说，有的时候不逼到最后一刻自己就不会醒悟的 既然选择了劝退这一道路就应该每天都一直努力嘛，其实可以做的事情真的是挺多的，但有的时候要学的东西太多了自己反而麻木了，诚然，在学习的道路上给自己的正反馈的确不多，但是这也不是自己能够为了逃避而找到了合理的借口x，所以我跟我基友一起商量不能再这么下去了，以后要计划好每天，每周以及每个月应该做到的计划，做到与没做到都要有奖励和惩罚才行。 每次自己做完的题解会发布到自己博客上，不管怎么样自己打出来的东西有一个记录也是极好的 下一周的计划:1.每天一道leetcode或者洛谷的题目(周三除外)(不能丢掉算法这方面的内容啊)2.这个星期学会dp算法和dfs&amp;bfs算法(dp摸了这么久了结果还没弄完我也是醉了)3.学习JavaScript相关知识，为微信小程序比赛做准备！]]></content>
+      
+      
+        <tags>
+            
+            <tag> 记录自己的心得体会 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>漫评《ようこそ実力至上主義の教室へ》</title>
+      <link href="/2019/04/14/20190414/"/>
+      <url>/2019/04/14/20190414/</url>
+      
+        <content type="html"><![CDATA[<p>很遗憾前年7月的番昨天才被我偶然所发现，然后花了一天不到的时间就补完了，动画里面看到堀北就想起了雪乃，看到路哥就想起了大老师，然而看下来才知道这部番跟春物完全不同，春物是以校园恋爱为主题描述一群正常高中生的生活，而实教是以校园为背景展开一场斗智斗勇的作品，前者偏重于青春的描写，后者偏重于对人性的刻画</p><p>大老师和路哥(二老师)也是表面看上去差不多但其实完全不同的两个人，路哥心黑大老师心白。</p><p>路哥：我不是，我没有<br>大老师：我也不是谦虚，这锅我背了。</p><p>大老师花式自爆收获后宫，而路哥则是个性冷淡，这也不难理解，动画最后一集本以为路哥会在铃音最虚弱的时候闪亮登场，击败坏人，获得美人芳心，迎娶白富美自此走上人生巅峰。然而路哥却开启王之蔑视，他把除了他之外所有人都当成了他赢得胜利的棋子，他根本不相信任何人，动画也随之戛然而止，还有很多东西都没讲清楚，过了两年也没出第二季也让人感觉深感遗憾。<br>这也不难理解，因为从小说喵了个咪只有男主没有女主，动画还是强行魔改小说把铃音当做女主来写，之后几卷就没有铃音的戏份了，所以第二季很难做出来<br>(脑瘫作者就不能跟这个作品好好写个女主吗)</p><p>之所以很喜欢这部番，感觉它把学校同学关系的那种真实感描写了出来，你所能看到的只是一个人的表面，很多人其实都是表里不一的，更不用说那些伪善的人了，每个人都喜欢隐藏自己的真实的一面，表里如一的堀北和人格分裂的桔梗就形成了鲜明的对比，路哥也是，表面上一副面瘫脸人畜无害的模样，实际上他把每个人都当做棋子，只要最终赢得胜利的人是他就行了。</p><p>引用逼乎上的评价，“有实力者不滥用实力，无实力者也能生存的反实力至上主义教室”嗯我觉得也是对这番最贴切的描述了</p><p>同时顺便期待下今年春物的第三季吧，嗯，希望能遇到更多这样有意思的动画。</p>]]></content>
+      
+      
       <categories>
-        <category>日记</category>
+          
+          <category> 日记 </category>
+          
       </categories>
-      <tags>
-        <tag>随手写的一点东西</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> 漫评 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>4月份不再摸鱼</title>
+      <link href="/2019/04/07/dailylife/"/>
+      <url>/2019/04/07/dailylife/</url>
+      
+        <content type="html"><![CDATA[<p>#<center>4月份再摸鱼我是狗</center>&gt;#<br>懒真的是一种病，更可况还是懒癌晚期的我(<del>划掉</del>)，我的博客好像一个月前就弄好了吧，结果现在才想起来要写第一篇日志hhh无药可救了喵。</p><p>哼唧，重新看了看自己上个月立下的一个个flag，再摸鱼可能都毕不了业了呢，所以啊，azure从下个星期开始就要好好努力咯，虽然在学校没什么可以一起交流的人，室友也只会天天打游戏，像个傻子一样学化学，放假了还要跟导师免费搬砖，沦为廉价的劳动力还一副理所当然的样子，哼唧，我可不能变成这样呢，答应过别人不做一个普通人(<del>真的是很奇怪的要求呢</del>)</p><p>所以我再这么摸鱼下去就是混吃等死了，认识很多大佬每天都那么努力，再看看自己真的是，无话可说，有的时候不逼到最后一刻自己就不会醒悟的</p><p>既然选择了劝退这一道路就应该每天都一直努力嘛，其实可以做的事情真的是挺多的，但有的时候要学的东西太多了自己反而麻木了，诚然，在学习的道路上给自己的正反馈的确不多，但是这也不是自己能够为了逃避而找到了合理的借口x，所以我跟我基友一起商量不能再这么下去了，以后要计划好每天，每周以及每个月应该做到的计划，做到与没做到都要有奖励和惩罚才行。</p><p>每次自己做完的题解会发布到自己博客上，不管怎么样自己打出来的东西有一个记录也是极好的</p><p>下一周的计划:<br>1.每天一道leetcode或者洛谷的题目(周三除外)(不能丢掉算法这方面的内容啊)<br>2.这个星期学会dp算法和dfs&amp;bfs算法(dp摸了这么久了结果还没弄完我也是醉了)<br>3.学习JavaScript相关知识，为微信小程序比赛做准备！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 日记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随手写的一点东西 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
