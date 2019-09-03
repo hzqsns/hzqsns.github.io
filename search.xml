@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[luoguOJ-P1433]]></title>
+    <url>%2F2019%2F09%2F03%2FluoguOJ-P1433%2F</url>
+    <content type="text"><![CDATA[P1433 吃奶酪 传送门 题目描述房间里放着n块奶酪。一只小老鼠要把它们都吃掉，问至少要跑多少距离？老鼠一开始在(0,0)点处。 输入格式第一行一个数n (n&lt;=15) 接下来每行2个实数，表示第i块奶酪的坐标。 两点之间的距离公式=sqrt((x1-x2)(x1-x2)+(y1-y2)(y1-y2)) 输出格式一个数，表示要跑的最少距离，保留2位小数。 输入输出样例输入 #141 11 -1-1 1-1 -1 输出 #17.41 思路：double一个sum来统计每次dfs到底的时候比较最短距离，如果s比sum要小就更新sum我觉得这里面最重要的就是用visit[maxn]数组来判断是否走过因为每次用now在dfs里面表示当前第几个点因为要走过所有的点，所以从哪个点开始进行dfs是无所谓的，所以默认dfs(0,0,0.0)开始没问题然后double Distance[maxn][maxn]来存放点与点之间的距离Distance[i][j]表示第i个点和第j个点之间的距离然后再dfs(i+1,j,s+Distance[now][j])这个的意思就是现在位于now点,然后再准备走向下一个点,也就是走向j对应的点然后就先令visit[j] = 1表示j这个点即将要走到了那么s就加上一个Distance[now][j],此时继续dfs那么此时的now就等于j点,如果一直dfs,一直递归到条件不成立,那么就回溯,令visit[j] = 0因为每一层dfs里面的for循环都是从1一直到n的,所以怎么无论dfs多少次都是会从1开始遍历如果经过了就不考虑,如果没经过就继续dfs,直至每层dfs为止然后再更新最小的sum值又因为输出的格式要求要保留两位小数,所以最后就printf(“%0.2f”,sum)得到最后的结果 代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 16;int n;double sum = 10000.0;//sum来存放跑动的最少距离double Distance[maxn][maxn];//存放点与点之间的距离double x[maxn],y[maxn];//存放每个点的坐标int visit[maxn];void dfs(int i,int now,double s)//i表示已经走了几个点，now表示当前第几个点，s表示距离&#123; if(s &gt;= sum)//如果发现s已经大于当前最小的sum则直接返回 &#123; return ; &#125; if(i == n)//全部走完的时候 &#123; sum = min(sum,s); return ; &#125; for(int j = 1;j &lt;= n;j++) &#123; if(!visit[j]) &#123; visit[j] = 1;//把即将要走过的这个点设置为走过 dfs(i+1,j,s+Distance[now][j]); visit[j] = 0;//回溯 &#125; &#125;&#125;int main()&#123; cin&gt;&gt;n; for(int i = 1;i &lt;= n;i++) &#123; cin&gt;&gt;x[i]&gt;&gt;y[i]; &#125; for(int i = 0;i &lt;= n;i++) &#123; for(int j = 0;j &lt;= n;j++) &#123; Distance[i][j] = sqrt((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j])); &#125; &#125; dfs(0,0,0.0); printf(&quot;%0.2f&quot;,sum); return 0;&#125;]]></content>
+      <categories>
+        <category>-[洛谷OJ] -[dfs]</category>
+      </categories>
+      <tags>
+        <tag>每天ac的算法题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[luoguOJ-P1403]]></title>
     <url>%2F2019%2F09%2F02%2FluoguOJ-P1403%2F</url>
     <content type="text"><![CDATA[P1403 [AHOI2005]约数研究传送门 题目描述：科学家们在Samuel星球上的探险得到了丰富的能源储备，这使得空间站中大型计算机“Samuel II”的长时间运算成为了可能。由于在去年一年的辛苦工作取得了不错的成绩，小联被允许用“Samuel II”进行数学研究。 小联最近在研究和约数有关的问题，他统计每个正数N的约数的个数，并以f(N)来表示。例如12的约数有1、2、3、4、6、12。因此f(12)=6。下表给出了一些f(N)的取值： f(n)表示n的约数个数，现在给出n，要求求出f(1)到f(n)的总和。 输入格式:输入一行，一个整数n 输出格式:输出一个整数，表示总和 输入输出样例输入 #13输出 #15 说明/提示【数据范围】 20%N&lt;=5000 100%N&lt;=1000000 思路： (数学方法)f(1)到f(n)的和，即为1到n之间因子的和那么1到n之间1的因子总共有n/1个2的因子总共有n/2个3的因子总共有n/3个…依此类推那么1到n之间因子的和即为f(i) = n / i;i从1到n的总和 代码如下：123456789101112int n;int result;int main()&#123; cin&gt;&gt;n; for(int i = 1;i &lt;= n;i++) &#123; result += n / i; &#125; cout&lt;&lt;result; return 0;&#125; (非数学方法)(用筛法) 定义一个数组num[maxn]，result = 0；从1到n,int i = 1,然后每隔1就累加一次num[i]++,表示从1到n每个数都拥有的1的个数,然后再从1到n,s加一次ai然后i++递增,同理,i = 2,每隔2就累加一次num[i]++,然后依次类推表示从2到n里面每个数如果含有2就会++一次,然后结束循环之后,s再加一次a[i]依此类推 代码如下：123456789101112int n,a[10000001],s;int main()&#123;cin&gt;&gt;n;for (int i=1;i&lt;=n;i++)&#123; for (int j=i;j&lt;=n;j+=i)a[j]++; s+=a[i]; &#125;cout&lt;&lt;s;return 0;&#125;]]></content>
