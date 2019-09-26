@@ -330,6 +330,326 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/24/Leetcode-022/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/65623022_p0_master1200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/24/Leetcode-022/" itemprop="url">Leetcode-022</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T10:04:10+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Leetcode/" itemprop="url" rel="index">
+                    <span itemprop="name">Leetcode</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/24/Leetcode-022/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/24/Leetcode-022/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="22-括号生成"><a href="#22-括号生成" class="headerlink" title="22.括号生成"></a><center>22.括号生成</center></h1><h2 id="难度-medium"><a href="#难度-medium" class="headerlink" title="难度:medium"></a>难度:medium</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">题目描述</span><br><span class="line">给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。</span><br><span class="line"></span><br><span class="line">例如，给出 n = 3，生成结果为：</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  &quot;((()))&quot;,</span><br><span class="line">  &quot;(()())&quot;,</span><br><span class="line">  &quot;(())()&quot;,</span><br><span class="line">  &quot;()(())&quot;,</span><br><span class="line">  &quot;()()()&quot;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<hr>
+<p>思路：应用递归的思路来解决这道题<br>只有当左括号大于右括号的时候才进行递归<br>但其实递归的实质就是栈的实现</p>
+<hr>
+<p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">void val_generateParenthesis(int left,int right,string str,int n,vector&lt;string&gt;&amp; val)</span><br><span class="line">&#123;</span><br><span class="line">    if(left &gt; n || right &gt; n)</span><br><span class="line">    return ;</span><br><span class="line">    if(left == n &amp;&amp; right == n)</span><br><span class="line">    val.push_back(str);</span><br><span class="line">    if(left &gt;= right)//只有左括号的数目大于右括号再进行递归</span><br><span class="line">    &#123;</span><br><span class="line">       val_generateParenthesis(left+1,right,str+&apos;(&apos;,n,val);</span><br><span class="line">       val_generateParenthesis(left,right+1,str+&apos;)&apos;,n,val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br><span class="line">    </span><br><span class="line">vector&lt;string&gt; generateParenthesis(int n) &#123;</span><br><span class="line">       vector&lt;string&gt; val;</span><br><span class="line">       val_generateParenthesis(0,0,&quot;&quot;,n,val);</span><br><span class="line">       return val;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/23/20190523/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/65623022_p0_master1200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/23/20190523/" itemprop="url">20190523</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-23T10:30:10+08:00">
+                2019-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/日记/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/23/20190523/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/23/20190523/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="半个月来摸出来一点东西吧"><a href="#半个月来摸出来一点东西吧" class="headerlink" title="半个月来摸出来一点东西吧"></a>半个月来摸出来一点东西吧</h1><p>上回写日记还是5月12号，一晃眼就已经23号了啊<br>这个五月我过得还是比较充实的，基本上实现了基本预定的目标<br>不管是学习上还是其他方面，但是现在面临的问题也更多了<br>诶多，6月15号的六级考试过了之后，23号就要开始期末考试了<br>今天正好整整一个月的时间吧，不说之前重复的话了，没意思，好好努力吧，争取让充实的五月不忘初心吧</p>
+<p>今天晚上又发生了不好的事情呢，我和好朋友又吵架了呢，像个hape一样那么大声在街上吵架。。。简直就像是失了智一样，我发现我有的时候就喜欢这样。。。喜欢跟别人较真，喜欢跟别人死磕，每次都是因为一些小事吵起来真的挺无语的，吵架的时候非要分个对错才行吗？有的时候想想就能明白的道理，自己却不去想不去思考，那再有用的大道理又有什么用呢？</p>
+<p>所以啊抛弃这种幼稚的思想吧，努力去成长为一个大人吧！</p>
+<p>这其中也发生了好多好多事情，我也想借这个机会聊聊我自己的看法，比如中美贸易战以及Trump制裁华为这几件事，让我觉得世界并不太平，Trump的目的可能是和以前的日本一样逼迫中国签订类似广场协议的条约<br>所以去年中兴被制裁，领导人直接就去谈判了，今年华为更加严重反倒没去，说明我们是准备和美国打而不是准备去谈判妥协问题。<br>但是我觉得这个时代自己不能太缺乏知识了，还是要去多了解历史经济相关的知识才行。<br>最近看b站上陈平教授的&lt;&lt;眉山论剑&gt;&gt;，我觉得陈平老师的知识很精辟也很到位，对当前一些热点问题的分析我觉得有自己独特的看法，而且也敢说话，没有架子<br>我决定去买本陈平教授的&lt;&lt;代谢增长论&gt;&gt;，多看一点历史案例和西方的一些兴衰史真的是很有意思啊，丰富自己的知识和阅历，我还从来没有主动迫切的想买一本书的时候啊。。。。<br>其实增加自己的知识水平比打游戏更有意思，我决定大学还有两年要利用好时间去学习更多相关的知识，争取能够早日达到能够在知乎上分析问题得出自己观点的水平吧！</p>
+<p>可能是一个最好的五月，也可能是一个最坏的五月x，具体怎么样全看你自己了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/23/luoguOJ-P1443/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1627,331 +1947,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/06/20190506/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/65623022_p0_master1200.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/06/20190506/" itemprop="url">20190506</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T22:17:48+08:00">
-                2019-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/06/20190506/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/06/20190506/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="预习第一天的感受"><a href="#预习第一天的感受" class="headerlink" title="预习第一天的感受"></a><center>预习第一天的感受</center></h1><p>不开心的第一天嗷，不过早晨做实验是真的混啊2333333，本来以为今天要做很久的实验，看了那么一大堆步骤，结果老师都不让我们去做，给了个粗品要我们直接去提纯，简直太快乐了啊哈哈。</p>
-<p>昨天Trump的一条推特导致今天A股暴跌真的是闻所未闻，都快跌6%了，简直就是股灾啊，看别人评论说的，别人美国总统一句话就能让你一无所有，很真实，股市的风险确实是太大了，我觉得我在大学这个阶段一定要慎之又慎才行，我搞这个心态又不好23333，所以要锻炼自己在金融方面的知识才行呢，做一个知识全面的人才行呢。</p>
-<p>下午就不怎么快乐了，今天开始复习物化了，但是真的是好烦啊，本来就不喜欢物理相关的知识，但是这学期两门专业课都涉及物理，简直让我绝望5555555，还以为就算不怎么好好学考试考好点能拿奖学金呢，可惜这学期估计科科及格都难咯</p>
-<p>下午在自习室从4点一直搞到9点半，除去要去上课签到花了点时间，差不多有将近五个小时的时间都可以学习，但是效率是真的低，在自习室整个人都快自闭了，太安静的环境也不适合去学习，脑阔里面非要听点电音或者轻音乐才能去集中自己的注意力，但是有的时候听多了反而又容易走神23333，真的是很难抉择呢，但是好在是已经开头了，我有信心去准备这次的期中考试，这个星期好好努力吧，争取达到能应付考试的水平就行了，然后下个星期再开始准备学习算法，天天运动，嗯，这学期不能再像之前那样了</p>
-<p>这可是你自己说要过一个不一样的五月啊，成年人就应该信守自己所作出的承诺。</p>
-<p>嘛，今天就写这么多吧，每天写日记写博客真的是让自己很喜欢这种生活，为什么不早点开始坚持记录自己每天的生活呢？嘻嘻</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/05/20190505/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/65623022_p0_master1200.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/05/20190505/" itemprop="url">20190505</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-05T21:17:31+08:00">
-                2019-05-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/05/20190505/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/05/20190505/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="今日份的不知所云"><a href="#今日份的不知所云" class="headerlink" title="今日份的不知所云"></a><center>今日份的不知所云</center></h1><p>嗯，五一假期后的第一天上学，感觉还行吧，感觉自己的状态有所回升呢，但是感觉还是要加把劲呢，还有一个星期从零开始准备期中考试啊，真的是最不舒服的一个星期要来了呢</p>
-<p>今天真的是莫名其妙的惊喜呢，空间里面突然有个大佬加我，真的是猜不透呢，不是一个世界的人原来想接触我这样的普通人吗？感觉别人的思想真的是不一样呢，想去顶级名校，想去拯救整个社会，想去改造别人的思想，想去像儒家一样去兼济天下，唉，可惜呢，只有生存无忧才会去想这些事呢，继承家产，到大城市的地方有几套房，我如果有这么好的家室就好了啊，有钱可以买自己想买的东西，也没有学业，事业上面的压力就好了，可是啊，这只能存在于幻想之中呢，现实就是我出身一个十八线小城市，没车没房，家里也没钱，唯一值得庆幸的就是父母都挺开明的，知道自己没什么知识，敢于让我自己去做决定，自己去做决定自己未来的人生道路，我觉得这也是不幸中的万幸了吧！</p>
-<p>还有一件事就是我今天才知道我的一个室友前几天刚脱单，这几天又找到了新的女友，怎么说呢，别人大学都谈了三次了我还一次都没有，怎么说呢，从小到大我可能对感情都没有概念吧，被老师把恋爱这个选项在脑海中删除了(其实也有小学到高中越来越丑越来越胖的原因)，但是谁不渴望爱情呢，不说那么奢侈的东西吧，我其实渴望被关心，渴望和别人每天聊天，渴望和别人分享自己的快乐和烦恼，谁喜欢孤独呢，孤独都不是被逼的吗？如果遇到合适的人和志同道合的人，谁又想一个人呢。</p>
-<p>诶多，不知不觉又写了这么多，我也不知道自己天天在说什么，但是感觉日常写日记真的让自己感觉很棒，我会继续坚持下去的，记录自己生活的点点滴滴，这样的感觉真的很棒，等我觉得哪天我的东西可以分享给别人的话就会给你们看的，毕竟日记也不是不可以分享给别人的东西，我也希望有人来看我每天生活的点点滴滴，希望以后能遇到更多更棒的朋友！<br>                                         by Azure</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1999,7 +1999,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
