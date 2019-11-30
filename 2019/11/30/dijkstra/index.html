@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example5.png">
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example6.png">
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example7.png">
-<meta property="og:updated_time" content="2019-11-30T07:14:16.176Z">
+<meta property="og:updated_time" content="2019-11-30T07:40:38.422Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dijkstra">
 <meta name="twitter:description" content="浅谈Djikstra算法前言：前几天在算法笔记上看到了晴神对于最短路径算法Dijikstra的一个深入的分析，我感觉挺感兴趣的，顺便想借此机会来深入分析，顺带也是更新下博客了咳咳，顺带说一句我的博客看起来挺乱的，等有时间会做一个分类吧，但我不想把它变成单纯的一个技术博客，而是记录一个我的学习，生活，感悟，以及展示自己兴趣爱好的地方(虽然现在从哪方面看上去这人都挺low的) 好吧，那就开始我对Dji">
@@ -503,6 +503,7 @@
 <p><strong>②</strong>新增点权，即以新增的点权代表城市能收集到的物资为例，用weight[u]表示城市u中的物资数目，并新增一个数组w[]，即从起点s到达顶点u可以收集到的最大的物资为w[u]，初始化的时候w[s] = weight[s],其余均为0，这样就可以在d[u] + G[u][v] &lt; d[v]时更新d[v]和w[v]<br>而当d[u] + G[u][v] == d[v]时且w[u] + weight[u][v] &gt; w[v]时更新w[v]<br>(即可以使s到v的最大物资更优)<br>代码与上面类似不再给出</p>
 <p><strong>③</strong>求最短路径条数，只需要增加一个数组num[]，令从起点s到达顶点u的最短路径条数为num[u]，初始化时num[s]为1，其余num[u]均为0<br>这样可以使当d[u] + G[u][v] &lt; d[v]使num[v]继承num[u]<br>而当d[u] + G[u][v] == d[v]时将num[u]加到num[v]上</p>
 <p>代码如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">for(int v = 0;v &lt; n;v++)&#123;</span><br><span class="line">   //如果v未访问 &amp;&amp; u能到达v</span><br><span class="line">   if(vis[v] == false &amp;&amp; G[u][v] != INF)&#123;</span><br><span class="line">      if(d[u] + G[u][v] &lt; d[v])&#123;</span><br><span class="line">         d[v] = d[u] + G[u][v];</span><br><span class="line">         num[v] = num[u];</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      else if(d[u] + G[u][v] == d[v])&#123;</span><br><span class="line">         num[v] += num[u];</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>鉴于时间关系暂时就先总结这么多，Dijikstra算法其实能扩展的东西还有很多，比如如果题目要求具体的最短路径的话还要另外增加一个记录前驱结点的数组之类的东西，等以后有时间我再来补齐吧!</p>
 
       
     </div>
