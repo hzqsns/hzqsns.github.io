@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example5.png">
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example6.png">
 <meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example7.png">
-<meta property="og:updated_time" content="2019-11-30T07:40:38.422Z">
+<meta property="og:updated_time" content="2019-11-30T07:42:44.287Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dijkstra">
 <meta name="twitter:description" content="浅谈Djikstra算法前言：前几天在算法笔记上看到了晴神对于最短路径算法Dijikstra的一个深入的分析，我感觉挺感兴趣的，顺便想借此机会来深入分析，顺带也是更新下博客了咳咳，顺带说一句我的博客看起来挺乱的，等有时间会做一个分类吧，但我不想把它变成单纯的一个技术博客，而是记录一个我的学习，生活，感悟，以及展示自己兴趣爱好的地方(虽然现在从哪方面看上去这人都挺low的) 好吧，那就开始我对Dji">
@@ -186,7 +186,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">绝对理性</p>
+        <p class="site-subtitle">人类的悲欢并不相通</p>
       
   </div>
 
@@ -472,12 +472,11 @@
 <p>但是djikstra算法不适用于有负边权的图，在这里不再赘述(<del>才不会告诉你别人已经有更好的解释了啦</del>)</p>
 <p><a href="https://blog.csdn.net/Kprogram/article/details/81220702" target="_blank" rel="noopener">戳这里</a></p>
 <p>对我的理解来说，Djikstra算法最直观的一个解释就是以起点开始寻找有没有其他中介点能够使起点到达其他顶点的距离能够变小</p>
-<p>下面是实现Djikstra算法的一个伪代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool vis[maxn] = &#123;false&#125;;</span><br><span class="line">void Djikstra(G, d[],s)</span><br><span class="line">&#123;</span><br><span class="line">    初始化</span><br><span class="line">    for(循环n次)&#123;</span><br><span class="line">        u = 使d[u]最小的还未访问的顶点的标号</span><br><span class="line">        vis[u] = true;//记下u已被访问</span><br><span class="line">        for(从u出发能到达的所有顶点v)&#123;</span><br><span class="line">            if(vis[v] == false &amp;&amp; 以u为中介点使s到达顶点v的最短距离d[v]更优)</span><br><span class="line">            &#123;</span><br><span class="line">               优化d[v];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Djikstra算法的一个伪代码"><a href="#Djikstra算法的一个伪代码" class="headerlink" title="Djikstra算法的一个伪代码"></a>Djikstra算法的一个伪代码</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">bool vis[maxn] = &#123;false&#125;;</span><br><span class="line">void Djikstra(G, d[],s)</span><br><span class="line">&#123;</span><br><span class="line">    初始化</span><br><span class="line">    for(循环n次)&#123;</span><br><span class="line">        u = 使d[u]最小的还未访问的顶点的标号</span><br><span class="line">        vis[u] = true;//记下u已被访问</span><br><span class="line">        for(从u出发能到达的所有顶点v)&#123;</span><br><span class="line">            if(vis[v] == false &amp;&amp; 以u为中介点使s到达顶点v的最短距离d[v]更优)</span><br><span class="line">            &#123;</span><br><span class="line">               优化d[v];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中G为邻接矩阵，s为起点</p>
 <p>vis[i] == true时表示顶点Vi已被访问，vis[i] == false时表示顶点Vi还未访问</p>
 <p>d[]表示起点s到达顶点Vi的最短距离，初始化时除了起点的d[s]赋为0，其余的顶点都赋予一个很大的数(比如INT_MAX或者自己赋一个很大的INF)<br>(即相当于把除了起点与其他顶点的边权确认后，其余各个顶点之间的距离设为无穷大(即INF)，这样可以保证后来各个点的最短距离d[i]都是从起点s得来的)</p>
-<p>拿一个简单的有向图来举例子吧</p>
+<h1 id="举一个简单的例子"><a href="#举一个简单的例子" class="headerlink" title="举一个简单的例子"></a>举一个简单的例子</h1><p>拿一个简单的有向图来举例子吧</p>
 <p><img src="/2019/11/30/dijkstra/example1.png" alt></p>
 <p>起点的d[s] = 0，其余点的d[i] = INF;</p>
 <p><img src="/2019/11/30/dijkstra/example2.png" alt></p>
@@ -712,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浅谈Djikstra算法"><span class="nav-number">1.</span> <span class="nav-text">浅谈Djikstra算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从最短路径算法Djikstra初谈"><span class="nav-number">2.</span> <span class="nav-text">从最短路径算法Djikstra初谈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Djikstra"><span class="nav-number">3.</span> <span class="nav-text">什么是Djikstra?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dijkstra算法的工作原理？"><span class="nav-number">4.</span> <span class="nav-text">Dijkstra算法的工作原理？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析算法的复杂度？"><span class="nav-number">5.</span> <span class="nav-text">分析算法的复杂度？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浅谈Djikstra算法"><span class="nav-number">1.</span> <span class="nav-text">浅谈Djikstra算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从最短路径算法Djikstra初谈"><span class="nav-number">2.</span> <span class="nav-text">从最短路径算法Djikstra初谈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Djikstra"><span class="nav-number">3.</span> <span class="nav-text">什么是Djikstra?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dijkstra算法的工作原理？"><span class="nav-number">4.</span> <span class="nav-text">Dijkstra算法的工作原理？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Djikstra算法的一个伪代码"><span class="nav-number">5.</span> <span class="nav-text">Djikstra算法的一个伪代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#举一个简单的例子"><span class="nav-number">6.</span> <span class="nav-text">举一个简单的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析算法的复杂度？"><span class="nav-number">7.</span> <span class="nav-text">分析算法的复杂度？</span></a></li></ol></div>
             
 
           </div>
