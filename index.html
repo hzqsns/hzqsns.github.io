@@ -330,6 +330,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2020/01/30/AcWing1212-dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/70352399_p0_master1200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/30/AcWing1212-dp/" itemprop="url">由两个简单dp组合而成的复杂dp问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-30T23:19:11+08:00">
+                2020-01-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm-AcWing/" itemprop="url" rel="index">
+                    <span itemprop="name">-[algorithm] -[AcWing]</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/01/30/AcWing1212-dp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/30/AcWing1212-dp/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/01/30/AcWing1212-dp/1.png" alt></p>
+<p><img src="/2020/01/30/AcWing1212-dp/2.png" alt></p>
+<p>分析题目，题目有两个限制<br>1.只能往右或者往下走<br>2.一定要按照递增的顺序取物品<br>3.一共要恰好取K件</p>
+<p>数据范围n和m都为50<br>所以这个题的维度可能比较多</p>
+<p>分析f里面一定要有两维i,j来存坐标<br>如果还要存当前取的数的坐标那么就会有四维了<br>这是一个不明智的行为<br>但是我们发现所有数的大小很小，才0到12，有很强的限制<br>所以不需要存最后一个数是哪个数，只需要存最后一个数是多少就行了<br>还有一维就是存最后一个取的物品价值是多少<br>即f[i,j,k,c]前两维表示坐标,k表示当前取多少件,c表示取最后一件的价值是多少</p>
+<p>计算时间复杂度50*50*50*12*13 = 390000<br>用最多的时间复杂度10^7/390000约等于25<br>即状态转移的计算量(大概还可以再循环一次)<br>所以大概是五重循环的样子，前四重是状态，还有一重是状态的转移</p>
+<p><img src="/2020/01/30/AcWing1212-dp/3.png" alt></p>
+<p>分为四种情况<br>两大类AB<br>分析最后一步<br>A最后一步从上往下走 B最后一步从左往右走<br>然后A B两类又可以继续划分<br>A：<br>A1：不取第W[i][j]个物品 A2：取第W[i][j]个物品<br>B：<br>B1：不取第W[i][j]个物品 B2：取第W[i][j]个物品</p>
+<p>考虑不取第W[i][j]个物品，那么拿A1举例的话f[i][j][k][c] = f[i-1][j][k][c]因为不取第W[i][j]个物品那么k没变，对应的C也没变<br>考虑取第W[i][j]个物品，那么拿A2举例的话f[i][j][k][c] = f[i-1][j][k-1][c-W[i][j]]因为取第W[i][j]个物品那么对应的就是从k-1转移过来的<br>对应的C应该从之前已经选取k-1个物品中最大的价值C’，这个时候直接从0到V进行循环相加即可</p>
+<hr>
+<p>对应的代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">分为四种情况</span><br><span class="line">两大类AB</span><br><span class="line">分析最后一步</span><br><span class="line">A最后一步从上往下走 B最后一步从左往右走</span><br><span class="line">然后A B两类又可以继续划分</span><br><span class="line">A：</span><br><span class="line">A1：不取第W[i][j]个物品 A2：取第W[i][j]个物品</span><br><span class="line">B：</span><br><span class="line">B1：不取第W[i][j]个物品 B2：取第W[i][j]个物品</span><br><span class="line"></span><br><span class="line">考虑不取第W[i][j]个物品，那么拿A1举例的话f[i][j][k][c] = f[i-1][j][k][c]因为不取第W[i][j]个物品那么k没变，对应的C也没变</span><br><span class="line">考虑取第W[i][j]个物品，那么拿A2举例的话f[i][j][k][c] = f[i-1][j][k-1][c-W[i][j]]因为取第W[i][j]个物品那么对应的就是从k-1转移过来的</span><br><span class="line">对应的C应该从之前已经选取k-1个物品中最大的价值C`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">const int N = 51,MOD = 1000000007;</span><br><span class="line"></span><br><span class="line">int f[N][N][13][14];//f[i,j,k,c]</span><br><span class="line">int W[N][N];</span><br><span class="line">int n,m,k;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m&gt;&gt;k;</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin&gt;&gt;W[i][j];</span><br><span class="line">            W[i][j]++;//所有物品的价值都+1</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    //初始化</span><br><span class="line">    f[1][1][1][W[1][1]] = 1;  //取第一件物品</span><br><span class="line">    f[1][1][0][0] = 1;         //不取第一件物品,这里初始化C为-1其实更好理解,因为C的范围是在0到12，也就是说有可能为0</span><br><span class="line">                              //取-1表示没取第一件物品，所以C初始化为-1，后面所有的物品价值都会大于-1</span><br><span class="line">                              //但是数组下标最好不取负数，所以把所有的物品价值W[i][j]都++，第一件不取C初始化为0</span><br><span class="line">    for(int i = 1;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 1;j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(i == 1 &amp;&amp; j == 1) continue;//已经初始化</span><br><span class="line">            for(int u = 0;u &lt;= k;u++)(u和v都是从0开始的)</span><br><span class="line">            &#123;</span><br><span class="line">                for(int v = 0;v &lt;= 13;v++)</span><br><span class="line">                &#123;</span><br><span class="line">                    int &amp;val = f[i][j][u][v];//用一个val做别名免除很长的f[i][j][u][v]</span><br><span class="line">                    val = (val + f[i-1][j][u][v]) % MOD;//每加一次都需要取模</span><br><span class="line">                    val = (val + f[i][j-1][u][v]) % MOD;</span><br><span class="line">                    if(u &gt; 0 &amp;&amp; v == W[i][j])&#123;//因为要取出一件来，所以u必须大于0(保证u-1大于0)，且只有当C对应的为W[i][j]时才能取出这一件来</span><br><span class="line">                    for(int c = 0;c &lt; v;c++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        val = (val + f[i-1][j][u-1][c]) % MOD;//因为MOD为1000000007，那么最多只能加两个数取模，否则有可能爆int</span><br><span class="line">                        val = (val + f[i][j-1][u-1][c]) % MOD;</span><br><span class="line">                    &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    int res = 0;</span><br><span class="line">    for(int i = 1;i &lt;= 13;i++) res = (res + f[n][m][k][i]) % MOD;//最后再把走到[n,m]取了k个数，价值从1到13(因为之前把W[i,j]都加了1)每个相加再取模得到最后的结果res</span><br><span class="line">    cout&lt;&lt;res;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2020/01/29/AcWing796-TwoDimensionOfSum/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1761,166 +1928,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/10/07/20191007/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/70352399_p0_master1200.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/07/20191007/" itemprop="url">20191007</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-07T17:38:17+08:00">
-                2019-10-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/10/07/20191007/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/07/20191007/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="上海之旅"><a href="#上海之旅" class="headerlink" title="上海之旅"></a><center>上海之旅</center></h1><p>已经上了两年的大学了，还从来没有好好出去玩过一次，于是一个月前，我就和两个同学计划在国庆7天里面好好出去玩玩，如今已经旅游完回到宿舍，不觉感叹美好时光的短暂，也从这次旅游之中感触到自己的很多不足，也是希望借机会记录一下自己的生活吧，反正自己的blog想写啥就写啥咯，记录一点不一样的东西可以让我的心宁静下来吧。<br>(其实就是想记录记录流水账，让自己记忆还未忘却的时候用文字和图片记录下来，我觉得这也是旅游的意义之一吧，而不是去过了什么收获体会都没有)<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/10/07/20191007/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1978,7 +1985,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1989,7 +1996,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
