@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[binarySort]]></title>
+    <url>%2F2020%2F01%2F31%2FbinarySort%2F</url>
+    <content type="text"><![CDATA[四个常用的二分模板第三天 代码如下12345678910111213141516171819202122232425262728293031323334353637383940int main()&#123; int num[9] = &#123;1,2,3,3,4,4,5,5,7&#125;;//测试数据 int L = 0,R = 8; int target = 5;//求小于等于target的最后一个数的下标 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt;= target) L = mid; else R = mid - 1; &#125;//求大于等于target的第一个数的下标 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &lt; target) L = mid + 1; else R = mid; &#125;//小于target的最后一个数 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt; target) L = mid ; else R = mid-1; &#125;//大于target的第一个数 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &gt; target) R = mid; else L = mid + 1; &#125; cout&lt;&lt;L; return 0;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[一个看起来很复杂的组合问题用dp求解]]></title>
     <url>%2F2020%2F01%2F31%2FAcWing1214-dp%2F</url>
     <content type="text"><![CDATA[AcWing1214. 波动数列Day3，striving 题目 输入输出样例 分析思路分析题目的大意一开始分析这道题咋一看是个序列模型，但其实是个组合模型因为可以肯定的是第一个数是不变的设为X那么数列即为X X+d1 X+d1+d2 X+d1+d2+d3 … X+d1+d2+…+dn-1其中di = {+a,-b}整理可得nx + (n-1)d1 + (n-2)d2 + … + dn-1 = S转换后 x = {S-[(n-1)d1 + (n-2)d2 + … + dn-1]} / n 则当S和di确定的时候x是一定确定的任何一个满足要求的合法序列对应一个d1到dn-1的取值，反过来也成立这是一一对应的关系 即原序列不同的方案数，等于所有d1到dn-1合法的取值的方案数 转换题目转换为求所有满足要求的所有d1到dn-1所有取法的方案数那么满足的要求是什么？1.di为+a或者-b2.因为x = {S-[(n-1)d1 + (n-2)d2 + … + dn-1]} / n 那么S % n == [(n-1)d1 + (n-2)d2 + … + dn-1]即有多少种选法的d1到dn-1的取值代入序列之和对n的余数等于总和S对n的余数 用dp的思路去求解问题状态的表示这道题目就相当于一个组合问题，可以相当于背包问题来做分析状态应该用两维去表示f[i,j]状态对应的集合即为所有从前i个数(前i个di)，且当前总和(总和即表示代入[(n-1)d1 + (n-2)d2 + … + dn-1])除以n的余数的方案的集合属性应该为数量 状态计算f[i,j]考虑最后一步，抓住最后一个不同点最后一步有两种情况因为最后一步是+dn-1有可能是+a,也有可能是-b d1 + d2 + … di(+a)d1’+ d2’+ … di(+a)不管前面的di是多少,di都为+a所以可以所有先去掉这个最后这个di去掉之后就相当于只考虑前i-1项，然后代入(n-1)d1 + (n-2)d2 + … + dn-1但是为了方便我们变换成d1 + 2d2 + … + (n-1)dn-1 (一一对应)(不换也可以)假设前i-1项的原序列和为C则有C(mod n) + ia(mod n) == j(mod n)即 C(mod n) = (j - ia)(mod n)即f[i,j] = f[i-1,(j - ia)%n] 同理当di = -b时f[i,j] = f[i-1,(j + ib)%n] 注意点1.凡是问满足要求不同选法的数量或者最大值时，都可以用以上类似的背包问题的模型2.这题不能用dfs来做因为长度n为1000，dfs时间复杂度为2^1000，不予考虑3.这个题取模的时候有可能为负数那么需要把负余数转换为正余数所以需要写一个函数get_mod4.S的范围包含负数,所以最后不能直接写S%n，也应代入get_mod函数中5.初始化f[0][0] = 1，表示当一项都不选的时候方案数为1，一项都不选代入原序列和为0,0对n取模的余数也为0 结论最后把f[i][j]所有的方案数都求出来最后对应的f[n-1][get_mod(s,n)]即为结果因为S % n == [(n-1)d1 + (n-2)d2 + … + dn-1]所以j = get_mod(s,n)时候对应的方案数为我们所求的结果因为对应的最后一项为dn-1所以i = n-1，表示前n-1项 代码如下：12345678910111213141516171819202122232425262728#include &lt;iostream&gt;using namespace std;const int maxn = 1010,MOD =100000007; int n,s,a,b;int f[maxn][maxn];int get_mod(int x,int y)//因为x有可能为负数，那么我们取模的时候需要加上y再取模得到正余数&#123; return (x % y + y) % y;&#125;int main()&#123; cin&gt;&gt;n&gt;&gt;s&gt;&gt;a&gt;&gt;b; f[0][0] = 1;//初始化，当一项都不选的时候方案数为1 for(int i = 1;i &lt; n;i++) &#123; for(int j = 0;j &lt; n;j++) &#123; f[i][j]= (f[i-1][get_mod(j-a*i,n)] + f[i-1][get_mod(j+b*i,n)]) % MOD; &#125; &#125; cout&lt;&lt;f[n-1][get_mod(s, n)];//注意S也有可能为负数 return 0;&#125;]]></content>
