@@ -88,20 +88,23 @@
 
 
 
-<meta name="description" content="P1182 数列分段Section II传送门">
+<meta name="description" content="AcWing1214. 波动数列Day3，striving">
 <meta name="keywords" content="每天ac的算法题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="luoguOJ-P1182">
-<meta property="og:url" content="https://hzqsns.github.io/2019/07/09/luoguOJ-P1182/index.html">
+<meta property="og:title" content="一个看起来很复杂的组合问题用dp求解">
+<meta property="og:url" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/index.html">
 <meta property="og:site_name" content="Nakano Azure">
-<meta property="og:description" content="P1182 数列分段Section II传送门">
+<meta property="og:description" content="AcWing1214. 波动数列Day3，striving">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://hzqsns.github.io/2019/07/09/luoguOJ-P1182/75049717_p0_master1200.jpg">
-<meta property="og:updated_time" content="2019-09-03T08:29:55.739Z">
+<meta property="og:image" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/78316040_p0_master1200.jpg">
+<meta property="og:image" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/1.png">
+<meta property="og:image" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/2.png">
+<meta property="og:image" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/3.png">
+<meta property="og:updated_time" content="2020-01-31T07:58:42.312Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="luoguOJ-P1182">
-<meta name="twitter:description" content="P1182 数列分段Section II传送门">
-<meta name="twitter:image" content="https://hzqsns.github.io/2019/07/09/luoguOJ-P1182/75049717_p0_master1200.jpg">
+<meta name="twitter:title" content="一个看起来很复杂的组合问题用dp求解">
+<meta name="twitter:description" content="AcWing1214. 波动数列Day3，striving">
+<meta name="twitter:image" content="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/78316040_p0_master1200.jpg">
 
 
 
@@ -131,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="https://hzqsns.github.io/2019/07/09/luoguOJ-P1182/">
+  <link rel="canonical" href="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/">
 
 
 
 
 
-  <title>luoguOJ-P1182 | Nakano Azure</title>
+  <title>一个看起来很复杂的组合问题用dp求解 | Nakano Azure</title>
   
 
 
@@ -333,7 +336,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/07/09/luoguOJ-P1182/">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2020/01/31/AcWing1214-dp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nakano Azure">
@@ -350,7 +353,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">luoguOJ-P1182</h1>
+          <h1 class="post-title" itemprop="name headline">一个看起来很复杂的组合问题用dp求解</h1>
         
 
         <div class="post-meta">
@@ -362,8 +365,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T21:40:10+08:00">
-                2019-07-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T14:47:08+08:00">
+                2020-01-31
               </time>
             
 
@@ -385,8 +388,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/洛谷OJ/" itemprop="url" rel="index">
-                    <span itemprop="name">洛谷OJ</span>
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/AcWing/" itemprop="url" rel="index">
+                    <span itemprop="name">AcWing</span>
                   </a>
                 </span>
 
@@ -403,8 +417,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/09/luoguOJ-P1182/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/09/luoguOJ-P1182/" itemprop="commentCount"></span>
+                <a href="/2020/01/31/AcWing1214-dp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/01/31/AcWing1214-dp/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -437,21 +451,23 @@
       
 
       
-        <h1 id="P1182-数列分段Section-II"><a href="#P1182-数列分段Section-II" class="headerlink" title="P1182 数列分段Section II"></a><center>P1182 数列分段<code>Section II</code></center></h1><h2 id="传送门"><a href="#传送门" class="headerlink" title="传送门"></a><a href="https://www.luogu.org/problemnew/show/P1182" target="_blank" rel="noopener">传送门</a></h2><p><img src="/2019/07/09/luoguOJ-P1182/75049717_p0_master1200.jpg" alt="诶嘿嘿"></p>
-<a id="more"></a>
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">对于给定的一个长度为N的正整数数列A-i，现要将其分成M(M≤N)段，并要求每段连续，且每段和的最大值最小。</span><br><span class="line"></span><br><span class="line">关于最大值最小：</span><br><span class="line"></span><br><span class="line">例如一数列4 2 4 5 1要分成33段</span><br><span class="line"></span><br><span class="line">将其如下分段：</span><br><span class="line"></span><br><span class="line">[4 2][4 5][1]</span><br><span class="line">第一段和为6，第2段和为9，第3段和为1，和最大值为9。</span><br><span class="line"></span><br><span class="line">将其如下分段：</span><br><span class="line"></span><br><span class="line">[4][2 4][5 1]</span><br><span class="line">第一段和为4，第2段和为6，第3段和为6，和最大值为6。</span><br><span class="line"></span><br><span class="line">并且无论如何分段，最大值不会小于6。</span><br><span class="line"></span><br><span class="line">所以可以得到要将数列4 2 4 5 1要分成3段，每段和的最大值最小为6。</span><br><span class="line"></span><br><span class="line">输入输出格式</span><br><span class="line">输入格式：</span><br><span class="line">第1行包含两个正整数N,M。</span><br><span class="line"></span><br><span class="line">第2行包含N个空格隔开的非负整数Ai,含义如题目所述。</span><br><span class="line"></span><br><span class="line">输出格式：</span><br><span class="line">一个正整数,即每段和最大值最小为多少。</span><br><span class="line">-------------------------------------------------------</span><br><span class="line">输入输出样例</span><br><span class="line">输入样例#1： </span><br><span class="line">5 3</span><br><span class="line">4 2 4 5 1</span><br><span class="line">输出样例#1： </span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+        <h1 id="AcWing1214-波动数列"><a href="#AcWing1214-波动数列" class="headerlink" title="AcWing1214. 波动数列"></a><center>AcWing1214. 波动数列</center></h1><p><img src="/2020/01/31/AcWing1214-dp/78316040_p0_master1200.jpg" alt><br>Day3，striving<br><a id="more"></a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/01/31/AcWing1214-dp/1.png" alt></p>
+<h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><p><img src="/2020/01/31/AcWing1214-dp/2.png" alt></p>
+<h1 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h1><h2 id="分析题目的大意"><a href="#分析题目的大意" class="headerlink" title="分析题目的大意"></a>分析题目的大意</h2><p>一开始分析这道题咋一看是个序列模型，但其实是个组合模型<br>因为可以肯定的是第一个数是不变的设为X<br>那么数列即为<br>X  X+d1  X+d1+d2  X+d1+d2+d3  …  X+d1+d2+…+dn-1<br>其中di = {+a,-b}<br>整理可得<br>nx + (n-1)d1 + (n-2)d2 + … + dn-1 = S<br>转换后</p>
+<p>x = {S-[(n-1)d1 + (n-2)d2 + … + dn-1]} / n</p>
+<p>则当S和di确定的时候x是一定确定的<br>任何一个满足要求的合法序列对应一个d1到dn-1的取值，反过来也成立<br>这是一一对应的关系</p>
+<p>即原序列不同的方案数，等于所有d1到dn-1合法的取值的方案数</p>
+<h2 id="转换"><a href="#转换" class="headerlink" title="转换"></a>转换</h2><p>题目转换为求所有满足要求的所有d1到dn-1所有取法的方案数<br>那么满足的要求是什么？<br>1.di为+a或者-b<br>2.因为x = {S-[(n-1)d1 + (n-2)d2 + … + dn-1]} / n<br>  那么S % n == [(n-1)d1 + (n-2)d2 + … + dn-1]<br>即有多少种选法的d1到dn-1的取值代入序列之和对n的余数等于总和S对n的余数</p>
+<h2 id="用dp的思路去求解问题"><a href="#用dp的思路去求解问题" class="headerlink" title="用dp的思路去求解问题"></a>用dp的思路去求解问题</h2><h3 id="状态的表示"><a href="#状态的表示" class="headerlink" title="状态的表示"></a>状态的表示</h3><p>这道题目就相当于一个组合问题，可以相当于背包问题来做<br>分析状态<br>应该用两维去表示f[i,j]<br>状态对应的集合即为所有从前i个数(前i个di)，且当前总和(总和即表示代入[(n-1)d1 + (n-2)d2 + … + dn-1])除以n的余数的方案的集合<br>属性应该为数量</p>
+<h3 id="状态计算"><a href="#状态计算" class="headerlink" title="状态计算"></a>状态计算</h3><p>f[i,j]考虑最后一步，抓住最后一个不同点<br>最后一步有两种情况因为最后一步是+dn-1<br>有可能是+a,也有可能是-b</p>
+<p>d1 + d2 + …    di(+a)<br>d1’+ d2’+ …    di(+a)<br>不管前面的di是多少,di都为+a<br>所以可以所有先去掉这个最后这个di<br>去掉之后就相当于只考虑前i-1项，<br>然后代入(n-1)d1 + (n-2)d2 + … + dn-1<br>但是为了方便我们变换成d1 + 2d2 + … + (n-1)dn-1 (一一对应)<br>(不换也可以)<br>假设前i-1项的原序列和为C<br>则有C(mod n) + ia(mod n) == j(mod n)<br>即 C(mod n)  = (j - ia)(mod n)<br>即f[i,j] = f[i-1,(j - ia)%n]</p>
+<p>同理当di = -b时<br>f[i,j] = f[i-1,(j + ib)%n]</p>
+<p><img src="/2020/01/31/AcWing1214-dp/3.png" alt></p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>1.凡是问满足要求不同选法的数量或者最大值时，都可以用以上类似的背包问题的模型<br>2.这题不能用dfs来做<br>因为长度n为1000，dfs时间复杂度为2^1000，不予考虑<br>3.这个题取模的时候有可能为负数<br>那么需要把负余数转换为正余数<br>所以需要写一个函数get_mod<br>4.S的范围包含负数,所以最后不能直接写S%n，也应代入get_mod函数中<br>5.初始化f[0][0] = 1，表示当一项都不选的时候方案数为1，一项都不选代入原序列和为0,0对n取模的余数也为0</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>最后把f[i][j]所有的方案数都求出来<br>最后对应的f[n-1][get_mod(s,n)]即为结果<br>因为S % n == [(n-1)d1 + (n-2)d2 + … + dn-1]<br>所以j = get_mod(s,n)时候对应的方案数为我们所求的结果<br>因为对应的最后一项为dn-1<br>所以i = n-1，表示前n-1项</p>
 <hr>
-<p>这题我的思路:</p>
-<ul>
-<li>这题遇到的坑</li>
-<li>1.cmp初始化应为1,或者最后应加1,因为M表示的是分成多少段,而我却搞成了有多少个分隔,导致运行错误<br>*</li>
-<li>2.temp初始化为0,之后若temp + num[i] &gt; x,直接令temp = num[i]再进行下一轮循环,而不是令temp = num[i+1]</li>
-<li>比如 4 2 4 5 1,如果temp = 4,x = 4,4 + 2 &gt; 4,则此时应有一个分隔即4 | 2 4 5 1,此时再令temp = 2开始寻找下一个分隔,而不是令temp = 4(2之后的4)再进行寻找<br>*</li>
-<li>3.如果当cmp &gt; M之后就可以结束循环判断为false,不必令cmp正好 == M,因为如果cmp &lt; M,</li>
-<li>也满足条件的话那么只需在已经分好的中间再多加几个分隔符就行了,所以只需判断错误的情况 </li>
-</ul>
-<hr>
-<p>代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">//P1182 数列分段`Section II`</span><br><span class="line"></span><br><span class="line">const int maxn = 100010;</span><br><span class="line">long N,M;//N表示有多少个正整数,M表示要分多少段</span><br><span class="line">long num[maxn];//存放数字的数组</span><br><span class="line">long long sum = 0;//求和以便进行二分查找</span><br><span class="line">long result;//最后的结果</span><br><span class="line">bool judge(long x)</span><br><span class="line">&#123;</span><br><span class="line">    long temp = 0;</span><br><span class="line">    long cmp = 1;</span><br><span class="line">    for(int i = 0;i &lt; N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(num[i] &gt; x) return false;</span><br><span class="line">        if(temp + num[i] &gt; x)</span><br><span class="line">        &#123;</span><br><span class="line">            temp = num[i];</span><br><span class="line">            cmp++;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            temp += num[i];</span><br><span class="line">        &#125;</span><br><span class="line">        if(cmp &gt; M) return false;</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;N&gt;&gt;M;//输入</span><br><span class="line">    long l = LONG_MAX;</span><br><span class="line">    for(int i = 0;i &lt; N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;num[i];</span><br><span class="line">        sum += num[i];</span><br><span class="line">        l = min(l,num[i]);//选取num[i]的最小值作为边界</span><br><span class="line">    &#125;</span><br><span class="line">    long r = sum;//选取所有和来作为右边界</span><br><span class="line">    while(l &lt; r)//当l == r时才终结循环</span><br><span class="line">    &#123;</span><br><span class="line">        long mid = (l + r) &gt;&gt; 1;</span><br><span class="line">        if(judge(mid))//判断mid是否符合条件,如果符合就继续往左缩小边界</span><br><span class="line">        &#123;</span><br><span class="line">           r = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            l = mid + 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;l;</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int maxn = 1010,MOD =100000007; </span><br><span class="line">int n,s,a,b;</span><br><span class="line">int f[maxn][maxn];</span><br><span class="line"></span><br><span class="line">int get_mod(int x,int y)//因为x有可能为负数，那么我们取模的时候需要加上y再取模得到正余数</span><br><span class="line">&#123;</span><br><span class="line">    return (x % y + y) % y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;s&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    f[0][0] = 1;//初始化，当一项都不选的时候方案数为1</span><br><span class="line">    for(int i = 1;i &lt; n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for(int j = 0;j &lt; n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i][j]= (f[i-1][get_mod(j-a*i,n)] + f[i-1][get_mod(j+b*i,n)]) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout&lt;&lt;f[n-1][get_mod(s, n)];//注意S也有可能为负数</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -492,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/06/20190706/" rel="next" title="20190706">
-                <i class="fa fa-chevron-left"></i> 20190706
+              <a href="/2020/01/30/AcWing1212-dp/" rel="next" title="由两个简单dp组合而成的复杂dp问题">
+                <i class="fa fa-chevron-left"></i> 由两个简单dp组合而成的复杂dp问题
               </a>
             
           </div>
@@ -501,10 +517,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/09/luoguOJ-P1325/" rel="prev" title="luoguOJ-P1325">
-                luoguOJ-P1325 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -675,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#P1182-数列分段Section-II"><span class="nav-number">1.</span> <span class="nav-text">P1182 数列分段Section II</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#传送门"><span class="nav-number">1.1.</span> <span class="nav-text">传送门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目描述</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AcWing1214-波动数列"><span class="nav-number">1.</span> <span class="nav-text">AcWing1214. 波动数列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出样例"><span class="nav-number">2.1.</span> <span class="nav-text">输入输出样例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析思路"><span class="nav-number">3.</span> <span class="nav-text">分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#分析题目的大意"><span class="nav-number">3.1.</span> <span class="nav-text">分析题目的大意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转换"><span class="nav-number">3.2.</span> <span class="nav-text">转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用dp的思路去求解问题"><span class="nav-number">3.3.</span> <span class="nav-text">用dp的思路去求解问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#状态的表示"><span class="nav-number">3.3.1.</span> <span class="nav-text">状态的表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态计算"><span class="nav-number">3.3.2.</span> <span class="nav-text">状态计算</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">4.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码如下："><span class="nav-number">6.</span> <span class="nav-text">代码如下：</span></a></li></ol></div>
             
 
           </div>
