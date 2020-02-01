@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mergeSort]]></title>
+    <url>%2F2020%2F02%2F01%2FmergeSort%2F</url>
+    <content type="text"><![CDATA[归并排序模板今天是第四天！ 归并排序的三个要点1.确定分界点 mid = l + r &gt;&gt; 12.递归排序 然后分成左右两个部分继续递归3.用一个额外的数组来依次从小到大左右两部分，并且还要循环左右两边看是否还有剩余然后再赋值给原数组 *注意点merge_sort的边界条件是区间里面的个数为1个或者没有的话就直接return; 代码如下1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include &lt;iostream&gt;#include &lt;cstdio&gt;using namespace std;const int N = 100010;//归并排序的三个要点/*1.确定分界点 mid = l + r &gt;&gt; 12.递归排序 然后分成左右两个部分继续递归3.用一个额外的数组来依次从小到大左右两部分，并且还要循环左右两边看是否还有剩余 然后再赋值给原数组* 注意点 merge_sort的边界条件是区间里面的个数为1个或者没有的话就直接return;*/int q[N],tmp[N];//设一个额外的tmp数组来int n;void merge_sort(int q[],int l,int r)&#123; if(l &gt;= r) return ;//当区间里面的个数为1个或者没有的话就直接返回 int mid = l + r &gt;&gt; 1; merge_sort(q,l,mid); merge_sort(q,mid+1,r);//把原数组分成左右两边然后继续归并排序 int k = 0,x = l,y = mid+1;//k为tmp里面有几个数 while(x &lt;= mid &amp;&amp; y &lt;= r) &#123; if(q[x] &lt; q[y]) tmp[k++]= q[x++]; else tmp[k++] = q[y++]; &#125; while(x &lt;= mid) tmp[k++] = q[x++];//如果还有剩余的就存放进tmp数组里面 while(y &lt;= mid) tmp[k++] = q[y++]; for(int i = 0;i &lt; k;i++) q[l+i] = tmp[i];//把tmp数组里面的数重新赋值给原数组&#125;int main()&#123; cin&gt;&gt;n; for(int i = 0;i &lt; n;i++) scanf(&quot;%d&quot;,&amp;q[i]); merge_sort(q,0,n-1); for(int i = 0;i &lt; n;i++) printf(&quot;%d &quot;,q[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[binarySort]]></title>
     <url>%2F2020%2F01%2F31%2FbinarySort%2F</url>
-    <content type="text"><![CDATA[四个常用的二分模板第三天 代码如下12345678910111213141516171819202122232425262728293031323334353637383940int main()&#123; int num[9] = &#123;1,2,3,3,4,4,5,5,7&#125;;//测试数据 int L = 0,R = 8; int target = 5;//求小于等于target的最后一个数的下标 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt;= target) L = mid; else R = mid - 1; &#125;//求大于等于target的第一个数的下标 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &lt; target) L = mid + 1; else R = mid; &#125;//小于target的最后一个数 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt; target) L = mid ; else R = mid-1; &#125;//大于target的第一个数 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &gt; target) R = mid; else L = mid + 1; &#125; cout&lt;&lt;L; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[四个常用的二分模板第三天 代码如下12345678910111213141516171819202122232425262728293031323334353637383940int main()&#123; int num[9] = &#123;1,2,3,3,4,4,5,5,7&#125;;//测试数据 int L = 0,R = 8; int target = 5;//求小于等于target的最后一个数的下标 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt;= target) L = mid; else R = mid - 1; &#125;//求大于等于target的第一个数的下标 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &lt; target) L = mid + 1; else R = mid; &#125;//小于target的最后一个数的下标 while(L &lt; R) &#123; int mid = L + R + 1 &gt;&gt; 1; if(num[mid] &lt; target) L = mid ; else R = mid-1; &#125;//大于target的第一个数的下标 while(L &lt; R) &#123; int mid = L + R &gt;&gt; 1; if(num[mid] &gt; target) R = mid; else L = mid + 1; &#125; cout&lt;&lt;L; return 0;&#125;]]></content>
       <categories>
         <category>algorithm</category>
       </categories>
