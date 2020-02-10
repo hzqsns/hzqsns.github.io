@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AcWing93-dfsCombination]]></title>
+    <url>%2F2020%2F02%2F10%2FAcWing93-dfsCombination%2F</url>
+    <content type="text"><![CDATA[一个简单的递归实现的枚举问题 第十天，好好总结之前学过的东西！明天得开始好好按计划执行了 题目 输入输出 分析思路这题是要我们从1到n这n个整数里面随机选出m个数且按照从小到大进行输出 举例假设我们从1到5这5个数里面随机选出3个来我们可以从三个位置来进行分析如果所示我们第一个位置选1之后，那么第二个位置只能从2到5进行选择所以我们dfs函数的参数应该这样考虑1.因为要枚举每个位置，用一个数组way[N]来记录每个位置放什么数2.要用一个参数来判断枚举到哪个位置，用一个变量u来表示当前枚举到第几个位置3.因为枚举完一个数到一个位置之后，后面的数只能比已经枚举的数要大，所以要用一个变量start来表示当前最小可以从start开始枚举4.排列性枚举里面需要判重数组，因为他不知道哪个数有没有用过，但是组合枚举就不需要这个判重数组了 代码如下1234567891011121314151617181920212223242526272829303132333435363738#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;using namespace std;const int N = 26;int n,m;//n表示1到n个数，m表示从n个数中随机选取m个int way[N];//定义一个数组来存放每个位置对应的数void dfs(int u,int start)//u表示当前数组枚举在第几个位置,start表示可以从start向后选&#123; if(u == m+1) &#123; for(int i = 1;i &lt;= m;i++) cout&lt;&lt;way[i]&lt;&lt;" "; cout&lt;&lt;endl; return ; &#125; for(int i = start;i &lt;= n;i++) &#123; way[u] = i; dfs(u+1,i+1); way[u] = 0; &#125; &#125;int main()&#123; cin&gt;&gt;n&gt;&gt;m; dfs(1,1); return 0;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+        <category>AcWing</category>
+      </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[EulerSieve]]></title>
     <url>%2F2020%2F02%2F09%2FEulerSieve%2F</url>
     <content type="text"><![CDATA[欧拉筛模板 Day 9! 12345678910111213141516171819202122int primes[N], cnt;int minp[N];bool st[N];void get_primes(int n)&#123; for (int i = 2; i &lt;= n; i ++ ) &#123; if (!st[i]) &#123; minp[i] = i; primes[cnt ++ ] = i; &#125; for (int j = 0; primes[j] * i &lt;= n; j ++ ) &#123; int t = primes[j] * i; st[t] = true; minp[t] = primes[j]; if (i % primes[j] == 0) break; &#125; &#125;&#125; st[i] == 0表示没有被筛过,1表示被筛过否则从小到大枚举质数，然后把质数的i倍都筛掉1.我们筛掉的一定是合数，primes[j]一定不大于i的最小质因子，故一定是用最小质因子筛除的 2.合数一定会被筛掉，因为合数一定包含一个最小质因子设数N的最小质因子为pN = p N/p则当i枚举到N/p的时候,因为p是最小质因子一定在primes数组里面会被枚举到t = N/p p = N即合数N一定会被筛掉 核心本题的核心在于if (i % primes[j] == 0) break;这句话上当 i是prime[j]的倍数时，i = kprime[j]，如果继续运算 j+1，i prime[j+1] = prime[j] k prime[j+1]，这里prime[j]是最小的素因子，当i = k * prime[j+1]时会重复，所以才跳出循环。 举例假设2, 3, 4, 5, 6, … 12 请问12在什么时候被筛去的呢？ 按上述解释以及程序计算，在i == 4时，质数表中已有2, 3，可以4 3 == 12. 后续 i == 6时， 质数表2, 3, 5，也可以 6 2 == 12 筛去12. 跟着程序算一次便知，i == 4时只筛去了8，为何不筛去12，因为12的最小质因数为2，由4 mod 2 == 0也可以看出4不是最小质因数，与2配对的因数6将在后面筛去12，这样才是用最小质因数去筛。 而线性的证明，只需由上述例子中看出每个被筛去的数都是唯一的由 最小质因数（其实也就是最小正因数，易证）配对的因数（相应的最大因数）筛去，每个数只被筛去一次，故为O(n)。]]></content>
