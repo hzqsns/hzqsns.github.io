@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="欧拉筛模板 Day 9!  12345678910111213141516171819202122int primes[N], cnt;int minp[N];bool st[N];void get_primes(int n)&amp;#123;    for (int i = 2; i &amp;lt;= n; i ++ )    &amp;#123;        if (!st[i])        &amp;#123;">
+<meta name="description" content="欧拉筛模板 Day 9!">
 <meta name="keywords" content="算法总结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EulerSieve">
 <meta property="og:url" content="https://hzqsns.github.io/2020/02/09/EulerSieve/index.html">
 <meta property="og:site_name" content="Nakano Azure">
-<meta property="og:description" content="欧拉筛模板 Day 9!  12345678910111213141516171819202122int primes[N], cnt;int minp[N];bool st[N];void get_primes(int n)&amp;#123;    for (int i = 2; i &amp;lt;= n; i ++ )    &amp;#123;        if (!st[i])        &amp;#123;">
+<meta property="og:description" content="欧拉筛模板 Day 9!">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hzqsns.github.io/2020/02/09/EulerSieve/76611496_p0_master1200.jpg">
-<meta property="og:updated_time" content="2020-02-09T11:06:36.737Z">
+<meta property="og:updated_time" content="2020-02-11T14:53:27.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EulerSieve">
-<meta name="twitter:description" content="欧拉筛模板 Day 9!  12345678910111213141516171819202122int primes[N], cnt;int minp[N];bool st[N];void get_primes(int n)&amp;#123;    for (int i = 2; i &amp;lt;= n; i ++ )    &amp;#123;        if (!st[i])        &amp;#123;">
+<meta name="twitter:description" content="欧拉筛模板 Day 9!">
 <meta name="twitter:image" content="https://hzqsns.github.io/2020/02/09/EulerSieve/76611496_p0_master1200.jpg">
 
 
@@ -450,13 +450,14 @@
       
         <h1 id="欧拉筛模板"><a href="#欧拉筛模板" class="headerlink" title="欧拉筛模板"></a><center>欧拉筛模板</center></h1><p><img src="/2020/02/09/EulerSieve/76611496_p0_master1200.jpg" alt></p>
 <p>Day 9!</p>
+<a id="more"></a>
 <hr>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> primes[N], cnt;</span><br><span class="line"><span class="keyword">int</span> minp[N];</span><br><span class="line"><span class="keyword">bool</span> st[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_primes</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!st[i])</span><br><span class="line">        &#123;</span><br><span class="line">            minp[i] = i;</span><br><span class="line">            primes[cnt ++ ] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] * i &lt;= n; j ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> t = primes[j] * i;</span><br><span class="line">            st[t] = <span class="literal">true</span>;</span><br><span class="line">            minp[t] = primes[j];</span><br><span class="line">            <span class="keyword">if</span> (i % primes[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>st[i] == 0表示没有被筛过,1表示被筛过<br>否则从小到大枚举质数，然后把质数的i倍都筛掉<br>1.我们筛掉的一定是合数，primes[j]一定不大于i的最小质因子，故一定是用最小质因子筛除的</p>
-<p>2.合数一定会被筛掉，因为合数一定包含一个最小质因子<br>设数N的最小质因子为p<br>N = p <em> N/p<br>则当i枚举到N/p的时候,因为p是最小质因子一定在primes数组里面会被枚举到<br>t = N/p </em> p = N<br>即合数N一定会被筛掉</p>
-<h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><p>本题的核心在于if (i % primes[j] == 0) break;这句话上<br>当 i是prime[j]的倍数时，i = kprime[j]，如果继续运算 j+1，i <em> prime[j+1] = prime[j] </em> k prime[j+1]，这里prime[j]是最小的素因子，当i = k * prime[j+1]时会重复，所以才跳出循环。</p>
+<p>2.合数一定会被筛掉，因为合数一定包含一个最小质因子<br>设数N的最小质因子为p<br>N = p * N/p<br>则当i枚举到N/p的时候,因为p是最小质因子一定在primes数组里面会被枚举到<br>t = N/p * p = N<br>即合数N一定会被筛掉</p>
+<h1 id="核心"><a href="#核心" class="headerlink" title="核心"></a>核心</h1><p>本题的核心在于if (i % primes[j] == 0) break;这句话上<br>当 i是prime[j]的倍数时，i = kprime[j]，如果继续运算 j+1，i * prime[j+1] = prime[j] * k prime[j+1]，这里prime[j]是最小的素因子，当i = k * prime[j+1]时会重复，所以才跳出循环。</p>
 <h1 id="举例"><a href="#举例" class="headerlink" title="举例"></a>举例</h1><p>假设2, 3, 4, 5, 6, … 12</p>
-<p>请问12在什么时候被筛去的呢？ 按上述解释以及程序计算，在i == 4时，质数表中已有2, 3，可以4 <em> 3 == 12. 后续 i == 6时， 质数表2, 3, 5，也可以 6 </em> 2 == 12 筛去12.</p>
+<p>请问12在什么时候被筛去的呢？ 按上述解释以及程序计算，在i == 4时，质数表中已有2, 3，可以4 * 3 == 12. 后续 i == 6时， 质数表2, 3, 5，也可以 6 * 2 == 12 筛去12.</p>
 <p>跟着程序算一次便知，i == 4时只筛去了8，为何不筛去12，因为12的最小质因数为2，由4 mod 2 == 0也可以看出4不是最小质因数，与2配对的因数6将在后面筛去12，这样才是用最小质因数去筛。</p>
 <p>而线性的证明，只需由上述例子中看出每个被筛去的数都是唯一的由 最小质因数（其实也就是最小正因数，易证）配对的因数（相应的最大因数）筛去，每个数只被筛去一次，故为O(n)。</p>
 
@@ -598,7 +599,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
