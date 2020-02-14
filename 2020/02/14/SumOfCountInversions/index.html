@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="不知道自己在说些什么,">
+  <meta name="keywords" content="算法总结,">
 
 
 
@@ -88,18 +88,22 @@
 
 
 
-<meta name="description" content="星期三的烦恼嗷今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。">
-<meta name="keywords" content="不知道自己在说些什么">
+<meta name="description" content="逆序对的数量 第十三天,加油！">
+<meta name="keywords" content="算法总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20190508">
-<meta property="og:url" content="https://hzqsns.github.io/2019/05/08/20190508/index.html">
+<meta property="og:title" content="SumOfCountInversions">
+<meta property="og:url" content="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/index.html">
 <meta property="og:site_name" content="Nakano Azure">
-<meta property="og:description" content="星期三的烦恼嗷今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。">
+<meta property="og:description" content="逆序对的数量 第十三天,加油！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-08T15:22:29.122Z">
+<meta property="og:image" content="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/79225025_p0_master1200.jpg">
+<meta property="og:image" content="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/1.png">
+<meta property="og:image" content="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/2.png">
+<meta property="og:updated_time" content="2020-02-14T13:35:18.708Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="20190508">
-<meta name="twitter:description" content="星期三的烦恼嗷今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。">
+<meta name="twitter:title" content="SumOfCountInversions">
+<meta name="twitter:description" content="逆序对的数量 第十三天,加油！">
+<meta name="twitter:image" content="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/79225025_p0_master1200.jpg">
 
 
 
@@ -129,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://hzqsns.github.io/2019/05/08/20190508/">
+  <link rel="canonical" href="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/">
 
 
 
 
 
-  <title>20190508 | Nakano Azure</title>
+  <title>SumOfCountInversions | Nakano Azure</title>
   
 
 
@@ -331,7 +335,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/08/20190508/">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2020/02/14/SumOfCountInversions/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nakano Azure">
@@ -348,7 +352,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">20190508</h1>
+          <h1 class="post-title" itemprop="name headline">SumOfCountInversions</h1>
         
 
         <div class="post-meta">
@@ -360,8 +364,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-08T22:42:05+08:00">
-                2019-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-14T20:20:19+08:00">
+                2020-02-14
               </time>
             
 
@@ -383,8 +387,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/日记/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/AcWing/" itemprop="url" rel="index">
+                    <span itemprop="name">AcWing</span>
                   </a>
                 </span>
 
@@ -401,8 +416,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/08/20190508/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/08/20190508/" itemprop="commentCount"></span>
+                <a href="/2020/02/14/SumOfCountInversions/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/14/SumOfCountInversions/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -435,11 +450,21 @@
       
 
       
-        <h1 id="星期三的烦恼嗷"><a href="#星期三的烦恼嗷" class="headerlink" title="星期三的烦恼嗷"></a><center>星期三的烦恼嗷</center></h1><p>今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。</p>
-<p>早晨日常逃课，但是早晨学习的效率是真的低啊，又困又要学习，真的是好难熬啊嗷嗷，期中考试的一周真的是难受难受难受难受的要死了，一个星期要学完前面几个月的知识我真是个天才哈哈哈哈哈哈嗝才怪，希望这星期能应付完期中考试吧，再准备其他比赛。</p>
-<p>晚上真的是没心思学习了，晚上看汉堡王做活动没忍住买了四五十的外卖呜呜呜，我真的是败家玩意嗷，还口口声声说减肥呜，估计又要胖回去了，嗯嗯这一定是最后一次，嗯最后一次啦，以后为了减肥可不能再这样了5555555</p>
-<p>最后就是不能理解为什么要晚上停电维修，唔，明明早晨宿舍都没人它不去检修，非要晚上还没睡觉的时候就停电检修，搞不懂电力部门在想什么</p>
-<p>那么今天就这样吧，晚安啦，希望明天没课的一天我能复习完物化和结构的大部分。<br>                           by Azure</p>
+        <h1 id="逆序对的数量"><a href="#逆序对的数量" class="headerlink" title="逆序对的数量"></a><center>逆序对的数量</center></h1><p><img src="/2020/02/14/SumOfCountInversions/79225025_p0_master1200.jpg" alt></p>
+<p>第十三天,加油！</p>
+<a id="more"></a>
+<h1 id="逆序对的定义"><a href="#逆序对的定义" class="headerlink" title="逆序对的定义"></a>逆序对的定义</h1><p>对于数列的第 i 个和第 j 个元素，如果满足 i &lt; j 且 a[i] &gt; a[j]，则其为一个逆序对。<br>重要的地方在于，一个元素可以不只是在一个逆序对中存在。如果 k &gt; j &gt; i 且 a[i] &gt; a[j] &gt; a[k]，那么这里<br>有两个逆序对，分别是 (a[i], a[j]) 和 (a[i], a[k]), a[i]是可以使用多次的。</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/02/14/SumOfCountInversions/1.png" alt></p>
+<h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p><img src="/2020/02/14/SumOfCountInversions/2.png" alt></p>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>这道题可以用分治的思路解决，因为我们观察可知<br>如果把一个数组一分为二，那么有三种情况<br>1.两个数都在左边<br>2.两个数都在右边<br>3.两个数一个在左边一个在右边</p>
+<p>假设数组的左右两边都已经按顺序排序好了<br>我们这个时候就要考虑第三种情况<br>假设数组为<br>4,5,6,8,12,<br>1,2,3,7,8<br>这个时候我们枚举左边进行排序<br>比如4比1大，那么4右边一直到中间的数一定也都比1大<br>这个时候我们直接令res = mid - i + 1即为1对应的逆序对<br>然后依次类推</p>
+<h2 id="为什么要排序？"><a href="#为什么要排序？" class="headerlink" title="为什么要排序？"></a>为什么要排序？</h2><p>如上图所示，当进行排序过后方便我们进行计算<br>以上面的数组为例<br>归并排序最后分组<br>8 | 5 | 12| 4| 6 | 8| 2 | 3 | 7 | 1 |</p>
+<p>当一半一半的递归下去进行分组的时候<br>8 和 5分到了左右两边<br>这个时候第一种情况和第二种情况为0<br>考虑第三种情况因为8比5大<br>所以res += 1<br>然后把8和5进行排序成5和8<br>依次类推再合并进行5,8|4,6,12<br>然后再合并左右两边，从而得到最终的结果</p>
+<h2 id="为什么这样排序不会改变逆序对数量？"><a href="#为什么这样排序不会改变逆序对数量？" class="headerlink" title="为什么这样排序不会改变逆序对数量？"></a>为什么这样排序不会改变逆序对数量？</h2><p>我个人的理解是左边的逆序对和右边的逆序对分别单独计算不会改变既在左边也在右边的逆序对，把左右的逆序对数目统计了之后就可以分别排序然后再计算第三种情况的逆序对数目</p>
+<p>总之，这题就是在归并排序里面加一个计算逆序对的思想</p>
+<h1 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h1><p>1.这题的数据会爆int，所以要转化成long long的形式记录数据<br>2.当l == r的表示[l,r]区间只有一个数，返回0</p>
+<hr>
+<h1 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> a[N],tmp[N];</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function">LL <span class="title">merge_reverse</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l == r) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    LL res = merge_reverse(l,mid)+merge_reverse(mid+<span class="number">1</span>,r);</span><br><span class="line">    <span class="keyword">int</span> i = l,j = mid + <span class="number">1</span>,k = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid &amp;&amp; j &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[i] &lt;= a[j]) tmp[k++] = a[i++];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            tmp[k++] = a[j++];</span><br><span class="line">            res += mid - i + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= mid) tmp[k++] = a[i++];</span><br><span class="line">    <span class="keyword">while</span>(j &lt;= r) tmp[k++] = a[j++];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; k;i++) a[l+i] = tmp[i];</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;merge_reverse(<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -467,7 +492,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/不知道自己在说些什么/" rel="tag"><i class="fa fa-tag"></i> 不知道自己在说些什么</a>
+            <a href="/tags/算法总结/" rel="tag"><i class="fa fa-tag"></i> 算法总结</a>
           
         </div>
       
@@ -480,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/07/20190507/" rel="next" title="20190507">
-                <i class="fa fa-chevron-left"></i> 20190507
+              <a href="/2020/02/13/difference-chafen/" rel="next" title="difference_chafen">
+                <i class="fa fa-chevron-left"></i> difference_chafen
               </a>
             
           </div>
@@ -489,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/09/20190509/" rel="prev" title="20190509">
-                20190509 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -663,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#星期三的烦恼嗷"><span class="nav-number">1.</span> <span class="nav-text">星期三的烦恼嗷</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#逆序对的数量"><span class="nav-number">1.</span> <span class="nav-text">逆序对的数量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逆序对的定义"><span class="nav-number">2.</span> <span class="nav-text">逆序对的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">3.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出"><span class="nav-number">4.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思路"><span class="nav-number">5.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要排序？"><span class="nav-number">5.1.</span> <span class="nav-text">为什么要排序？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么这样排序不会改变逆序对数量？"><span class="nav-number">5.2.</span> <span class="nav-text">为什么这样排序不会改变逆序对数量？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意点"><span class="nav-number">6.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码如下"><span class="nav-number">7.</span> <span class="nav-text">代码如下</span></a></li></ol></div>
             
 
           </div>
