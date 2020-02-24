@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[HashOfString]]></title>
+    <url>%2F2020%2F02%2F24%2FHashOfString%2F</url>
+    <content type="text"><![CDATA[字符串哈希 第十九天，加油！ 题目 输入输出 样例 分析思路这题可以用字符串哈希的方式去解决把字符串看成是一个P进制的数str = “ABCABCDEYXC…..”那么h[0] = 0;h[1] = “A”的hash值h[2] = “AB”的hash值h[3] = “ABC”的hash值h[4] = “ABCA”的hash值…1.那么对于1到N的字符串来说如果想求L到R区间的hash值因为h[R]表示1到R的hash值h[L-1]表示1到L-1的hash值那么对于P进制来说，由于从左到右是从高位往低位走对于h[R]来说，下标R对应的为P^0,R-1为P^1,…,依次类推1对应的就是P^(R-1)对于h[L-1]，下标L-1对应的为P^0,L-2为P^1,…,依次类推1对应的就是P^(L-2)那么我们把h[L-1]向左移直到与h[R]对齐，左移的位数就是R-1-(L-2) = R-L+1比如123456789，我们要求789这个哈希值那么就找到7之前的哈希值123456然后向左移3位得到123456000最后123456789 - 123456000 = 789所以从L到R这段的hash值就表示为h[R] - h[L]*P^(R-L+1) 2.对于字符串hash来说ABCD假设映射为(1234)p那么ABCD的hash值就为(1*P^3+2*P^2+3*P^1+4*P^0)mod Q那么映射的hash值就是0到Q-1的数了PS:Q经验值取2^64，p一般取131或者13331 注意点1.字符串哈希默认P进制中的P = 131或者133312.不能把某一个字母映射成0，假设A映射成0，A的hash值为0，那么AA的hash值也为0，这样不同的字符串映射成了同一个数字，所以需要避免这种现象3.因为映射的Q为2^64,我们可以不用取模运算，直接用unsigned long long 来存储我们所有的h[i]，溢出的时候就相当于模上2^644.预处理前缀就是h[i] = h[i-1]*P + str[i]; 应用可以应用于一个字符串里面判断有没有两段是完全相同，这个方法比KMP要更好而且很多拓展的题目也可以应用到这个字符串哈希方法 草稿 代码如下12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;iostream&gt;#include &lt;cmath&gt;using namespace std;typedef unsigned long long ULL;const int N = 100010,P = 131;int n,m;char str[N];ULL h[N],p[N];ULL get(int l,int r)//计算(l,r)的hash值&#123; return h[r] - h[l-1]*p[r-l+1]; &#125;int main()&#123; scanf("%d%d%s",&amp;n,&amp;m,str+1); p[0] = 1;//令P^0 = 1 for(int i = 1;i &lt;= n;i++) &#123; p[i] = p[i-1] * P;//预处理P^i h[i] = h[i-1]* P + str[i];//计算字符串的前缀和取模hash值，因为用的是ULL类型所以就不用取模运算了 &#125; while(m--) &#123; int l1,r1,l2,r2; scanf("%d%d%d%d",&amp;l1,&amp;r1,&amp;l2,&amp;r2); if(get(l1,r1) == get(l2,r2)) printf("Yes\n"); else printf("No\n"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+        <category>AcWing</category>
+        <category>Hash</category>
+      </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[AcWing240-UnionFind]]></title>
     <url>%2F2020%2F02%2F22%2FAcWing240-UnionFind%2F</url>
     <content type="text"><![CDATA[一个稍微复杂一点的并查集模型摸了两天，今天是第十八天，争取一周能有五篇吧 题目 输入输出 分析思路我们可以用一个并查集的思路来做这道题不管是不是同类我们都放到一个集合里面或者说是放到一个子树里面我们可以设置距离根节点距离为1的点为吃掉根节点的，距离为2的点为被根节点吃的，距离为0的点(即模3余0)判断思路1.如果x,y均大于n，说明是假话2.A.当t == 1的时候，如果x和y的祖宗节点px,py相同的话，那么说明x和y在同一个集合里面，这个时候就判断x到根节点的距离d[x]和y到根节点的距离d[y]的关系，因为如果只有x和y到根节点距离相等的时候表示x和y是同类,那么距离不等的时候就不是同类，即(d[x] - d[y]) %3 != 0的时候表示距离不等，为假B.当t == 1的时候，如果x和y的祖宗节点px,py不相同的话，那么说明x和y不在同一个集合里面，那么这个时候就令x的祖宗结点px指向y的祖宗结点py这个时候px到根节点的距离需要计算令px指向py，(d[x] + ？)%3 = d[y] % 3则？ = d[y] - d[x] ，？ = d[px];即d[px] = d[y] - d[x];下面代码里有更形象的解释3.当t == 2的时候A.当x和y的祖宗结点相同的时候即px == py时，说明x和y在同一个集合里面如果x比y的距离多1,即(d[x] - d[y]-1)%3 == 0，说明他俩就是x吃y，否则不是下面代码里有更形象的解释B.当x和y的祖宗结点不相同的时候即px != py时，说明x和y不在同一个集合里面，这个时候就令x的祖宗节点指向y的祖宗节点，因为x吃y所以(d[x] + d[px]) % 3 == (d[y] + 1) % 312345678910因为是x吃y，那么x到根节点的距离比y要多1 因为距离根节点为1的点是吃根节点的，距离为2的点是被根节点吃的 ----------------- | | v | | | 0-----&gt;1-------&gt;2 比如0是根节点，1是吃根节点的距离为1,2是被根节点吃的距离为2 那么2吃1的话即2到根节点的距离要比1到根节点的距离多1 代码如下：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101#include &lt;iostream&gt;using namespace std;const int N = 50010;int n,m;int p[N],d[N];//d[i]表示到父节点的距离，只不过find之后才会变成到祖宗节点的距离int find(int x)&#123; if(p[x] != x)//如果x不是树根的话 &#123; int t = find(p[x]);//先找到根节点，并存起来 //p[x] = find(p[x]); d[x] += d[p[x]];//d[x]就是点x到点p[x]之间的距离，而d[p[x]]就是点p[x]到根节点的距离 p[x] = t; &#125; return p[x];&#125;int main()&#123; scanf("%d%d",&amp;n,&amp;m); for(int i = 1;i &lt;= n;i++) p[i] = i; int res = 0; while(m--) &#123; int t,x,y; scanf("%d%d%d",&amp;t,&amp;x,&amp;y); if(x &gt; n|| y &gt; n) res++; else &#123; int px = find(x),py = find(y); if(t == 1) &#123; //如果x和y在同一个根节点上，但是x到根节点的距离和y到根节点距离模3不相同，说明x和y不是同类 //因为如果是同类的话到根节点的距离模3应该相同 if(px == py &amp;&amp;(d[x] - d[y]) %3 != 0) res++; else if(px != py)//如果x和y不在同一个根节点上 &#123; p[px] = py;//令x的根节点指向y的根节点，即px----&gt;py d[px] = d[y] - d[x];//那么px到根节点的距离就是如下所示 /* d[x] x-----px | |？ V y-----py d[y] 令px指向py，(d[x] + ?)%3 = d[y] % 3 则? = d[y] - d[x] ，？ = d[px]; 即d[px] = d[y] - d[x]; */ &#125; &#125; else//如果t == 2 &#123; //x吃y，那么x到根节点的距离比y要多1 //因为距离根节点为1的点是吃根节点的，距离为2的点是被根节点吃的 /* ----------------- | | v | | | 0-----&gt;1-------&gt;2 比如0是根节点，1是吃根节点的距离为1,2是被根节点吃的距离为2 那么2吃1的话即2到根节点的距离要比1到根节点的距离多1 */ if(px == py &amp;&amp; (d[x] - d[y]-1)%3 != 0)//x和y在同一个集合里面 &#123; //如果x比y的距离多1,即(d[x] - d[y]-1)%3 == 0 //说明他俩就是x吃y，否则不是 res++; &#125; else if(px != py)//x和y不在一个集合里面 &#123; p[px] = py;//令x的祖宗节点指向y的祖宗节点 d[px] = d[y] + 1 - d[x]; //因为x吃y所以(d[x] + d[px]) % 3 == (d[y] + 1) % 3 /* d[x] x-----px | |d[px] V y-----py d[y] */ &#125; &#125; &#125; &#125; printf("%d\n",res); return 0;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+        <category>AcWing</category>
+        <category>UnionFind</category>
+      </categories>
       <tags>
-        <tag>algorithm</tag>
-        <tag>AcWing</tag>
-        <tag>UnionFind</tag>
+        <tag>算法总结</tag>
       </tags>
   </entry>
   <entry>
@@ -19,6 +35,9 @@
         <category>AcWing</category>
         <category>SlidingWindow</category>
       </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[intervaldp-qujiandp]]></title>
@@ -65,6 +84,9 @@
         <category>algorithm</category>
         <category>AcWing</category>
       </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[AcWing93-dfsCombination]]></title>
