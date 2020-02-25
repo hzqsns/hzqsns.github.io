@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[20200225]]></title>
+    <url>%2F2020%2F02%2F25%2F20200225%2F</url>
+    <content type="text"><![CDATA[记录下今天的感悟&gt; 算是一个新的系列吧其实挺想笑的，算了算从去年三月份拿钱给原来的好哥们帮我投资中信证券开始，到今天差不多算快一年了吧，一年的时间，心态还是没什么变化，学费倒是交了不少，不过可能也是投资路上的一条必经之路吧 今天的急跌确实是让我有点慌张了，但是哪次大跌我自己都不这样呢？所以保持一个平常心来看待挺重要的，一天两天的涨跌放到一个月几个月甚至半年来看真的不算什么，所以，投资是一个长期的过程，而且我当前自己的资金也有限，承受风险的能力也弱，所以当前最好只专注一个去做，不追涨只补跌，切记切记！ 今天让我最感慨的就是一直在做的欧菲光了，三个月前从17块多第一次买入就买到了最高点，然后一次一次降成本到了16块多，最后开年了割肉去追高医药股，自己亏了一千块，然后又买回欧菲光，最后到前几天实在是忍不住17块多卖了，然后就一直涨四天涨到了22 有时候就在想，很多事情为什么都这么巧呢？其实自己根本就没必要太在意一时的涨跌，专注于自己当前的优质的票其实就很好了，因为钱是赚不完的，不能吃着碗里的看着别人锅里的，切记切记，所以当前一定只做手里的TCL，别的票一律都不考虑！直到十块左右再考虑出吧 今天确实看到有人说了风险很高了，我也确实留了个心眼，因为现在科技股的估值确实都太高太高了，根本就不是价值投资了，说的好听就是趋势，说的不好听就是传花击鼓了，不知道什么时候自己就是最后一棒了，所以我估计最多还有半个月的行情，到时候就必须慢慢止盈出场了。切记！切记！ 那今天就先写这么多吧，以后有机会可以多写写自己每天的感悟和心态的]]></content>
+      <categories>
+        <category>DiaryOfInvestment</category>
+      </categories>
+      <tags>
+        <tag>投资心得</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MatrixOfFastPower]]></title>
     <url>%2F2020%2F02%2F25%2FMatrixOfFastPower%2F</url>
     <content type="text"><![CDATA[矩阵快速幂第二十天。 题目 输入输出 分析思路 注意点1.在计算矩阵快速幂的时候可能会爆int，所以要用long long存储2.f[N] = f[1]*A^N-1 因为f[n] = {fn,fn+1,Sn}那么f[2]就对应Sn经过快速幂最后得到的Sn的值3.对于计算fn*A12345for (int i = 0; i &lt; N; i ++ ) for (int j = 0; j &lt; N; j ++ ) temp[i] = (temp[i] + (LL)a[j] * b[j][i]) % m; a代表1X3的矩阵，b代表3X3的矩阵 这两个矩阵相乘后得到1X3的矩阵，所以是a的每一行a[j]去乘以b的第i行的j个数从上往下 4.对于计算A*A1234567int temp[N][N] = &#123;0&#125;; for (int i = 0; i &lt; N; i ++ ) for (int j = 0; j &lt; N; j ++ ) for (int k = 0; k &lt; N; k ++ ) temp[i][j] = (temp[i][j] + (LL)a[i][k] * b[k][j]) % m; a和b都代表3X3的矩阵，那么最后相乘会得到3X3的矩阵 a[i][k]*b[k][j]表示a的每一行的第k个数乘以b的每一列的第k个数 代码如下1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;typedef long long LL;int n,m;const int N = 3; //int f[N];int a[3][3] = &#123;&#123;0,1,0&#125;,&#123;1,1,1&#125;,&#123;0,0,1&#125;&#125;;void mul(int a[],int b[],int c[][N])&#123; int temp[N] = &#123;0&#125;; for(int i = 0;i &lt; N;i++) &#123; for(int j = 0;j &lt; N;j++) &#123; temp[i] = (temp[i]+(LL)b[j]*c[j][i]) % m; &#125; &#125; memcpy(a,temp,sizeof temp); &#125;void mul(int a[][N],int b[][N],int c[][N])&#123; int temp[N][N] = &#123;0&#125;; for(int i = 0;i &lt; N;i++) &#123; for(int j = 0;j &lt; N;j++) &#123; for(int k = 0;k &lt; N;k++) &#123; temp[i][j] = (temp[i][j] + (LL)b[i][k]*c[k][j])% m; &#125; &#125; &#125; memcpy(a,temp,sizeof temp); &#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); n--; int f[N] = &#123;1,1,1&#125;; while(n) &#123; if(n &amp; 1) mul(f,f,a);//res = res *a; mul(a,a,a);//a *= a; n &gt;&gt;= 1; &#125; cout&lt;&lt;f[2]; //f[N] = f[1]*A^N-1 因为f[n] = &#123;fn,fn+1,Sn&#125;那么f[2]就对应Sn经过快速幂最后得到的Sn的值 return 0;&#125;]]></content>
