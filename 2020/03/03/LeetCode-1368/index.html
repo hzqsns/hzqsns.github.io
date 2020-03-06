@@ -98,8 +98,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hzqsns.github.io/2020/03/03/LeetCode-1368/79324027_p0_master1200.jpg">
 <meta property="og:image" content="https://hzqsns.github.io/2020/03/03/LeetCode-1368/1.png">
-<meta property="og:image" content="https://hzqsns.github.io/2020/03/03/LeetCode-1368/1.png">
-<meta property="og:updated_time" content="2020-03-03T12:11:56.148Z">
+<meta property="og:image" content="https://hzqsns.github.io/2020/03/03/LeetCode-1368/2.png">
+<meta property="og:updated_time" content="2020-03-06T09:06:47.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode-1368">
 <meta name="twitter:description" content="一个典型的01BFS的题目(最短路) 第二十三天，开始整理除了模板题之外的其他题目">
@@ -464,7 +464,7 @@
         <h1 id="一个典型的01BFS的题目-最短路"><a href="#一个典型的01BFS的题目-最短路" class="headerlink" title="一个典型的01BFS的题目(最短路)"></a><center>一个典型的01BFS的题目(最短路)</center></h1><p><img src="/2020/03/03/LeetCode-1368/79324027_p0_master1200.jpg" alt></p>
 <p>第二十三天，开始整理除了模板题之外的其他题目<br><a id="more"></a><br><a href="https://leetcode-cn.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/submissions/" target="_blank" rel="noopener">传送门</a></p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/03/03/LeetCode-1368/1.png" alt></p>
-<h1 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h1><p><img src="/2020/03/03/LeetCode-1368/1.png" alt></p>
+<h1 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h1><p><img src="/2020/03/03/LeetCode-1368/2.png" alt></p>
 <h1 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h1><p>这题从题意上分析可知可以抽象成从点(0,0)走到点(n-1,m-1)的路径中最少修改的次数，其也跟最短路有关(一般的最短路的问题是问最短距离，这个最少的修改次数也可以跟最短路相关)</p>
 <p>如果最短路的边权全部都是1的话可以用BFS进行求解，但是因为这个图的权值是0和1都存在，如果走的方向相同当前格子就为0，否则就为1，这个时候就不能用简单的BFS进行求解，而是用01BFS进行求解</p>
 <p>01BFS，就不是简单的用queue去存储而是用一个双端队列deque去存储，如果当前边权为0就加入到队头、如果是1就加入到队尾，这样可以保证队列里面的单调性，确保我们取出的队头一定是最小的</p>
@@ -523,6 +523,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/06/LeetCode-1363-dp/" rel="prev" title="LeetCode-1363-dp">
+                LeetCode-1363-dp <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -609,7 +613,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">74</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -620,7 +624,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
