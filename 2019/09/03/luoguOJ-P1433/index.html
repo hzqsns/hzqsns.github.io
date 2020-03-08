@@ -97,7 +97,7 @@
 <meta property="og:description" content="P1433 吃奶酪传送门">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://hzqsns.github.io/2019/09/03/luoguOJ-P1433/76296843_p0_master1200.jpg">
-<meta property="og:updated_time" content="2020-02-02T14:52:17.770Z">
+<meta property="og:updated_time" content="2020-03-08T12:11:24.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="luoguOJ-P1433">
 <meta name="twitter:description" content="P1433 吃奶酪传送门">
@@ -446,7 +446,19 @@
 <h3 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h3><p>输入 #1<br>4<br>1 1<br>1 -1<br>-1 1<br>-1 -1</p>
 <p>输出 #1<br>7.41</p>
 <hr>
-<p>思路：<br>double一个sum来统计每次dfs到底的时候比较最短距离，如果s比sum要小就更新sum<br>我觉得这里面最重要的就是用visit[maxn]数组来判断是否走过因为每次用now在dfs里面表示当前第几个点<br>因为要走过所有的点，所以从哪个点开始进行dfs是无所谓的，所以默认dfs(0,0,0.0)开始没问题<br>然后double Distance[maxn][maxn]来存放点与点之间的距离<br>Distance[i][j]表示第i个点和第j个点之间的距离<br>然后再dfs(i+1,j,s+Distance[now][j])<br>这个的意思就是现在位于now点,然后再准备走向下一个点,也就是走向j对应的点<br>然后就先令visit[j] = 1表示j这个点即将要走到了<br>那么s就加上一个Distance[now][j],此时继续dfs<br>那么此时的now就等于j点,如果一直dfs,一直递归到条件不成立,那么就回溯,令visit[j] = 0<br>因为每一层dfs里面的for循环都是从1一直到n的,所以怎么无论dfs多少次都是会从1开始遍历<br>如果经过了就不考虑,如果没经过就继续dfs,直至每层dfs为止然后再更新最小的sum值<br>又因为输出的格式要求要保留两位小数,所以最后就printf(“%0.2f”,sum)得到最后的结果</p>
+<p>思路：<br>double一个sum来统计每次dfs到底的时候比较最短距离，如果s比sum要小就更新sum</p>
+<p>我觉得这里面最重要的就是用visit[maxn]数组来判断是否走过因为每次用now在dfs里面表示当前第几个点</p>
+<p>因为要走过所有的点，所以从哪个点开始进行dfs是无所谓的，所以默认dfs(0,0,0.0)开始没问题</p>
+<p>然后double Distance[maxn][maxn]来存放点与点之间的距离</p>
+<p>Distance[i][j]表示第i个点和第j个点之间的距离</p>
+<p>然后再dfs(i+1,j,s+Distance[now][j])</p>
+<p>这个的意思就是现在位于now点,然后再准备走向下一个点,也就是走向j对应的点</p>
+<p>然后就先令visit[j] = 1表示j这个点即将要走到了</p>
+<p>那么s就加上一个Distance[now][j],此时继续dfs</p>
+<p>那么此时的now就等于j点,如果一直dfs,一直递归到条件不成立,那么就回溯,令visit[j] = 0</p>
+<p>因为每一层dfs里面的for循环都是从1一直到n的,所以怎么无论dfs多少次都是会从1开始遍历</p>
+<p>如果经过了就不考虑,如果没经过就继续dfs,直至每层dfs为止然后再更新最小的sum值</p>
+<p>又因为输出的格式要求要保留两位小数,所以最后就printf(“%0.2f”,sum)得到最后的结果</p>
 <p>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">16</span>;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">double</span> sum = <span class="number">10000.0</span>;<span class="comment">//sum来存放跑动的最少距离</span></span><br><span class="line"><span class="keyword">double</span> Distance[maxn][maxn];<span class="comment">//存放点与点之间的距离</span></span><br><span class="line"><span class="keyword">double</span> x[maxn],y[maxn];<span class="comment">//存放每个点的坐标</span></span><br><span class="line"><span class="keyword">int</span> visit[maxn];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> now,<span class="keyword">double</span> s)</span><span class="comment">//i表示已经走了几个点，now表示当前第几个点，s表示距离</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s &gt;= sum)<span class="comment">//如果发现s已经大于当前最小的sum则直接返回</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(i == n)<span class="comment">//全部走完的时候</span></span><br><span class="line">    &#123;</span><br><span class="line">        sum = min(sum,s);</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!visit[j])</span><br><span class="line">        &#123;</span><br><span class="line">            visit[j] = <span class="number">1</span>;<span class="comment">//把即将要走过的这个点设置为走过</span></span><br><span class="line">            dfs(i+<span class="number">1</span>,j,s+Distance[now][j]);</span><br><span class="line">            visit[j] = <span class="number">0</span>;<span class="comment">//回溯</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;x[i]&gt;&gt;y[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            Distance[i][j] = <span class="built_in">sqrt</span>((x[i]-x[j])*(x[i]-x[j])+(y[i]-y[j])*(y[i]-y[j]));</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%0.2f"</span>,sum);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
@@ -587,7 +599,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">75</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -598,7 +610,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
