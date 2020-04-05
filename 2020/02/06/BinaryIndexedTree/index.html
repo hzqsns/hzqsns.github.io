@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2020/02/06/BinaryIndexedTree/3.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/02/06/BinaryIndexedTree/1.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/02/06/BinaryIndexedTree/1.png">
-<meta property="og:updated_time" content="2020-02-06T14:53:26.369Z">
+<meta property="og:updated_time" content="2020-04-05T04:23:43.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="BinaryIndexedTree">
 <meta name="twitter:description" content="树状数组及其模板题第七天！777777777">
@@ -462,7 +462,7 @@
 <p>对于偶数来说<br>第一种<br>C[2] = A[1] + A[2]<br>C[6] = A[5] + A[6]<br>C[10] = A[9] + A[10]<br>C[14] = A[13] + A[14]</p>
 <p>第二种<br>C[4] = A[4] + C[3] + C[2] = A[1] + A[2]+ A[3]+A[4]<br>C[8] = A[8] + A[7] + C[6] + C[4] = A[1]+ … + A[8]<br>….<br>C[16] = A[1] + … + A[16]</p>
 <p>不难看出，如果把x转换为二进制表示<br>C[x]就表示区间(x-2^k,x]这个前开后闭区间的和<br>其中k表示二进制后面有多少个0<br>对应到我们样例中就是第几层到当前下标x对应层的和</p>
-<h2 id="lowbit运算"><a href="#lowbit运算" class="headerlink" title="lowbit运算"></a>lowbit运算</h2><p>我们定义lowbit(x) = x &amp; -x<br>拿x = 6来举例<br>x|—-0000001101001100<br>-x|—1111110010110100<br>x&amp;-x|-0000000000000100<br>即6对应1后面有2个0<br>lowbit(6) = 2<br>(lowbit(x)也可以理解为能整除x的最大2的幂次)</p>
+<h2 id="lowbit运算"><a href="#lowbit运算" class="headerlink" title="lowbit运算"></a>lowbit运算</h2><p>我们定义lowbit(x) = x &amp; -x<br>拿x = 844来举例<br>x|—-0000001101001100<br>-x|—1111110010110100<br>x&amp;-x|-0000000000000100<br>即844对应1后面有2个0<br>lowbit(844) = 2^2 = 4<br>(lowbit(x)也可以理解为能整除x的最大2的幂次)</p>
 <p>于是我们可以把区间(x-2^k,x]转换为(x-lowbit(x),x]</p>
 <p>最后求出树状数组C[N]即可进行更多的操作</p>
 <hr>
