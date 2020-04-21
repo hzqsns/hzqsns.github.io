@@ -330,6 +330,170 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/23/luoguOJ-P1443-bfs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/80122338_p0_master1200.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/23/luoguOJ-P1443-bfs/" itemprop="url">luoguOJ-P1443</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-23T09:06:04+08:00">
+                2019-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/洛谷OJ/" itemprop="url" rel="index">
+                    <span itemprop="name">洛谷OJ</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/23/luoguOJ-P1443-bfs/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/23/luoguOJ-P1443-bfs/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="P1443-马的遍历"><a href="#P1443-马的遍历" class="headerlink" title="P1443 马的遍历"></a><center>P1443 马的遍历</center></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>有一个n*m的棋盘(1&lt; n,m &lt;=400)，在某个点上有一个马,要求你计算出马到达棋盘上任意一个点最少要走几步</p>
+<h1 id="输入输出格式"><a href="#输入输出格式" class="headerlink" title="输入输出格式"></a>输入输出格式</h1><h2 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h2><p>一行四个数据，棋盘的大小和马的坐标</p>
+<h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>一个n*m的矩阵，代表马到达某个点最少要走几步（左对齐，宽5格，不能到达则输出-1）</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#输入输出样例</span><br><span class="line"></span><br><span class="line">输入样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">3</span> <span class="number">3</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">0</span>    <span class="number">3</span>    <span class="number">2</span>    </span><br><span class="line"><span class="number">3</span>    <span class="number">-1</span>   <span class="number">1</span>    </span><br><span class="line"><span class="number">2</span>    <span class="number">1</span>    <span class="number">4</span></span><br><span class="line"></span><br><span class="line">输入样例#<span class="number">2</span>：</span><br><span class="line"><span class="number">6</span> <span class="number">9</span> <span class="number">1</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">2</span>：</span><br><span class="line"><span class="number">0</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">4</span> </span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> </span><br><span class="line"><span class="number">2</span> <span class="number">1</span> <span class="number">4</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">4</span> </span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> </span><br><span class="line"><span class="number">2</span> <span class="number">3</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">4</span> </span><br><span class="line"><span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">4</span> <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<hr>
+<p>思考:<br>这题就是一道很典型的bfs的题目<br>根据题目给的首节点，来存入队列里面<br>定义方向数组来模拟马走的八个方向<br>然后把首节点存入队列，然后取出首节点，依次遍历八个方向，然后如果可以就Map2 = Map1 +1<br>这样的话根据这个递推公式可以推出所有可以走的点<br>最后还记得定义一个path数组来判断是否走过就行了</p>
+<p>这道题目里面的坑:<br>题目要左对齐宽五格所以要printf(“%-5d”,Map[i][j])</p>
+<hr>
+<p>代码如下:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//P1443 马的遍历</span></span><br><span class="line"><span class="keyword">int</span> n,m;<span class="comment">//定义</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">410</span>;</span><br><span class="line"><span class="comment">//定义方向数组来定义马走的八个方向</span></span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">8</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">-2</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> dy[<span class="number">8</span>] = &#123;<span class="number">2</span>,<span class="number">1</span>,<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">-1</span>,<span class="number">-2</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> Map[maxn][maxn];<span class="comment">//定义一个数组记录棋盘上的</span></span><br><span class="line"><span class="keyword">int</span> path[maxn][maxn];<span class="comment">//定义一个路径来判断是否走过当前路径</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span><span class="comment">//定义一个结构体才存放棋盘坐标的值</span></span><br><span class="line">     <span class="keyword">int</span> x,y;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">queue</span>&lt;Node&gt; val;<span class="comment">//定义一个来存放结点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bfs</span><span class="params">(Node s)</span><span class="comment">//传入结点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    val.push(s);</span><br><span class="line">    Map[s.x][s.y] = <span class="number">0</span>;<span class="comment">//定义开始为0，其余的结点都是依照这个点而来的</span></span><br><span class="line">    path[s.x][s.y] = <span class="number">1</span>;<span class="comment">//记录路径为走过</span></span><br><span class="line">    <span class="keyword">while</span>(!val.empty())<span class="comment">//如果队列里面不为空则继续循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        Node temp = val.front();</span><br><span class="line">        val.pop();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">8</span>;i++)<span class="comment">//八个方向来进行探测</span></span><br><span class="line">        &#123;</span><br><span class="line">            Node cmp;<span class="comment">//定义一个中间变量来存放数据</span></span><br><span class="line">            cmp.x = temp.x + dx[i];</span><br><span class="line">            cmp.y = temp.y + dy[i];</span><br><span class="line">            <span class="keyword">if</span>(path[cmp.x][cmp.y] != <span class="number">0</span>||cmp.x&lt;<span class="number">1</span>||cmp.x&gt;n||cmp.y&lt;<span class="number">1</span>||cmp.y&gt;m)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            path[cmp.x][cmp.y] = <span class="number">1</span>;<span class="comment">//记录为走过</span></span><br><span class="line">            Map[cmp.x][cmp.y] = Map[temp.x][temp.y] + <span class="number">1</span>;</span><br><span class="line">            val.push(cmp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(Map,<span class="number">-1</span>,<span class="keyword">sizeof</span>(Map));<span class="comment">//定义Map上所有结点为-1，如果这个值不会改变则说明这个点根本走不到</span></span><br><span class="line">    Node s;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;s.x&gt;&gt;s.y;</span><br><span class="line">    bfs(s);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= m;j++)</span><br><span class="line">        &#123;</span><br><span class="line">             <span class="built_in">printf</span>(<span class="string">"%-5d"</span>,Map[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/20/luoguOJ-P1162-dfs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1783,172 +1947,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/04/Leetcode-002/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/80122338_p0_master1200.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/04/Leetcode-002/" itemprop="url">Leetcode-002</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-04T16:39:45+08:00">
-                2019-05-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">Leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/04/Leetcode-002/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/04/Leetcode-002/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="2-两数相加"><a href="#2-两数相加" class="headerlink" title="2. 两数相加"></a>2. 两数相加</h1><h3 id="难度-medium"><a href="#难度-medium" class="headerlink" title="难度 : medium"></a>难度 : medium</h3><h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述:"></a>题目描述:</h5><p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">示例：</span><br><span class="line"></span><br><span class="line">输入：(<span class="number">2</span> -&gt; <span class="number">4</span> -&gt; <span class="number">3</span>) + (<span class="number">5</span> -&gt; <span class="number">6</span> -&gt; <span class="number">4</span>)</span><br><span class="line">输出：<span class="number">7</span> -&gt; <span class="number">0</span> -&gt; <span class="number">8</span></span><br><span class="line">原因：<span class="number">342</span> + <span class="number">465</span> = <span class="number">807</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<p>分析：两个非空的链表表示两个非负的整数，既然是按照逆序的方式来储存，那么就应该对两个链表分别从头开始遍历进行加和操作</p>
-<p>用x,y来分别取出两个数对应的数位,用carry来记录是否需要进位<br>先令carry = 0,再计算sum = x + y + carry;<br>如果 sum &gt;= 10,则令carry = 1<br>再让 sum % 10来组成新的数的每一位<br>如果其中一个链表有数可以取出,而另一个链表的下一位为NULL<br>则令为NULL的那一条链表对应的x或者y为0即可</p>
-<p>然后最后结束的时候如果carry还为 1,说明最后还多出来一位,则应该再额外多进1。</p>
-<hr>
-<p>自己在这题中遇到的问题:<br>Leetcode给的构造函数(struct跟class一样啊，我真的是有点傻了)<br>既然它给的有构造函数<br><code>ListNode(int x) : val(x), next(NULL) {}</code><br>则初始化对象的时候一定要调用,那么定义新的结点的时候就一定需要一个初始值(比如0),否则会报错。</p>
-<hr>
-<p>代码如下:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">addTwoNumbers</span><span class="params">(ListNode* l1, ListNode* l2)</span> </span>&#123;</span><br><span class="line">  ListNode *p1,*p2,*p3;</span><br><span class="line">  ListNode *l3 = <span class="keyword">new</span> ListNode(<span class="number">0</span>);      </span><br><span class="line">  p1 = l1;</span><br><span class="line">  p2 = l2;</span><br><span class="line">  p3 = l3;</span><br><span class="line">  <span class="keyword">int</span> carry = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">while</span>(p1 != <span class="literal">NULL</span> || p2 != <span class="literal">NULL</span>)</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="comment">//如果对应的数位为NULL,则直接令其为0</span></span><br><span class="line">      <span class="keyword">int</span> x = (p1 != <span class="literal">NULL</span>) ? p1-&gt;val : <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> y = (p2 != <span class="literal">NULL</span>) ? p2-&gt;val : <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">int</span> sum = x + y + carry;</span><br><span class="line">      (sum / <span class="number">10</span>)? (carry = <span class="number">1</span>): (carry = <span class="number">0</span>);</span><br><span class="line">      ListNode *s = <span class="keyword">new</span> ListNode(<span class="number">0</span>);<span class="comment">//定义一个新的结点来存放结果,一定要初始化才行</span></span><br><span class="line">      s-&gt;val = sum % <span class="number">10</span>;</span><br><span class="line">      p3-&gt;next = s;</span><br><span class="line">      p3 = s;</span><br><span class="line">      (p1 != <span class="literal">NULL</span>) &amp;&amp; (p1 = p1-&gt;next);<span class="comment">//代替if的语句</span></span><br><span class="line">      (p2 != <span class="literal">NULL</span>) &amp;&amp; (p2 = p2-&gt;next);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(carry)<span class="comment">//如果最后carry还为1,则说明还需进一位</span></span><br><span class="line">  &#123;</span><br><span class="line">      ListNode *s = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">      s-&gt;val = <span class="number">1</span>;</span><br><span class="line">      p3-&gt;next = s;</span><br><span class="line">      p3 = s;</span><br><span class="line">      p3-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  l3 = l3-&gt;next;</span><br><span class="line">  <span class="keyword">return</span> l3;      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2006,7 +2004,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">88</span>
+                  <span class="site-state-item-count">89</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2017,7 +2015,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
