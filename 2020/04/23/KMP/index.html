@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/5.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/1.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/2.png">
-<meta property="og:updated_time" content="2020-04-23T16:27:46.520Z">
+<meta property="og:updated_time" content="2020-04-23T16:33:56.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KMP">
 <meta name="twitter:description" content="KMP算法模板及理解39">
@@ -464,9 +464,11 @@
 <p>如果是暴力做法那么肯定就是把模板串整体往后挪一位然后再开始重新判断</p>
 <p>但是显然我们在之前匹配的过程中已经做了大量的重复工作</p>
 <p>所以我们思考怎么样才可以多挪动几位</p>
-<p>因为这很容易可以想到<br>如果是<br>主串       abcabcxhhhh..<br>模板串     abcabcyjklm……<br>我们匹配到主串的h和模板串的j这里就不匹配了<br>但是这里再把模板串往后挪动一位也肯定不匹配啊<br>即<br>abcabcxhhhh..<br> abcabcyjklm……<br>因为除非是一模一样的字符串，不然两个相同的字符串其中一个往后挪动一位还完全一致是不可能的</p>
+<p>因为这很容易可以想到<br>如果是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主串       abcabcxhhhh</span><br><span class="line">模板串     abcabcyjklm</span><br></pre></td></tr></table></figure></p>
+<p>我们匹配到主串的h和模板串的j这里就不匹配了<br>但是这里再把模板串往后挪动一位也肯定不匹配啊<br>即<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">abcabcxhhhh</span></span><br><span class="line"><span class="attribute"> abcabcyjklm</span></span><br></pre></td></tr></table></figure></p>
+<p>因为除非是一模一样的字符串，不然两个相同的字符串其中一个往后挪动一位还完全一致是不可能的</p>
 <p>所以模板串挪到什么地方才对呢？</p>
-<p>即挪到<br>主串            abcabcxhhhh..<br>模板串             abcabcyjklm……<br>这里才能相同</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">即挪到</span><br><span class="line">主串            abcabcxhhhh</span><br><span class="line">模板串             abcabcyjklm</span><br><span class="line">这里才能相同</span><br></pre></td></tr></table></figure>
 <p>因为从模板串可以看出来，一开始枚举到第6位的c的时候主串和模板串前面都还一致，直到枚举到第七位的时候就不相同了<br>这个时候就需要滑动模板串</p>
 <p>这个时候就需要next数组了<br>next数组的含义就是：用来存模式串中每个前缀最长的能匹配前缀子串的结尾字符的下标</p>
 <p>从模板串可知截止到第6位c之前的abcabc，后面的abc和前缀abc是相同的，<br>此时第6位c对应的next数组的值next[6] = 3,表示模板串中以第i个字符结尾的字符串应该跳到模板串的next[i]的位置往后继续匹配，如果对应的后面一个字符不匹配的话，则需要继续滑动，对应到模板串上就相当于要匹配的位置不断的往前跳动</p>
