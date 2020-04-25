@@ -102,7 +102,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/5.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/1.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/04/23/KMP/2.png">
-<meta property="og:updated_time" content="2020-04-24T14:12:14.664Z">
+<meta property="og:updated_time" content="2020-04-25T03:06:18.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KMP">
 <meta name="twitter:description" content="KMP算法模板及理解39">
@@ -481,7 +481,8 @@
 </ol>
 <h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><ol>
 <li>求next数组其实就是把模板串也当成一个主串，错位来跟模板串来进行最大匹配，当匹配成功的时候主串中对应的下标i和模板串中对应的下标j+1其实是对应滑动最短的距离之后可以再从j+1的位置开始进行匹配，如果后面一个字母对应不匹配就继续滑动</li>
-<li>那么对于不同的主串和模板串来说，匹配到不同的字母的时候，但是他们两个前面的字母都是相等的，这个时候前面相同的部分其实就可以看作是同一个模板串，然后因为我们已经处理了next数组，表示如果是模板串和模板串匹配的时候应该滑动几位，又因为这个时候主串和模板串前面的部分相同，我们就可以看成是模板串与模板串匹配然后直接套用next数组来表示模板串应该滑动多少，或者说是应该跳回到哪个位置再往后继续匹配。</li>
+<li>我们其实是找到最大前缀截止的地方方便我进行下一次匹配，然后我惊奇的发现我假设存在这种情况，和最大后缀又是相等的，所以直接转换成求最大后缀来求出next数组了。</li>
+<li>那么对于不同的主串和模板串来说，匹配到不同的字母的时候，但是他们两个前缀都是相等的，这个时候前面相同的部分其实就可以看作是同一个模板串，然后因为我们已经处理了next数组，表示如果是模板串和模板串匹配的时候应该滑动几位，又因为这个时候主串和模板串前面的部分相同，我们就可以看成是模板串与模板串匹配然后直接套用next数组来表示模板串应该滑动多少，或者说是应该跳回到哪个位置再往后继续匹配。</li>
 </ol>
 <h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ol>
 <li>模板串和主串下标都要从1开始储存，且主串和模板串需要错位去枚举，即主串是从i = 1开始枚举，模板串是从j = 0开始枚举，每次枚举S[i]与P[j+1]是否相同</li>
@@ -539,6 +540,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/04/25/SmallestHamiltonDistance/" rel="prev" title="SmallestHamiltonDistance">
+                SmallestHamiltonDistance <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -625,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -636,7 +641,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
