@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[AcWing1064-StateCompression]]></title>
+    <url>%2F2020%2F04%2F27%2FAcWing1064-StateCompression%2F</url>
+    <content type="text"><![CDATA[一种类型的状态压缩dp - AcWing1064.骑士42 题目及输入输出 分析 由题目的分析可知，每一行状态只跟上一行的状态有关于是 我们可以从第i行开始枚举有效的状态 再枚举第i行能转移到第i+1行的状态 最后把第n行所有有效状态的数量加起来即可 闫氏dp分析法 注意点 需要预先处理出来有效的状态有效的状态需要满足：状态里面不能有连续的1我们可以提前枚举出来有效的状态然后记录到一个vector中 我们需要预先存储一个有效的状态能够转移到那些状态中去如果状态a能够转移到状态b，那么需要满足(1)a &amp; b == 0，即a和b的二进制表示的相同的位数不能同时有1(2)check(a | b)是否为true，即a和b的并集同样不能存在连续的1，如果存在连续的1说明国王的周围部分包括下一层的国王，这样的状态也是不成立的 最后的结果会爆int，需要用long long来存储最后的结果 需要预先写出一个check函数来判断状态是否有连续的1，用一个count函数来计算状态里面有多少个1 代码如下12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;vector&gt;using namespace std;typedef long long LL;const int N = 12,M = 1 &lt;&lt; 10,W = 110;LL f[N][W][M];//f[i][j][k]表示前i行，放置了j个国王，且第i行状态为k的方案数vector&lt;int&gt; head[M];//存放第i个状态能转移到的合法状态vector&lt;int&gt; state;//存放合法状态int n,m;int cnt[M];bool check(int state)&#123; for (int i = 0; i &lt; n; i ++ ) if ((state &gt;&gt; i &amp; 1) &amp;&amp; (state &gt;&gt; i + 1 &amp; 1)) return false; return true;&#125;int count(int state)&#123; int res = 0; for (int i = 0; i &lt; n; i ++ ) res += state &gt;&gt; i &amp; 1; return res;&#125;int main()&#123; scanf("%d %d",&amp;n,&amp;m); for (int i = 0; i &lt; 1 &lt;&lt; n; i ++ ) if (check(i)) &#123; state.push_back(i); cnt[i] = count(i); &#125; for(int i = 0;i &lt; state.size();i++) &#123; for(int j = 0;j &lt; state.size();j++) &#123; int x = state[i],y = state[j]; if( (x &amp; y) == 0 &amp;&amp; check(x | y)) &#123; head[i].push_back(j); &#125; &#125; &#125; f[0][0][0] = 1; for(int i = 1;i &lt;= n+1;i++) &#123; for(int j = 0;j &lt;= m;j++) &#123; for(int k = 0;k &lt; state.size();k++) &#123; int c = cnt[state[k]]; int a = state[k]; for(int b : head[k]) &#123; if(c &lt;= j) &#123; f[i][j][a] += f[i-1][j-c][state[b]]; &#125; &#125; &#125; &#125; &#125; LL res = 0; for(int i = 0;i &lt; 1 &lt;&lt; n;i++) res +=f[n][m][i]; cout&lt;&lt;res; return 0; &#125;]]></content>
+      <categories>
+        <category>AcWing</category>
+        <category>StateCompression</category>
+      </categories>
+      <tags>
+        <tag>算法总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ShareDealing]]></title>
     <url>%2F2020%2F04%2F27%2FShareDealing%2F</url>
     <content type="text"><![CDATA[一个稍微复杂一点的状态机模(三种状态) - 1058. 股票买卖 V41 题目 输入输出 分析由题目分析可知卖股票之后，会有一个一天的冷却期 所以需要分成三种状态 手中有股票 卖出股票后的第一天(因为有冷却期不能买股票，所以要单独分出来) 卖出股票后的第二天 代码如下1234567891011121314151617181920212223242526272829#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;const int N = 1e5+10;int f[N][3];//0对应有货，1对于无货的第一天，2对应无货的第二天及以后的天数int w[N];int n;int main()&#123; cin&gt;&gt;n; for(int i = 1;i &lt;= n;i++) cin&gt;&gt;w[i]; f[0][0] = f[0][1] = -0x3f3f3f3f; f[0][2] = 0; for(int i = 1;i &lt;= n;i++) &#123; f[i][0] = max(f[i-1][0],f[i-1][2] - w[i]); //手中有货 f[i][1] = f[i-1][0] + w[i]; //手中无货的第一天 f[i][2] = max(f[i-1][2],f[i-1][1]); //手中无货的第二天 &#125; cout&lt;&lt;max(f[n][1],f[n][2]); return 0;&#125;]]></content>
