@@ -330,193 +330,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/15/Leetcode-019/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/20200426182013.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nakano Azure">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/15/Leetcode-019/" itemprop="url">Leetcode-019</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T11:08:44+08:00">
-                2019-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">Leetcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/15/Leetcode-019/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/15/Leetcode-019/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="19-删除链表的倒数第N个节点"><a href="#19-删除链表的倒数第N个节点" class="headerlink" title="19. 删除链表的倒数第N个节点"></a><center>19. 删除链表的倒数第N个节点</center></h1><h2 id="难度：medium"><a href="#难度：medium" class="headerlink" title="难度：medium"></a>难度：medium</h2><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">题目描述</span><br><span class="line">给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line"></span><br><span class="line">给定一个链表: <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">4</span>-&gt;<span class="number">5</span>, 和 n = <span class="number">2.</span></span><br><span class="line"></span><br><span class="line">当删除了倒数第二个节点后，链表变为 <span class="number">1</span>-&gt;<span class="number">2</span>-&gt;<span class="number">3</span>-&gt;<span class="number">5.</span></span><br><span class="line">说明：</span><br><span class="line"></span><br><span class="line">给定的 n 保证是有效的。</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>我自己的思路:<br>(两次遍历链表的想法)<br>先定义一个num遍历链表记录结点的总数，然后定义一个cmp = 0，当再次遍历到num - n -1时就表明这个时候的结点是在要删除结点的前一个结点，然后再进行删除操作</p>
-<p>这题遇到的坑：不知道leetcode到底有没有头结点，结果最后发现没有头结点，head对应的就是第一个结点，最后定义了一个newhead做头结点来进行操作，如果</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * struct ListNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     ListNode *next;</span></span><br><span class="line"><span class="comment"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode* <span class="title">removeNthFromEnd</span><span class="params">(ListNode* head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode* newhead = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    newhead-&gt;next = head;       </span><br><span class="line">    <span class="keyword">int</span> num = <span class="number">0</span>,cmp = <span class="number">0</span>;</span><br><span class="line">    ListNode *temp1,*temp2;    </span><br><span class="line">    temp1 = newhead;</span><br><span class="line">    temp2 = newhead;</span><br><span class="line">    <span class="keyword">while</span>(temp1 != <span class="literal">NULL</span>)<span class="comment">//统计链表的结点数</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp1 = temp1-&gt;next;</span><br><span class="line">        num++;</span><br><span class="line">    &#125;    </span><br><span class="line">     <span class="keyword">while</span>(cmp != num - n <span class="number">-1</span> )<span class="comment">//定位到要删除结点的前一个结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp2 = temp2-&gt;next;</span><br><span class="line">        cmp++;</span><br><span class="line">    &#125;   </span><br><span class="line">    ListNode * flag = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    flag = temp2-&gt;next;</span><br><span class="line">    temp2-&gt;next = flag-&gt;next;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> newhead-&gt;next; </span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>官方的题解思路：</p>
-<p>###方法一：两次遍历算法</p>
-<p>###思路</p>
-<p>我们注意到这个问题可以容易地简化成另一个问题：删除从列表开头数起的第 (L - n + 1)(L−n+1) 个结点，其中 LL 是列表的长度。只要我们找到列表的长度 LL，这个问题就很容易解决。</p>
-<p>###算法</p>
-<p>首先我们将添加一个哑结点作为辅助，该结点位于列表头部。哑结点用来简化某些极端情况，例如列表中只含有一个结点，或需要删除列表的头部。在第一次遍历中，我们找出列表的长度 LL。然后设置一个指向哑结点的指针，并移动它遍历列表，直至它到达第 (L - n)(L−n) 个结点那里。我们把第 (L - n)(L−n) 个结点的 next 指针重新链接至第 (L - n + 2)(L−n+2) 个结点，完成这个算法。</p>
-<p><img src="/2019/05/15/Leetcode-019/a476f4e932fa4499e22902dcb18edba41feaf9cfe4f17869a90874fbb1fd17f5-file_1555694537876.png" alt="删除列表中的第 L - n + 1 个元素"></p>
-<p>Java代码如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    <span class="keyword">int</span> length  = <span class="number">0</span>;</span><br><span class="line">    ListNode first = head;</span><br><span class="line">    <span class="keyword">while</span> (first != null) &#123;</span><br><span class="line">        length++;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    length -= n;</span><br><span class="line">    first = dummy;</span><br><span class="line">    <span class="keyword">while</span> (length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        length--;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    first.next = first.next.next;</span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>##复杂度分析</p>
-<p>时间复杂度：O(L)，该算法对列表进行了两次遍历，首先计算了列表的长度 LL 其次找到第 (L - n)个结点。 操作执行了 2L-n 步，时间复杂度为 O(L)。</p>
-<p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p>
-<hr>
-<p>###方法二：一次遍历算法</p>
-<p>###算法</p>
-<p>上述算法可以优化为只使用一次遍历。我们可以使用两个指针而不是一个指针。第一个指针从列表的开头向前移动 n+1n+1 步，而第二个指针将从列表的开头出发。现在，这两个指针被 nn 个结点分开。我们通过同时移动两个指针向前来保持这个恒定的间隔，直到第一个指针到达最后一个结点。此时第二个指针将指向从最后一个结点数起的第 nn 个结点。我们重新链接第二个指针所引用的结点的 next 指针指向该结点的下下个结点。</p>
-<p><img src="/2019/05/15/Leetcode-019/4e134986ba59f69042b2769b84e3f2682f6745033af7bcabcab42922a58091ba-file_1555694482088.png" alt="删除链表的倒数第 N 个元素"></p>
-<p>Java代码如下:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">removeNthFromEnd</span><span class="params">(ListNode head, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    dummy.next = head;</span><br><span class="line">    ListNode first = dummy;</span><br><span class="line">    ListNode second = dummy;</span><br><span class="line">    <span class="comment">// Advances first pointer so that the gap between first and second is n nodes apart</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n + <span class="number">1</span>; i++) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Move first to the end, maintaining the gap</span></span><br><span class="line">    <span class="keyword">while</span> (first != null) &#123;</span><br><span class="line">        first = first.next;</span><br><span class="line">        second = second.next;</span><br><span class="line">    &#125;</span><br><span class="line">    second.next = second.next.next;</span><br><span class="line">    <span class="keyword">return</span> dummy.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>###复杂度分析</p>
-<p>时间复杂度：O(L)，该算法对含有 L个结点的列表进行了一次遍历。因此时间复杂度为 O(L)。</p>
-<p>空间复杂度：O(1)，我们只用了常量级的额外空间。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/14/Leetcode-018/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -813,14 +626,14 @@
 
       
         
-          
-            <h1 id="一点点小总结吧"><a href="#一点点小总结吧" class="headerlink" title="一点点小总结吧"></a><center>一点点小总结吧</center></h1><p>迟到了两天才有时间写个总结，我也真是懒啊hhh<br>忙碌复习一周的感觉简直就是要了我的命，从零开始学习令我厌恶的化学真的是让我作呕<br>可是我又能有什么办法呢(笑)，为了不挂科，也只能用心的去学了呢，每天一有空就去自习室简直就是让人窒息啊，就感觉提前进入了复习周一样难受啊，不过以后每个周末都要好好努力复习了呢</p>
-<p>总之总之，期中考试终于over了，接下来是新の五月的生活啊<br>虽然已经过了一半了，但是也要好好的充实才行呢</p>
-<p>这几天又发生了几件让我不开心的事情呢，果然不是每个人都是善意的呢，有的人不喜欢被主动勾搭，有的人不喜欢和我说话，真的是好遗憾呢</p>
-<p>诶多诶多，这每天记流水账一样的日记简直就是让我想吐啊233333，果然每天还是应该乱写点想写的东西才好吗</p>
-<p>啰里啰嗦了半天还是决定以后如果有意义的事情再来写日记吧233333<br>那么就这样吧今天，希望以后能继续写更多有意义的东西呢</p>
-
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/12/20190512/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -973,11 +786,14 @@
 
       
         
-          
-            <h1 id="令人绝望的星期四"><a href="#令人绝望的星期四" class="headerlink" title="令人绝望的星期四"></a><center>令人绝望的星期四</center></h1><p>嗯，一个星期唯一没课的一天，硬是自己把自己搞自闭了，早晨7点本来只想趴着休息会，结果睡着睡着就睡到九点半了，唔，然后一个上午相当于啥都没干，中午又睡了个觉磨磨蹭蹭到三点钟才起床去自习室，然后到自习室混了7个多小时到十点左右再回来</p>
-<p>结构真的是好难啊，好多东西我都搞不懂，还有一天多的时间去学，还有物化这块硬骨头要啃，呜，这个星期过了我就好好做人，游戏都删掉的我要过一个不一样的五月！</p>
-<pre><code>by Azure</code></pre>
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/09/20190509/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1130,14 +946,14 @@
 
       
         
-          
-            <h1 id="星期三的烦恼嗷"><a href="#星期三的烦恼嗷" class="headerlink" title="星期三的烦恼嗷"></a><center>星期三的烦恼嗷</center></h1><p>今天真的是忙碌的一天嗷，从早到晚满课嗷，今天凌晨四点钟突然惊醒然后睡不着，到床上折腾了半天估计有半个小时吧才睡着，诶诶多结果一醒来结果利物浦居然把巴萨逆转了！！！哇塞，创造历史的一场比赛啊，还没有球队能够在客场0比3的情况下，主场逆转翻盘！真的是荡气回肠的一场比赛，说实话我其实挺喜欢利物浦的，尤其是渣叔克洛普，我超喜欢的！真心希望利物浦能赢得欧冠啊，去年的遗憾今年不能再重蹈覆辙了。</p>
-<p>早晨日常逃课，但是早晨学习的效率是真的低啊，又困又要学习，真的是好难熬啊嗷嗷，期中考试的一周真的是难受难受难受难受的要死了，一个星期要学完前面几个月的知识我真是个天才哈哈哈哈哈哈嗝才怪，希望这星期能应付完期中考试吧，再准备其他比赛。</p>
-<p>晚上真的是没心思学习了，晚上看汉堡王做活动没忍住买了四五十的外卖呜呜呜，我真的是败家玩意嗷，还口口声声说减肥呜，估计又要胖回去了，嗯嗯这一定是最后一次，嗯最后一次啦，以后为了减肥可不能再这样了5555555</p>
-<p>最后就是不能理解为什么要晚上停电维修，唔，明明早晨宿舍都没人它不去检修，非要晚上还没睡觉的时候就停电检修，搞不懂电力部门在想什么</p>
-<p>那么今天就这样吧，晚安啦，希望明天没课的一天我能复习完物化和结构的大部分。<br>                           by Azure</p>
-
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/08/20190508/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1290,15 +1106,14 @@
 
       
         
-          
-            <h1 id="今日份的记事"><a href="#今日份的记事" class="headerlink" title="今日份的记事"></a><center>今日份的记事</center></h1><p>今天真的是不一样的一天呢</p>
-<p>早晨日常去上体育课，本来以为要体测做引体向上，结果那个老师是个明白人233333，我本来一个也做不了的qaq结果挂上面抖了抖就给我算满分了hhhhh，然后测完中途就溜回去洗了个澡就休息了，嗯挺不错的。</p>
-<p>中午倒是发生了一些事情让我有点害怕，中午日常吃饱饭，但是一站起来就感觉胃特别不舒服，还好我室友给了我胃药缓解多了，但是以后必须得格外注意了，不能吃的太饱233333</p>
-<p>下午好不容易起来去自习室，但是感觉还是效率不是太高，好在今天把物化第二章复习完了，接下来就是明天继续复习第三章和去写期中考试卷子了，嗯感觉这个星期如果熬过去感觉这次的考试是可以挺过去的。</p>
-<p>晚上倒是发生了很多愉快的事情，和同一类人聊天是真的愉快，说什么话都能很快就明白根本不用多费口舌，别人说什么东西也能很快就能懂意思，不仅仅是一起讨论问题还是去探讨一些别的话题，我们在一起聊天是真的很开心很开心！希望以后多和这样的好朋友在一起为未来的前途努力吧！说实话真的是很烦为什么没分配到一个宿舍里面啊真的是，我现在越来越讨厌我的室友了，真的不是一类人，只会天天打游戏，应付考试应付别人，关键是还喜欢影响别人，等着瞧吧，再过两年我们走着瞧咯。</p>
-<p>这个星期复习完专业课后要重新开始学习算法，英语和数学，嗯一个也不能拉下，尤其是已经把游戏全部都卸载掉了，嗯五月初自己说过的话千万不能再忘了，已经失去太多的东西了好像已经没有再可以失去的了，一起学习的朋友晚上熬夜到三点中还在做leetcode，感觉自己跟别人比起来真的是太舒服了，要找回原来的那种状态，要去让每一天都充实起来才行！加油吧，每天都不忘初心方得始终。<br>                                       by Azure</p>
-
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/07/20190507/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1451,15 +1266,14 @@
 
       
         
-          
-            <h1 id="预习第一天的感受"><a href="#预习第一天的感受" class="headerlink" title="预习第一天的感受"></a><center>预习第一天的感受</center></h1><p>不开心的第一天嗷，不过早晨做实验是真的混啊2333333，本来以为今天要做很久的实验，看了那么一大堆步骤，结果老师都不让我们去做，给了个粗品要我们直接去提纯，简直太快乐了啊哈哈。</p>
-<p>昨天Trump的一条推特导致今天A股暴跌真的是闻所未闻，都快跌6%了，简直就是股灾啊，看别人评论说的，别人美国总统一句话就能让你一无所有，很真实，股市的风险确实是太大了，我觉得我在大学这个阶段一定要慎之又慎才行，我搞这个心态又不好23333，所以要锻炼自己在金融方面的知识才行呢，做一个知识全面的人才行呢。</p>
-<p>下午就不怎么快乐了，今天开始复习物化了，但是真的是好烦啊，本来就不喜欢物理相关的知识，但是这学期两门专业课都涉及物理，简直让我绝望5555555，还以为就算不怎么好好学考试考好点能拿奖学金呢，可惜这学期估计科科及格都难咯</p>
-<p>下午在自习室从4点一直搞到9点半，除去要去上课签到花了点时间，差不多有将近五个小时的时间都可以学习，但是效率是真的低，在自习室整个人都快自闭了，太安静的环境也不适合去学习，脑阔里面非要听点电音或者轻音乐才能去集中自己的注意力，但是有的时候听多了反而又容易走神23333，真的是很难抉择呢，但是好在是已经开头了，我有信心去准备这次的期中考试，这个星期好好努力吧，争取达到能应付考试的水平就行了，然后下个星期再开始准备学习算法，天天运动，嗯，这学期不能再像之前那样了</p>
-<p>这可是你自己说要过一个不一样的五月啊，成年人就应该信守自己所作出的承诺。</p>
-<p>嘛，今天就写这么多吧，每天写日记写博客真的是让自己很喜欢这种生活，为什么不早点开始坚持记录自己每天的生活呢？嘻嘻</p>
-
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/06/20190506/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1612,13 +1426,14 @@
 
       
         
-          
-            <h1 id="今日份的不知所云"><a href="#今日份的不知所云" class="headerlink" title="今日份的不知所云"></a><center>今日份的不知所云</center></h1><p>嗯，五一假期后的第一天上学，感觉还行吧，感觉自己的状态有所回升呢，但是感觉还是要加把劲呢，还有一个星期从零开始准备期中考试啊，真的是最不舒服的一个星期要来了呢</p>
-<p>今天真的是莫名其妙的惊喜呢，空间里面突然有个大佬加我，真的是猜不透呢，不是一个世界的人原来想接触我这样的普通人吗？感觉别人的思想真的是不一样呢，想去顶级名校，想去拯救整个社会，想去改造别人的思想，想去像儒家一样去兼济天下，唉，可惜呢，只有生存无忧才会去想这些事呢，继承家产，到大城市的地方有几套房，我如果有这么好的家室就好了啊，有钱可以买自己想买的东西，也没有学业，事业上面的压力就好了，可是啊，这只能存在于幻想之中呢，现实就是我出身一个十八线小城市，没车没房，家里也没钱，唯一值得庆幸的就是父母都挺开明的，知道自己没什么知识，敢于让我自己去做决定，自己去做决定自己未来的人生道路，我觉得这也是不幸中的万幸了吧！</p>
-<p>还有一件事就是我今天才知道我的一个室友前几天刚脱单，这几天又找到了新的女友，怎么说呢，别人大学都谈了三次了我还一次都没有，怎么说呢，从小到大我可能对感情都没有概念吧，被老师把恋爱这个选项在脑海中删除了(其实也有小学到高中越来越丑越来越胖的原因)，但是谁不渴望爱情呢，不说那么奢侈的东西吧，我其实渴望被关心，渴望和别人每天聊天，渴望和别人分享自己的快乐和烦恼，谁喜欢孤独呢，孤独都不是被逼的吗？如果遇到合适的人和志同道合的人，谁又想一个人呢。</p>
-<p>诶多，不知不觉又写了这么多，我也不知道自己天天在说什么，但是感觉日常写日记真的让自己感觉很棒，我会继续坚持下去的，记录自己生活的点点滴滴，这样的感觉真的很棒，等我觉得哪天我的东西可以分享给别人的话就会给你们看的，毕竟日记也不是不可以分享给别人的东西，我也希望有人来看我每天生活的点点滴滴，希望以后能遇到更多更棒的朋友！<br>                                         by Azure</p>
-
-          
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/05/20190505/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1953,16 +1768,174 @@
 
       
         
-          
-            <h1 id="新の开始"><a href="#新の开始" class="headerlink" title="新の开始"></a>新の开始</h1><h2 id="胡乱写一些自己都看不懂的话"><a href="#胡乱写一些自己都看不懂的话" class="headerlink" title="胡乱写一些自己都看不懂的话"></a>胡乱写一些自己都看不懂的话</h2><h3 id="重新再来，从头开始"><a href="#重新再来，从头开始" class="headerlink" title="重新再来，从头开始"></a>重新再来，从头开始</h3><p>真的是令人怀念的话语啊,上一次说这个话是高考前一百多天的时候,结果说完也没有多么努力去改变自己的命运,结果自己到了今天这个地步,如今,实在是没有什么可以再失去的东西了</p>
-<p>青春？梦想？努力？奋斗？再为自己的年轻付出巨大的代价之后才会后悔,可是又能有什么用呢？一次又一次的悔恨,一次又一次的失败，我实在是厌倦这样的生活了,不知道两年前的自己怎么也想不到今天会到这种地步吧，不仅什么也不会，而且也缺少朋友，缺少能天天和我一起说话的人</p>
-<p>孤独？谁又喜欢孤独呢，谁希望自己被逼成这样呢，孤独的人也渴望和朋友一起聊天，一起分享每天的欢乐，一起诉说每天的烦恼，这是我梦想中的生活啊。</p>
-<p>然而，每天简直就是有无穷无尽的烦恼，不仅是学业上还是生活中。<br>经过了两年的时间，自己还是啥都不会，虽然早就下定了转行的决心，但是相比跟我年龄一样的科班的人，差距还是巨大，只有每天付出比他们更多的努力才能让自己变得更强<br>生活上，每天被室友吵得心烦，天天只会打游戏，混日子，每个星期还要去实验室跟老师搬砖还浑然不知未来的处境如何，真的是感觉可悲，真不知道再过两年他们会有什么感受。</p>
-<p>想起了高中班主任跟我说的话，眼界决定境界，态度决定高度，这句话我现在细想起来还真的是太对了，但可惜我两样都没有<br>论眼界，从小城市出身的我真的是眼界太低，见识也太低了，居然稀里糊涂的报了化学这个天坑专业，高中还以为化学挺有意思的，谁知道大学完全是两个完全相反的学科，跳进了坑真的是感觉自己蠢到极点。<br>论态度，我明知道每天自己该干嘛，却还是天天摸鱼，喜欢看b站，喜欢逛知乎，喜欢玩游戏，反正每天除了学习真的是一堆事都能做，但是只要学习就容易犯困，提不起劲，这个学期把没用的课都翘了好好学算法，学相关一堆知识可以学，但是我还是喜欢浪费时间，整天摸鱼，然后从2月份一直到现在，我真的忍受不了了，必须做出一点改变来才行了，不然就算再给两年的时间给自己也是白费。</p>
-<p>已经20岁了，不再是一个小孩子了，是时候该为自己的未来，为自己的前途好好考虑一下了，人不是为自己而活，你还要付出很多很多东西才行，不说那么远，就说为了将来自己幸福的生活现在也应该要好好行动了。<br>嗯，今天把游戏全都卸载了，时间是宝贵的，再也经不起我这样浪费了，两个月的时间，我想重新调整自己的状态，该去自习室去自习室，该休息休息，以后每天十一点上床睡觉，决不熬夜，只有晚上睡好了早晨才有精神去学习，去做其他事情。<br>这个月，再也不能跟自己开玩笑了。<br>总结下最近应该准备的东西吧<br>1.英语六级，每天背10-15个单词<br>2.物理化学，结构化学复习，先把期中考试撑过了再说吧。<br>3.每天一篇算法题目(期中考试前可酌情减少)<br>4.订阅的专栏每天阅读两到三篇文章，有问题多跟小伙伴去讨论<br>5.知乎上多跟别人互动交流，诶多自己不主动怎么会有更多的朋友呢emmmm，如果可以每个星期摸出一篇高质量的回答吧！争取把点赞数和关注数都上去吧，多跟别人到想法下面去互动吧！<br>6.Linux入门吧，再不入门说不过去了。<br>7.继续算法的学习，这个每天不能丢。<br>8.运动也不能停，但是可视情况减少相应的跑步次数来去学习。</p>
-<p>嗯，就写这么多吧，现在好像也总算养成了写博客写日记的习惯了，希望再过一年两年的自己再回过头来看不会后悔吧！加油啊</p>
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/04/20190504/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/05/02/20190502/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Nakano Azure">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20200426182013.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/02/20190502/" itemprop="url">五一假期的一点感想</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-02T10:49:48+08:00">
+                2019-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/05/02/20190502/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/02/20190502/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          这是一篇加密的文章。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/02/20190502/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2059,7 +2032,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">96</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
