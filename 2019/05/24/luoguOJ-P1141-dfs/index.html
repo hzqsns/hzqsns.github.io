@@ -6,10 +6,10 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
 
@@ -27,8 +27,8 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
 
 
@@ -47,7 +47,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -55,9 +55,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
@@ -75,13 +75,13 @@
 
 
 
-  <meta name="keywords" content="每天ac的算法题,">
+  <meta name="keywords" content="每天ac的算法题," />
 
 
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Nakano Azure" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="Nakano Azure" type="application/atom+xml" />
 
 
 
@@ -89,17 +89,16 @@
 
 
 <meta name="description" content="P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm">
-<meta name="keywords" content="每天ac的算法题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="luoguOJ-P1141">
 <meta property="og:url" content="https://hzqsns.github.io/2019/05/24/luoguOJ-P1141-dfs/index.html">
 <meta property="og:site_name" content="Nakano Azure">
 <meta property="og:description" content="P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-02T14:53:37.062Z">
+<meta property="article:published_time" content="2019-05-24T02:29:51.000Z">
+<meta property="article:modified_time" content="2020-02-02T14:53:37.062Z">
+<meta property="article:author" content="Nakano Azure">
+<meta property="article:tag" content="每天ac的算法题">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="luoguOJ-P1141">
-<meta name="twitter:description" content="P1141 01迷宫传送门题目描述有一个仅由数字0与1组成的n×n格迷宫。若你位于一格0上，那么你可以移动到相邻4格中的某一格1上，同样若你位于一格1上，那么你可以移动到相邻4格中的某一格0上。 你的任务是：对于给定的迷宫，询问从某一格开始能移动到多少个格子（包含自身）。 输入输出格式输入格式：第1行为两个正整数n,m。 下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。 接下来mm">
 
 
 
@@ -129,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://hzqsns.github.io/2019/05/24/luoguOJ-P1141-dfs/">
+  <link rel="canonical" href="https://hzqsns.github.io/2019/05/24/luoguOJ-P1141-dfs/"/>
 
 
 
@@ -147,9 +146,9 @@
 
   <script src="D:/Blog/AzureBlog/source/live2d-widget/autolload.js"></script>
   
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
-   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;"></canvas> 
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
    <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
    <script type="text/javascript" src="/js/src/fireworks.js"></script>
 
@@ -170,7 +169,7 @@
     
 
     <div class="custom-logo-site-title">
-      <a href="/" class="brand" rel="start">
+      <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
         <span class="site-title">Nakano Azure</span>
         <span class="logo-line-after"><i></i></span>
@@ -198,9 +197,9 @@
       
         
         <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+          <a href="/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -208,9 +207,9 @@
       
         
         <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
+          <a href="/about/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -218,9 +217,9 @@
       
         
         <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
+          <a href="/tags/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
           </a>
@@ -228,9 +227,9 @@
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
+          <a href="/categories/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -238,9 +237,9 @@
       
         
         <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
+          <a href="/archives/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -248,9 +247,9 @@
       
         
         <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
+          <a href="/schedule/%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
             
             日程表
           </a>
@@ -258,9 +257,9 @@
       
         
         <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
+          <a href="/sitemap.xml%20" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
             
             站点地图
           </a>
@@ -273,7 +272,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
             搜索
           </a>
@@ -294,7 +293,9 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -335,7 +336,7 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Nakano Azure">
-      <meta itemprop="description" content>
+      <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/20200426182013.jpg">
     </span>
 
@@ -371,7 +372,7 @@
           </span>
 
           
-            <span class="post-category">
+            <span class="post-category" >
             
               <span class="post-meta-divider">|</span>
             
@@ -383,7 +384,7 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/洛谷OJ/" itemprop="url" rel="index">
+                  <a href="/categories/%E6%B4%9B%E8%B0%B7OJ/" itemprop="url" rel="index">
                     <span itemprop="name">洛谷OJ</span>
                   </a>
                 </span>
@@ -414,7 +415,7 @@
           
             <span class="post-meta-divider">|</span>
             <span class="page-pv"><i class="fa fa-file-o"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
 
@@ -441,15 +442,45 @@
 <p>下面n行，每行n个字符，字符只可能是0或者1，字符之间没有空格。</p>
 <p>接下来mm行，每行22个用空格分隔的正整数i,j对应了迷宫中第i行第j列的一个格子，询问从这一格开始能移动到多少格。</p>
 <h2 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h2><p>m行，对于每个询问输出相应答案。</p>
-<h1 id="输入输出样例："><a href="#输入输出样例：" class="headerlink" title="输入输出样例："></a>输入输出样例：</h1><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">输入样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">--------------------------------------------------</span><br><span class="line">输入样例#<span class="number">2</span>： </span><br><span class="line"><span class="number">8</span> <span class="number">4</span></span><br><span class="line"><span class="number">10010011</span></span><br><span class="line"><span class="number">01100100</span></span><br><span class="line"><span class="number">10010011</span></span><br><span class="line"><span class="number">01011011</span></span><br><span class="line"><span class="number">10001000</span></span><br><span class="line"><span class="number">00011011</span></span><br><span class="line"><span class="number">00101000</span></span><br><span class="line"><span class="number">00000010</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">8</span> <span class="number">6</span></span><br><span class="line"><span class="number">6</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">2</span>： </span><br><span class="line"><span class="number">25</span></span><br><span class="line"><span class="number">19</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">25</span></span><br></pre></td></tr></table></figure>
+<h1 id="输入输出样例："><a href="#输入输出样例：" class="headerlink" title="输入输出样例："></a>输入输出样例：</h1><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">输入样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">01</span></span><br><span class="line"><span class="number">10</span></span><br><span class="line"><span class="number">1</span> <span class="number">1</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">1</span>： </span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line">--------------------------------------------------</span><br><span class="line">输入样例#<span class="number">2</span>： </span><br><span class="line"><span class="number">8</span> <span class="number">4</span></span><br><span class="line"><span class="number">10010011</span></span><br><span class="line"><span class="number">01100100</span></span><br><span class="line"><span class="number">10010011</span></span><br><span class="line"><span class="number">01011011</span></span><br><span class="line"><span class="number">10001000</span></span><br><span class="line"><span class="number">00011011</span></span><br><span class="line"><span class="number">00101000</span></span><br><span class="line"><span class="number">00000010</span></span><br><span class="line"><span class="number">1</span> <span class="number">2</span></span><br><span class="line"><span class="number">8</span> <span class="number">6</span></span><br><span class="line"><span class="number">6</span> <span class="number">2</span></span><br><span class="line"><span class="number">4</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">输出样例#<span class="number">2</span>： </span><br><span class="line"><span class="number">25</span></span><br><span class="line"><span class="number">19</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="number">25</span></span><br></pre></td></tr></table></figure>
+
 <hr>
 <h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p>定义一个数组val来存放迷宫，定义一个数组cmp来判断是否走过<br>1.这道题一眼看上去就是一个深搜，把01用二维数组存下下来，搜索每一个格子然后判断合理情况，如果遇到不相同的格子就记录<br>然后每遇到一个点就重新memset一下cmp重新开始<br>噼里啪啦一顿dfs交上去，TLE了三个点只有70分</p>
 <p>2.这样做问题出在哪里呢？我把测试数据看了一下，发现很恶心，n和m分别取到了1000和100000，那显然，memset是很耗时间的<br>于是我想到把cmp数组的标记改为layer，代表所搜索的格子所在的不同联通块。<br>这样，每一次去数新一个格子所能联通的块数就只要更新layer，节省了很大一块时间(这样就不用每次memset一次cmp数组我觉得这样的做法很巧妙)<br>成功过掉了第二个点也就是n=1000, m=10000的点</p>
 <p>3.但是还有两个点TLE，说明还要需要改进的地方需要我去思考<br>苦苦思索，是与否有其他优化方法，果然，有一条很明显的但是一早就被我忽略了：</p>
 <h2 id="同一个联通块所在的格子，能到达的格子数都是相同的。"><a href="#同一个联通块所在的格子，能到达的格子数都是相同的。" class="headerlink" title="同一个联通块所在的格子，能到达的格子数都是相同的。"></a>同一个联通块所在的格子，能到达的格子数都是相同的。</h2><p>这样一看，怎么记忆化就已经很明显了，我们已经用cmp数组标记过了当前搜索的格子所在的联通块，用layer表示，那么我们只要再开一个record数组，将已经遍历过的联通块对应的格子数记录下来，那么搜索到相应联通块里的其它格子时，就不用再搜索了，这是一步很大的优化，最终我提交了修改过的代码，100分ac</p>
-<p>自己遇到的坑：<br>第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方~(但是我懒啊)~<br>第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。</p>
+<p>自己遇到的坑：<br>第一个坑: OJ上要求的是直接输入一串数而不是一个数字一个数字输入的我觉得这个挺坑的，我就懒得换了，直接char一个数组去接受，然后再int一个全局数组去修改对应的值，这样做其实挺傻的，还有可以改进的地方<del>(但是我懒啊)</del><br>第二个坑: OJ要求的输出是输入数据之后全部输出，所以就还要再定义一个sum数组去存放数据，最后再全部输出。</p>
 <hr>
 <h2 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下:"></a>代码如下:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxm = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> layer = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> record[maxm];</span><br><span class="line"><span class="keyword">char</span> sum[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> val[maxn][maxn];<span class="comment">//定义一个二维数组才存放n*n的迷宫</span></span><br><span class="line"><span class="keyword">int</span> cmp[maxn][maxn];</span><br><span class="line"><span class="keyword">int</span> n,m;<span class="comment">//n表示n*n迷宫,m表示询问的点的个数</span></span><br><span class="line"><span class="comment">//方向数组</span></span><br><span class="line"><span class="keyword">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">1</span>,<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> dy[<span class="number">4</span>] = &#123;<span class="number">0</span>,<span class="number">-1</span>,<span class="number">0</span>,<span class="number">1</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cmp[x][y] = layer;</span><br><span class="line">    record[layer] = ++num;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; <span class="number">4</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a = x + dx[i],b = y + dy[i];</span><br><span class="line">        <span class="keyword">if</span>(val[a][b]==val[x][y])</span><br><span class="line">           <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(cmp[a][b] == layer)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(a &gt; <span class="number">0</span>&amp;&amp;a &lt;= n&amp;&amp;b &gt;<span class="number">0</span>&amp;&amp;b &lt;= n)</span><br><span class="line">        &#123;</span><br><span class="line">            cmp[a][b] = layer;</span><br><span class="line">            dfs(a,b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="built_in">cin</span>&gt;&gt;sum[i][j];</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= n;j++)</span><br><span class="line">       &#123;</span><br><span class="line">           (sum[i][j] == <span class="string">'1'</span>)&amp;&amp;(val[i][j] = <span class="number">1</span>);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> sum[maxm];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        num = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> temp1,temp2;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;temp1,&amp;temp2);</span><br><span class="line">        <span class="keyword">if</span>(record[cmp[temp1][temp2]] == <span class="number">0</span>)&#123;<span class="comment">//如果record里面temp1和temp2对应的cmp的值为0的话就进行dfs，并记录到record中        </span></span><br><span class="line">            dfs(temp1,temp2);</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//遇到相同的联通块直接输出对应的record</span></span><br><span class="line">        &#123;</span><br><span class="line">            sum[i] = record[cmp[temp1][temp2]];</span><br><span class="line">        &#125;</span><br><span class="line">        layer++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;sum[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       
     </div>
@@ -477,7 +508,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/每天ac的算法题/" rel="tag"><i class="fa fa-tag"></i> 每天ac的算法题</a>
+            <a href="/tags/%E6%AF%8F%E5%A4%A9ac%E7%9A%84%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag"><i class="fa fa-tag"></i> 每天ac的算法题</a>
           
         </div>
       
@@ -568,7 +599,7 @@
       
 
       <div id="music163player">
-    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=608667&auto=1&height=66"></iframe>
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=608667&auto=1&height=66"></iframe>
     </div>
 
 
@@ -576,7 +607,9 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/20200426182013.jpg" alt="Nakano Azure">
+              <img class="site-author-image" itemprop="image"
+                src="/images/20200426182013.jpg"
+                alt="Nakano Azure" />
             
               <p class="site-author-name" itemprop="name">Nakano Azure</p>
               <p class="site-description motion-element" itemprop="description">这里是雨,一个死傲娇,喜欢摸鱼,不喜欢说话,欢迎来看我每天的日常Orz</p>
@@ -587,7 +620,7 @@
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/archives/">
+                <a href="/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">97</span>
                   <span class="site-state-item-name">日志</span>
