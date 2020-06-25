@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[LeetCode139-WordBreak-dp]]></title>
+    <url>%2F2020%2F06%2F25%2FLeetCode139-WordBreak-dp%2F</url>
+    <content type="text"><![CDATA[LeetCode139.单词拆分-遇事不决动态规划XD53期末告一段落，接下来重心会转移一点到pat上leetcode每日一题会坚持刷 题目及输入输出 分析 这题可以用动态规划的思想去做(一开始我也没想到)f[i]表示字符串从1到i的位置是否可以由字典wordDict里面的字符串组成那么我们可以枚举1到i-1的位置，设j枚举i-1到1如果f[j] == true &amp;&amp; check(s.substr(j,i-j))即j之前的字符串已经匹配，且从j到i的字符串也在字典中返回true此时f[i] = true; 注意点 f[0]要初始化为true，因为我们这个方法是把f[i]从1到i的字符串分成两段去判断，左边是否匹配，右面是否在字典中但是一开始从最左边开始枚举的时候没有左边，此时就要把f[0]设置成true，因为在最左边的时候只需要看右边是否在字典中即可 j从后往前去枚举比较好，因为j如果从前开始枚举的话，那么从头开始枚举，比如很长的一串字符串applepenapple，j从小到大枚举pplepenapple，plepenapple，lepenapple…直到枚举到apple才能返回true，从后往前枚举的话显然枚举不了几次就枚举到了，个人理解是因为前面的字符串大多都已经匹配了，dp的思路就是前面的字符串符合+后面的字符串在字典中即可么，那么肯定是从后往前枚举字符串快 代码如下12345678910111213141516171819202122232425class Solution &#123;public: bool check(string s,unordered_set&lt;string&gt;&amp; t) &#123; return t.count(s); &#125; bool wordBreak(string s, vector&lt;string&gt;&amp; w) &#123; unordered_set&lt;string&gt; t(w.begin(),w.end()); vector&lt;bool&gt;f(s.size()+1,0); f[0] = true; for(int i = 1;i &lt;= s.size();i++) &#123; for(int j = i-1;j &gt;= 0;j--) &#123; if(f[j] &amp; check(s.substr(j,i-j),t)) &#123; f[i] = true; break; &#125; &#125; &#125; return f[s.size()]; &#125;&#125;;]]></content>
+      <categories>
+        <category>LeetCode</category>
+        <category>dp</category>
+      </categories>
+      <tags>
+        <tag>LeetCode每日一题</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode5188-KthAncestorOfaTreeNode-LCAmultiplication]]></title>
     <url>%2F2020%2F06%2F14%2FLeetCode5188-KthAncestorOfaTreeNode-LCAmultiplication%2F</url>
     <content type="text"><![CDATA[LeetCode5188. 树节点的第 K 个祖先 - LCA倍增 52时隔半个月继续更新，以后可能会更新技术相关的东西了。但每周的周赛会继续坚持更新 题目 输入输出 分析 我们可以设一个函数f(i,k),表示i的第2^k个父节点是谁 比如要求v的第m个父节点是谁m的二进制表示为1100101那么我们可以拆成2的次幂相加，即2^0+2^1+2^4+2^5v—-(走2^0步)—&gt;v1=f(v,0)—-(走2^1步)—&gt;v2=f(v1,1)—-(走2^4步)—&gt;v3=f(v2,4)—-(走2^5步)—&gt;v4=f(v3,5)最后v4即是我们要找的父节点因为我们是用二进制来优化的，所以询问一次最大的次数就是logm 我们的问题就来到怎么处理f(i,k)数组了f[i,0] = p[i]即i这个点往上走1步就是i的父节点p[i]f[i,1] = f[f(i,0),0]相当于i的第2^1个父节点就是i的第2^0个父节点再走2^0步的父节点同理f[i,2] = f[f(i,1),1]相当于i的第2^2个父节点就是i的第2^1个父节点再走2^1步的父节点依次类推f[i,k] = f[f(i,k-1),k-1]相当于先走到2^k-1的位置，然后再走2^k-1步走到对应的父节点 需要注意的是，我们在预处理f[i,k]的时候，要求第i个点的所有状态的话，我们需要将i的所有祖先结点都处理出来这样我们可以用BFS来一层一层的进行求解 时间复杂度预处理的时间复杂度 = 状态的数量*每个状态计算的时间每个状态计算时间复杂度为O(1)那么状态的数量，有n个数，每次查询的时间复杂度为logn预处理时间复杂度为nlognn最大为50000，log50000 &lt; 16那么时间复杂度差不多就是16n 注意点 用邻接表去存储树 f数组要初始化为-1，防止状态从不合法的状态转移过来 要f[i][j-1] != -1的时候，f[i][j] = f[f[i][j-1]][j-1]; 代码如下123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354class TreeAncestor &#123;public: vector&lt;vector&lt;int&gt;&gt; f,g; TreeAncestor(int n, vector&lt;int&gt;&amp; p) &#123; f = vector&lt;vector&lt;int&gt;&gt;(n, vector&lt;int&gt;(16,-1)); g = vector&lt;vector&lt;int&gt;&gt;(n); int root = 0; for(int i = 0;i &lt; n;i++) &#123; if(p[i] == -1) root = i; else &#123; g[p[i]].push_back(i); &#125; &#125; queue&lt;int&gt; q; q.push(root); while(q.size()) &#123; auto t = q.front(); q.pop(); for(auto i : g[t]) &#123; f[i][0] = t; for(int j = 1;j &lt; 16;j++) &#123; if(f[i][j-1] != -1) f[i][j] = f[f[i][j-1]][j-1]; &#125; q.push(i); &#125; &#125; &#125; int getKthAncestor(int node, int k) &#123; int x = node; for(int i = 0;i &lt; 16;i++) &#123; if(k &gt;&gt; i &amp; 1) &#123; x = f[x][i]; if(x == -1) return x; &#125; &#125; return x; &#125;&#125;;/** * Your TreeAncestor object will be instantiated and called as such: * TreeAncestor* obj = new TreeAncestor(n, parent); * int param_1 = obj-&gt;getKthAncestor(node,k); */]]></content>
