@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[20200712]]></title>
+    <url>%2F2020%2F07%2F12%2F20200712%2F</url>
+    <content type="text"><![CDATA[对不起，我对你真的生气了，我也是有脾气的人请你不要再让我失望了]]></content>
+      <categories>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>不知道自己在说什么</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[LeetCode139-WordBreak-dp]]></title>
     <url>%2F2020%2F06%2F25%2FLeetCode139-WordBreak-dp%2F</url>
     <content type="text"><![CDATA[LeetCode139.单词拆分-遇事不决动态规划XD53期末告一段落，接下来重心会转移一点到pat上leetcode每日一题会坚持刷 题目及输入输出 分析 这题可以用动态规划的思想去做(一开始我也没想到)f[i]表示字符串从1到i的位置是否可以由字典wordDict里面的字符串组成那么我们可以枚举1到i-1的位置，设j枚举i-1到1如果f[j] == true &amp;&amp; check(s.substr(j,i-j))即j之前的字符串已经匹配，且从j到i的字符串也在字典中返回true此时f[i] = true; 注意点 f[0]要初始化为true，因为我们这个方法是把f[i]从1到i的字符串分成两段去判断，左边是否匹配，右面是否在字典中但是一开始从最左边开始枚举的时候没有左边，此时就要把f[0]设置成true，因为在最左边的时候只需要看右边是否在字典中即可 j从后往前去枚举比较好，因为j如果从前开始枚举的话，那么从头开始枚举，比如很长的一串字符串applepenapple，j从小到大枚举pplepenapple，plepenapple，lepenapple…直到枚举到apple才能返回true，从后往前枚举的话显然枚举不了几次就枚举到了，个人理解是因为前面的字符串大多都已经匹配了，dp的思路就是前面的字符串符合+后面的字符串在字典中即可么，那么肯定是从后往前枚举字符串快 代码如下12345678910111213141516171819202122232425class Solution &#123;public: bool check(string s,unordered_set&lt;string&gt;&amp; t) &#123; return t.count(s); &#125; bool wordBreak(string s, vector&lt;string&gt;&amp; w) &#123; unordered_set&lt;string&gt; t(w.begin(),w.end()); vector&lt;bool&gt;f(s.size()+1,0); f[0] = true; for(int i = 1;i &lt;= s.size();i++) &#123; for(int j = i-1;j &gt;= 0;j--) &#123; if(f[j] &amp; check(s.substr(j,i-j),t)) &#123; f[i] = true; break; &#125; &#125; &#125; return f[s.size()]; &#125;&#125;;]]></content>
