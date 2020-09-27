@@ -454,8 +454,7 @@
       
 
       
-        <h1 id="一个简单的状态机模型"><a href="#一个简单的状态机模型" class="headerlink" title="一个简单的状态机模型"></a><center>一个简单的状态机模型</center></h1><p><img src="/2020/04/21/FSM-dp/80696475_p0_master1200.jpg" alt><br>38.</p>
-<a id="more"></a>
+        <h1 id="一个简单的状态机模型"><a href="#一个简单的状态机模型" class="headerlink" title="一个简单的状态机模型"></a><center>一个简单的状态机模型</center></h1><p><img src="/2020/04/21/FSM-dp/80696475_p0_master1200.jpg" alt><br>38.<br><a id="more"></a></p>
 <h1 id="状态机模型的基本要素"><a href="#状态机模型的基本要素" class="headerlink" title="状态机模型的基本要素"></a>状态机模型的基本要素</h1><p><img src="/2020/04/21/FSM-dp/4.png" alt></p>
 <h1 id="AcWing1049-大盗阿福"><a href="#AcWing1049-大盗阿福" class="headerlink" title="AcWing1049. 大盗阿福"></a>AcWing1049. 大盗阿福</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p><img src="/2020/04/21/FSM-dp/1.png" alt></p>
 <h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p><img src="/2020/04/21/FSM-dp/2.png" alt></p>
@@ -468,7 +467,6 @@
 <li>初始化要注意f[0][0] = 0,f[0][1] = -INF，状态机要给一个入口才能进入到状态机模型的0和1中<br>具体问题分析理解的话就是第0个店铺如果不抢的话价值肯定为0，如果抢的话不存在这种情况，设置为负无穷</li>
 </ol>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> f[N][<span class="number">2</span>],w[N];</span><br><span class="line"><span class="keyword">int</span> n,T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w[i]);</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span>,f[<span class="number">0</span>][<span class="number">1</span>] = <span class="number">-0x3f3f3f3f</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++) </span><br><span class="line">        &#123;</span><br><span class="line">            f[i][<span class="number">0</span>] = <span class="built_in">max</span>(f[i<span class="number">-1</span>][<span class="number">0</span>],f[i<span class="number">-1</span>][<span class="number">1</span>]);</span><br><span class="line">            f[i][<span class="number">1</span>] = f[i<span class="number">-1</span>][<span class="number">0</span>] + w[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="built_in">max</span>(f[n][<span class="number">1</span>],f[n][<span class="number">0</span>]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -610,7 +608,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -445,7 +445,6 @@
 
 <p><img src="/2020/04/08/PAT-1010-radix/80440675_p0_master1200.jpg" alt><br>第三十五天<br>离放假过去了整整九十天。</p>
 <a id="more"></a>
-
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/04/08/PAT-1010-radix/1.png" alt></p>
 <h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p><img src="/2020/04/08/PAT-1010-radix/2.png" alt></p>
 <hr>
@@ -460,7 +459,7 @@
 <li>有一个很容易犯的思维定势，就是他已给的数的进制最大就是36，但是我们要求的另外一个数的进制可能远大于36<br>因为N1,N2最大是十位，那么最大的数应该为zzzzzzzzzz,转换为10进制差不多就是1e16，所以我们在计算calc函数的时候，要判断<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">double</span>)res * r + <span class="built_in">get</span>(x) &gt; <span class="number">1e16</span>，</span><br></pre></td></tr></table></figure>
 这个时候res一定要转化成double类型，因为可能res = 1e15,然后再计算一遍res * r + get(x)会超出long long的范围，从而又从long long前面的范围开始<br>而double可以存储最多为10^308级别的数，一定够用，所以我们这个时候要用double来转换判断是否超过范围，如果超出范围，直接返回一个很大的数即可</li>
 </ol>
-<ol start="2">
+<ol>
 <li><p>二分枚举的时候应该是calc(n2,mid) &lt;= target，这样我们求出的l就是小于等于target的最后一个数，那么二分过后如果calc(n2,l)如果不能与target说明就不存在，如果等于就说明存在</p>
 </li>
 <li><p>calc函数的第二个参数的r也应该设置成long long类型，方便后面二分的时候也计算对应进制转化为十进制的值</p>
@@ -615,7 +614,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

@@ -439,10 +439,9 @@
       
 
       
-        <h1 id="P1403-AHOI2005-约数研究"><a href="#P1403-AHOI2005-约数研究" class="headerlink" title="P1403 [AHOI2005]约数研究"></a><center>P1403 [AHOI2005]约数研究</center></h1><p><a href="https://www.luogu.org/problem/P1403" target="_blank" rel="noopener">传送门</a><br><img src="/2019/09/02/luoguOJ-P1403/76478287_p0_master1200.jpg" alt></p>
-<a id="more"></a>
-
-<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><pre><code>科学家们在Samuel星球上的探险得到了丰富的能源储备，这使得空间站中大型计算机“Samuel II”的长时间运算成为了可能。由于在去年一年的辛苦工作取得了不错的成绩，小联被允许用“Samuel II”进行数学研究。</code></pre><p>小联最近在研究和约数有关的问题，他统计每个正数N的约数的个数，并以f(N)来表示。例如12的约数有1、2、3、4、6、12。因此f(12)=6。下表给出了一些f(N)的取值：</p>
+        <h1 id="P1403-AHOI2005-约数研究"><a href="#P1403-AHOI2005-约数研究" class="headerlink" title="P1403 [AHOI2005]约数研究"></a><center>P1403 [AHOI2005]约数研究</center></h1><p><a href="https://www.luogu.org/problem/P1403" target="_blank" rel="noopener">传送门</a><br><img src="/2019/09/02/luoguOJ-P1403/76478287_p0_master1200.jpg" alt><br><a id="more"></a></p>
+<h3 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h3><pre><code>科学家们在Samuel星球上的探险得到了丰富的能源储备，这使得空间站中大型计算机“Samuel II”的长时间运算成为了可能。由于在去年一年的辛苦工作取得了不错的成绩，小联被允许用“Samuel II”进行数学研究。
+</code></pre><p>小联最近在研究和约数有关的问题，他统计每个正数N的约数的个数，并以f(N)来表示。例如12的约数有1、2、3、4、6、12。因此f(12)=6。下表给出了一些f(N)的取值：</p>
 <p><img src="/2019/09/02/luoguOJ-P1403/1645.png" alt><br>f(n)表示n的约数个数，现在给出n，要求求出f(1)到f(n)的总和。</p>
 <p>输入格式:<br>输入一行，一个整数n</p>
 <p>输出格式:<br>输出一个整数，表示总和</p>
@@ -453,38 +452,11 @@
 <hr>
 <p>思路：</p>
 <p>(数学方法)<br>f(1)到f(n)的和，即为1到n之间因子的和<br>那么1到n之间<br>1的因子总共有n/1个<br>2的因子总共有n/2个<br>3的因子总共有n/3个<br>…<br>依此类推<br>那么1到n之间因子的和即为f(i) = n / i;i从1到n的总和  </p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> result;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        result += n / i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;result;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> result;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        result += n / i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;result;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p>(非数学方法)(用筛法)</p>
 <p>定义一个数组num[maxn]，result = 0；<br>从1到n,<br>int i = 1,然后每隔1就累加一次num[i]++,表示从1到n每个数都拥有的1的个数,然后再从1到n,s加一次a<a href="然后i从2开始就不用再管之前的i了">i</a><br>然后i++递增,同理,i = 2,每隔2就累加一次num[i]++,然后依次类推表示从2到n里面每个数如果含有2就会++一次,然后结束循环之后,s再加一次a[i]<br>依此类推</p>
-<p>代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,a[<span class="number">10000001</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&lt;=n;j+=i)a[j]++;</span><br><span class="line">        s+=a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<p>代码如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n,a[<span class="number">10000001</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&lt;=n;j+=i)a[j]++;</span><br><span class="line">        s+=a[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;s;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -626,7 +598,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

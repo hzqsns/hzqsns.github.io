@@ -454,13 +454,10 @@
       
 
       
-        <h1 id="KMP算法模板及理解"><a href="#KMP算法模板及理解" class="headerlink" title="KMP算法模板及理解"></a><center>KMP算法模板及理解</center></h1><p><img src="/2020/04/23/KMP/79911593_p0_master1200.jpg" alt><br>39</p>
-<a id="more"></a>
-
+        <h1 id="KMP算法模板及理解"><a href="#KMP算法模板及理解" class="headerlink" title="KMP算法模板及理解"></a><center>KMP算法模板及理解</center></h1><p><img src="/2020/04/23/KMP/79911593_p0_master1200.jpg" alt><br>39<br><a id="more"></a></p>
 <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。</p>
 <p>KMP是一种高效的字符串匹配算法，用来在主字符串中查找模式字符串的位置(比如在“hello,world”主串中查找“world”模式串的位置)。</p>
-<h1 id="暴力的做法"><a href="#暴力的做法" class="headerlink" title="暴力的做法"></a>暴力的做法</h1><p>对于主串S[N]和模板串P[N],要找模板P在主串S中的每个起始位置</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">主串长度为n,模板串长度为m</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= m;j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(S[i] != p[j])</span><br><span class="line">		&#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="暴力的做法"><a href="#暴力的做法" class="headerlink" title="暴力的做法"></a>暴力的做法</h1><p>对于主串S[N]和模板串P[N],要找模板P在主串S中的每个起始位置<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">主串长度为n,模板串长度为m</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>;j &lt;= m;j++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(S[i] != p[j])</span><br><span class="line">		&#123;</span><br><span class="line">			flag = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="如何优化暴力的做法？"><a href="#如何优化暴力的做法？" class="headerlink" title="如何优化暴力的做法？"></a>如何优化暴力的做法？</h1><p>暴力的做法是从主串的起始位置i开始，每次从头开始枚举模板串，如果有不相同的字符就直接break掉，再从i+1的位置开始进行匹配</p>
 <p>显然，这种做法会进行大量重复性的工作<br>比如<br>主串   ababaeaba<br>模板串 ababacd<br>我枚举到第5个字符的时候发现此时主串中的e和模板串的c并不匹配<br>但是两个串中都有相同的前缀aba，这个时候可以滑动</p>
 <p><img src="/2020/04/23/KMP/3.png" alt><br>如图所示，主串的i-1和模板串的j位置对应的字符串是相等的</p>
@@ -468,11 +465,7 @@
 <p>如果是暴力做法那么肯定就是把模板串整体往后挪一位然后再开始重新判断</p>
 <p>但是显然我们在之前匹配的过程中已经做了大量的重复工作</p>
 <p>所以我们思考怎么样才可以多挪动几位</p>
-<p>因为这很容易可以想到<br>如果是</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主串       abcabcxhhhh</span><br><span class="line">模板串     abcabcyjklm</span><br></pre></td></tr></table></figure>
-<p>我们匹配到主串的x和模板串的y这里就不匹配了<br>但是这里再把模板串往后挪动一位也肯定不匹配啊<br>即</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主串  abcabcxhhhh</span><br><span class="line">模板串 abcabcyjklm</span><br></pre></td></tr></table></figure>
-<p>因为除非是一模一样的字符串，不然两个相同的字符串其中一个往后挪动一位还完全一致是不可能的</p>
+<p>因为这很容易可以想到<br>如果是<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主串       abcabcxhhhh</span><br><span class="line">模板串     abcabcyjklm</span><br></pre></td></tr></table></figure><br>我们匹配到主串的x和模板串的y这里就不匹配了<br>但是这里再把模板串往后挪动一位也肯定不匹配啊<br>即<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主串  abcabcxhhhh</span><br><span class="line">模板串 abcabcyjklm</span><br></pre></td></tr></table></figure><br>因为除非是一模一样的字符串，不然两个相同的字符串其中一个往后挪动一位还完全一致是不可能的</p>
 <p>所以模板串挪到什么地方才对呢？</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">即挪到</span><br><span class="line">主串            abcabcxhhhh</span><br><span class="line">模板串             abcabcyjklm</span><br><span class="line">这里才能相同</span><br></pre></td></tr></table></figure>
 <p>因为从模板串可以看出来，一开始枚举到第6位的c的时候主串和模板串前面都还一致，直到枚举到第七位的时候就不相同了<br>这个时候就需要滑动模板串</p>
@@ -638,7 +631,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

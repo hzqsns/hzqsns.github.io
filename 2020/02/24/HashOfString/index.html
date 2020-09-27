@@ -468,7 +468,6 @@
         <h1 id="字符串哈希"><a href="#字符串哈希" class="headerlink" title="字符串哈希"></a><center>字符串哈希</center></h1><p><img src="/2020/02/24/HashOfString/74028539_p0_master1200.jpg" alt></p>
 <p>第十九天，加油！</p>
 <a id="more"></a>
-
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/02/24/HashOfString/1.png" alt></p>
 <h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p><img src="/2020/02/24/HashOfString/2.png" alt></p>
 <h1 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h1><p><img src="/2020/02/24/HashOfString/3.png" alt></p>
@@ -479,15 +478,6 @@
 <h1 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h1><p><img src="/2020/02/24/HashOfString/4.jpg" alt><br><img src="/2020/02/24/HashOfString/5.jpg" alt></p>
 <hr>
 <h1 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ULL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">100010</span>,P = <span class="number">131</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line">ULL h[N],p[N];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">ULL <span class="title">get</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span><span class="comment">//计算(l,r)的hash值</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> h[r] - h[l<span class="number">-1</span>]*p[r-l+<span class="number">1</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%s"</span>,&amp;n,&amp;m,str+<span class="number">1</span>);</span><br><span class="line">   </span><br><span class="line">    p[<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//令P^0 = 1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        p[i] = p[i<span class="number">-1</span>] * P;<span class="comment">//预处理P^i</span></span><br><span class="line">        h[i] = h[i<span class="number">-1</span>]* P + str[i];<span class="comment">//计算字符串的前缀和取模hash值，因为用的是ULL类型所以就不用取模运算了</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(m--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> l1,r1,l2,r2;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d%d"</span>,&amp;l1,&amp;r1,&amp;l2,&amp;r2);</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">get</span>(l1,r1) == <span class="built_in">get</span>(l2,r2)) <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
 
       
     </div>
@@ -629,7 +619,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

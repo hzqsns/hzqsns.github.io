@@ -452,8 +452,7 @@
       
 
       
-        <h1 id="AcWing1214-波动数列"><a href="#AcWing1214-波动数列" class="headerlink" title="AcWing1214. 波动数列"></a><center>AcWing1214. 波动数列</center></h1><p><img src="/2020/01/31/AcWing1214-dp/78316040_p0_master1200.jpg" alt><br>Day3，striving</p>
-<a id="more"></a>
+        <h1 id="AcWing1214-波动数列"><a href="#AcWing1214-波动数列" class="headerlink" title="AcWing1214. 波动数列"></a><center>AcWing1214. 波动数列</center></h1><p><img src="/2020/01/31/AcWing1214-dp/78316040_p0_master1200.jpg" alt><br>Day3，striving<br><a id="more"></a></p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/01/31/AcWing1214-dp/1.png" alt></p>
 <h2 id="输入输出样例"><a href="#输入输出样例" class="headerlink" title="输入输出样例"></a>输入输出样例</h2><p><img src="/2020/01/31/AcWing1214-dp/2.png" alt></p>
 <h1 id="分析思路"><a href="#分析思路" class="headerlink" title="分析思路"></a>分析思路</h1><h2 id="分析题目的大意"><a href="#分析题目的大意" class="headerlink" title="分析题目的大意"></a>分析题目的大意</h2><p>一开始分析这道题咋一看是个序列模型，但其实是个组合模型<br>因为可以肯定的是第一个数是不变的设为X<br>那么数列即为<br>X  X+d1  X+d1+d2  X+d1+d2+d3  …  X+d1+d2+…+dn-1<br>其中di = {+a,-b}<br>整理可得<br>nx + (n-1)d1 + (n-2)d2 + … + dn-1 = S<br>转换后</p>
@@ -470,26 +469,6 @@
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>最后把f[i][j]所有的方案数都求出来<br>最后对应的f[n-1][get_mod(s,n)]即为结果<br>因为S % n == [(n-1)d1 + (n-2)d2 + … + dn-1]<br>所以j = get_mod(s,n)时候对应的方案数为我们所求的结果<br>因为对应的最后一项为dn-1<br>所以i = n-1，表示前n-1项</p>
 <hr>
 <h1 id="代码如下："><a href="#代码如下：" class="headerlink" title="代码如下："></a>代码如下：</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">1010</span>,MOD =<span class="number">100000007</span>; </span><br><span class="line"><span class="keyword">int</span> n,s,a,b;</span><br><span class="line"><span class="keyword">int</span> f[maxn][maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_mod</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span><span class="comment">//因为x有可能为负数，那么我们取模的时候需要加上y再取模得到正余数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x % y + y) % y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;s&gt;&gt;a&gt;&gt;b;</span><br><span class="line">    f[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span>;<span class="comment">//初始化，当一项都不选的时候方案数为1</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            f[i][j]= (f[i<span class="number">-1</span>][get_mod(j-a*i,n)] + f[i<span class="number">-1</span>][get_mod(j+b*i,n)]) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[n<span class="number">-1</span>][get_mod(s, n)];<span class="comment">//注意S也有可能为负数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       
     </div>
@@ -631,7 +610,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

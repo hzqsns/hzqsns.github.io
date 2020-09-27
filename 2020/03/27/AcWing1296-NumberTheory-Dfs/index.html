@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://hzqsns.github.io/2020/03/27/AcWing1296-NumberTheory-Dfs/1.png">
 <meta property="og:image" content="https://hzqsns.github.io/2020/03/27/AcWing1296-NumberTheory-Dfs/2.png">
 <meta property="article:published_time" content="2020-03-27T03:41:07.000Z">
-<meta property="article:modified_time" content="2020-05-04T11:55:02.280Z">
+<meta property="article:modified_time" content="2020-06-25T09:07:01.435Z">
 <meta property="article:author" content="Nakano Azure">
 <meta property="article:tag" content="算法总结">
 <meta name="twitter:card" content="summary">
@@ -462,11 +462,9 @@
       
 
       
-        <h1 id="一个与约数相关的数论问题-AcWing1296-聪明的燕姿"><a href="#一个与约数相关的数论问题-AcWing1296-聪明的燕姿" class="headerlink" title="一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 "></a><center>一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 </center></h1><p><img src="/2020/03/27/AcWing1296-NumberTheory-Dfs/80296589_p0_master1200.jpg" alt><br>第三十三天</p>
-<a id="more"></a>
-
+        <h1 id="一个与约数相关的数论问题-AcWing1296-聪明的燕姿"><a href="#一个与约数相关的数论问题-AcWing1296-聪明的燕姿" class="headerlink" title="一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 "></a><center>一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 </center></h1><p><img src="/2020/03/27/AcWing1296-NumberTheory-Dfs/80296589_p0_master1200.jpg" alt><br>第三十三天<br><a id="more"></a></p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/03/27/AcWing1296-NumberTheory-Dfs/1.png" alt></p>
-<p>#输入输出<br><img src="/2020/03/27/AcWing1296-NumberTheory-Dfs/2.png" alt></p>
+<h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p><img src="/2020/03/27/AcWing1296-NumberTheory-Dfs/2.png" alt></p>
 <h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>题目的大意就是给一个数S</p>
 <p>让你找到有多少数能够满足它约数的和等于S</p>
 <p>比如S = 42</p>
@@ -488,9 +486,7 @@
 <p>这个时候我们就可以观察我们的约数和的公式<br>S = (1+p1+p1^2+…+p1^a1)(1+p2+p2^2+…+p2^a2)…(1+pn+pn^2+…+pn^an)</p>
 <p>假设这个时候有一个约数和S满足(1+2)(1+2+2^2)(1+2+2^2+…+2^k)<br>3x5x9x17x33x65x129 = 635037975 就已经接近1e9的量级了，可见符合条件的项不会很多</p>
 <p>那么这个时候我们就可以用dfs进行搜索，看我们能不能得到符合条件的(1+pk+pk^2+…+pk^ak)能够使得<br>S能够整除，即S % (1+pk+pk^2+…+pk^ak) == 0<br>然后S /= (1+pk+pk^2+…+pk^ak),再dfs到下一层</p>
-<p>应该先从小到大枚举P</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(p : <span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,...)</span><br><span class="line">    <span class="keyword">for</span>(a : <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,...)</span><br><span class="line">        <span class="keyword">if</span>(S mod (<span class="number">1</span>+p1+p1^<span class="number">2</span>+...+p1^a1) == <span class="number">0</span>)</span><br><span class="line">            dfs(下一层)</span><br></pre></td></tr></table></figure>
-
+<p>应该先从小到大枚举P<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(p : <span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,...)</span><br><span class="line">    <span class="keyword">for</span>(a : <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,...)</span><br><span class="line">        <span class="keyword">if</span>(S mod (<span class="number">1</span>+p1+p1^<span class="number">2</span>+...+p1^a1) == <span class="number">0</span>)</span><br><span class="line">            dfs(下一层)</span><br></pre></td></tr></table></figure></p>
 <p>这个时候我们还需要继续思考特殊情况</p>
 <p>如果ai = 1的话，S = (1+Pi)的时候，因为Pi为质数，那么S-1也一定为质数，那么这个时候只需要判断S-1是否为质数即可</p>
 <p>又S只会有两种情况，就是一种情况包括一个因子里面有(1+Pi)，另一种情况不包括(1+Pi)<br>S = (1+Pi)(1+Pj+Pj^2…..)<br>S = (1+Pi+Pi^2)(1+…..)</p>
@@ -501,7 +497,7 @@
 <p>比如质数为P = 2,3,5,7….</p>
 <p>如果枚举2之后再dfs到下一层，那么这个时候就应该再从3开始进行枚举而不是再从头开始枚举</p>
 <h3 id="2-product参数"><a href="#2-product参数" class="headerlink" title="2.product参数"></a>2.product参数</h3><p>product表示 S = (1+p1+p1^2+…+p1^a1)(1+p2+p2^2+…+p2^a2)…(1+pn+pn^2+…+pn^an)中</p>
-<p>当前进行到哪一个括号里面的最高次项Pi^ai的乘积和<br>比如S = (1+2+2^2)(1+3+3^2+3^3)(1+….)<br>则dfs到第三层的时候product = 2^2*3^3 (product : 1 – &gt; 2^2 – &gt; 2^2*3^3)</p>
+<p>当前进行到哪一个括号里面的最高次项Pi^ai的乘积和<br>比如S = (1+2+2^2)(1+3+3^2+3^3)(1+….)<br>则dfs到第三层的时候product = 2^2*3^3 (product : 1 — &gt; 2^2 — &gt; 2^2*3^3)</p>
 <p>又由算术基本定理可知<br>一个数N = P1^a1 * P2^a2 * … * Pn^an</p>
 <p>product = P1^a1 * P2^a2*…..</p>
 <p>如果product要从第一层(一开始product初始化为1)进到第二层，此时product(2) = product(1) * P1^a1<br>S = S’ / (1+p1+p1^2+…+p1^a1)</p>
@@ -511,7 +507,7 @@
 <p>所以每一层我们都应当判断S-1是否为质数，如果S-1是质数的话,也需要记录，但是不需要返回上一层继续往下搜即可<br>就比如24<br>24 = (1+23)<br>     = (1+2)(1+7)<br>     = (1+3)(1+5)<br>第一层的时候判断23是质数，所以记录res[len++] = 1*23<br>同时也需要继续往下做然后依次判断2、7 或者3、5能不能满足条件<br>只要有S-1为质数，说明就有满足条件的数，这个时候就需要记录结果</p>
 <h1 id="为什么S-1一定要大于上一层的质数？"><a href="#为什么S-1一定要大于上一层的质数？" class="headerlink" title="为什么S-1一定要大于上一层的质数？"></a>为什么S-1一定要大于上一层的质数？</h1><p>因为我们要保证质数是从小到大枚举的，只有剩下的S-1是大于上一层的质数的时候，(1+S)才有可能成为最初的那个S的一个因子</p>
 <p>因为我们要表示S’ = (1+ 2 + 2^2+…)(1 + 3 + 3^2 + …)…(1+S)<br>越往后枚举对应的那个Pi也越大，所以S-1一定要大于上一层的质数才能满足条件</p>
-<h1 id="S-1对应的是什么情况？"><a href="#S-1对应的是什么情况？" class="headerlink" title="S == 1对应的是什么情况？"></a>S == 1对应的是什么情况？</h1><p>S == 1对应的就是S’只由一个括号即只有一个P,S’ = (1+p+p^2+…+p^k)组成的情况<br>比如 7 = (1 + 2 + 2^2)   —–&gt;对应4<br>13 = (1 + 3 + 3^2)       —–&gt;对应9<br>15 = (1 + 2 + 2^2 + 2^3) —–&gt;对应8<br>这种情况表明，我从p = primes[i]开始枚举，一个p得到的序列和就把一开始的S’给整除了或者说这个序列和与S’相等，即此时的p得到的序列和(1+p+p^2+…+p^k) == S’</p>
+<h1 id="S-1对应的是什么情况？"><a href="#S-1对应的是什么情况？" class="headerlink" title="S == 1对应的是什么情况？"></a>S == 1对应的是什么情况？</h1><p>S == 1对应的就是S’只由一个括号即只有一个P,S’ = (1+p+p^2+…+p^k)组成的情况<br>比如 7 = (1 + 2 + 2^2)   ——-&gt;对应4<br>13 = (1 + 3 + 3^2)       ——-&gt;对应9<br>15 = (1 + 2 + 2^2 + 2^3) ——-&gt;对应8<br>这种情况表明，我从p = primes[i]开始枚举，一个p得到的序列和就把一开始的S’给整除了或者说这个序列和与S’相等，即此时的p得到的序列和(1+p+p^2+…+p^k) == S’</p>
 <p>所以此时S’ / (1+p+p^2+…) == 1<br>dfs到下一层直接就是dfs(last,p^k,1)<br>那么dfs到下一层S == 1的时候,product = p^k就是对应我们要找的那个数</p>
 <h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>1.求质数的过程应该用线性筛的方法去做<br>2.dfs(last,product,S)其中last应该初始化为-1<br>这样我们在一开始判断S-1大于前面的质数的时候应该特判,S-1 &gt; ((last &lt; 0) ? 0 : primes[last])<br>因为最小是(1+2)那么S起码是2,所以应该有S &gt; 1 即S-1 &gt; 0</p>
 <hr>
@@ -656,7 +652,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -740,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一个与约数相关的数论问题-AcWing1296-聪明的燕姿"><span class="nav-number">1.</span> <span class="nav-text">一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">3.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析思路"><span class="nav-number">4.</span> <span class="nav-text">分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算术基本定理"><span class="nav-number">4.1.</span> <span class="nav-text">算术基本定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举个例子"><span class="nav-number">4.1.1.</span> <span class="nav-text">举个例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续分析"><span class="nav-number">4.2.</span> <span class="nav-text">继续分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-last参数"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.last参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-product参数"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.product参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-S参数"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.S参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么S-1一定要大于上一层的质数？"><span class="nav-number">5.</span> <span class="nav-text">为什么S-1一定要大于上一层的质数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#S-1对应的是什么情况？"><span class="nav-number">6.</span> <span class="nav-text">S &#x3D;&#x3D; 1对应的是什么情况？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">6.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码如下"><span class="nav-number">7.</span> <span class="nav-text">代码如下</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一个与约数相关的数论问题-AcWing1296-聪明的燕姿"><span class="nav-number">1.</span> <span class="nav-text">一个与约数相关的数论问题 - AcWing1296.聪明的燕姿 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-number">2.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出"><span class="nav-number">3.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题意"><span class="nav-number">4.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析思路"><span class="nav-number">5.</span> <span class="nav-text">分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#算术基本定理"><span class="nav-number">5.1.</span> <span class="nav-text">算术基本定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#举个例子"><span class="nav-number">5.1.1.</span> <span class="nav-text">举个例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继续分析"><span class="nav-number">5.2.</span> <span class="nav-text">继续分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-last参数"><span class="nav-number">5.2.1.</span> <span class="nav-text">1.last参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-product参数"><span class="nav-number">5.2.2.</span> <span class="nav-text">2.product参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-S参数"><span class="nav-number">5.2.3.</span> <span class="nav-text">3.S参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么S-1一定要大于上一层的质数？"><span class="nav-number">6.</span> <span class="nav-text">为什么S-1一定要大于上一层的质数？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#S-1对应的是什么情况？"><span class="nav-number">7.</span> <span class="nav-text">S &#x3D;&#x3D; 1对应的是什么情况？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#注意点"><span class="nav-number">7.1.</span> <span class="nav-text">注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码如下"><span class="nav-number">8.</span> <span class="nav-text">代码如下</span></a></li></ol></div>
             
 
           </div>

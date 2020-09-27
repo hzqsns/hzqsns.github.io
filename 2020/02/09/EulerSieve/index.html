@@ -452,7 +452,6 @@
         <h1 id="欧拉筛模板"><a href="#欧拉筛模板" class="headerlink" title="欧拉筛模板"></a><center>欧拉筛模板</center></h1><p><img src="/2020/02/09/EulerSieve/76611496_p0_master1200.jpg" alt></p>
 <p>Day 9!</p>
 <a id="more"></a>
-
 <hr>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> primes[N], cnt;</span><br><span class="line"><span class="keyword">int</span> minp[N];</span><br><span class="line"><span class="keyword">bool</span> st[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_primes</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i ++ )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!st[i])</span><br><span class="line">        &#123;</span><br><span class="line">            minp[i] = i;</span><br><span class="line">            primes[cnt ++ ] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] * i &lt;= n; j ++ )</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> t = primes[j] * i;</span><br><span class="line">            st[t] = <span class="literal">true</span>;</span><br><span class="line">            minp[t] = primes[j];</span><br><span class="line">            <span class="keyword">if</span> (i % primes[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>st[i] == 0表示没有被筛过,1表示被筛过<br>否则从小到大枚举质数，然后把质数的i倍都筛掉<br>1.我们筛掉的一定是合数，primes[j]一定不大于i的最小质因子，故一定是用最小质因子筛除的</p>
@@ -603,7 +602,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

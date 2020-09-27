@@ -452,8 +452,7 @@
       
 
       
-        <h1 id="最短Hamilton路径-一种类型的状态压缩dp"><a href="#最短Hamilton路径-一种类型的状态压缩dp" class="headerlink" title="最短Hamilton路径(一种类型的状态压缩dp)"></a><center>最短Hamilton路径(一种类型的状态压缩dp)</center></h1><p><img src="/2020/04/25/SmallestHamiltonDistance/78693898_p0_master1200.jpg" alt><br>40</p>
-<a id="more"></a>
+        <h1 id="最短Hamilton路径-一种类型的状态压缩dp"><a href="#最短Hamilton路径-一种类型的状态压缩dp" class="headerlink" title="最短Hamilton路径(一种类型的状态压缩dp)"></a><center>最短Hamilton路径(一种类型的状态压缩dp)</center></h1><p><img src="/2020/04/25/SmallestHamiltonDistance/78693898_p0_master1200.jpg" alt><br>40<br><a id="more"></a></p>
 <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><img src="/2020/04/25/SmallestHamiltonDistance/1.png" alt></p>
 <h1 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h1><p><img src="/2020/04/25/SmallestHamiltonDistance/2.png" alt></p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>题目要求的是从0到n-1的最短距离的方案<br>我们可以发现，我们所需要的不是整个方案是什么，而只是方案最优解是多少</p>
@@ -469,22 +468,6 @@
 </ol>
 <hr>
 <h1 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">20</span>, M = <span class="number">1</span> &lt;&lt; N;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">int</span> a[N][N];</span><br><span class="line"><span class="keyword">int</span> f[M][N];<span class="comment">//f[i][j]表示从0到j，走过的路程用二进制i来表示的路径的最小值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span><br><span class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n;j++)</span><br><span class="line">       <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i][j]);</span><br><span class="line">       </span><br><span class="line">    <span class="built_in">memset</span>(f,<span class="number">0x3f</span>,<span class="keyword">sizeof</span> f);<span class="comment">//初始的情况把所有点都赋成正无穷，保证所有的点一定是从0转移过来的</span></span><br><span class="line">    f[<span class="number">1</span>][<span class="number">0</span>] = <span class="number">0</span>;            <span class="comment">//f[1][0]表示从0走到0，走过的点二进制表示为(00000...001)即为1，这个时候路径的长度为0</span></span><br><span class="line">                            <span class="comment">//即对应f[1][0] = 0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; <span class="number">1</span> &lt;&lt; n;i++)<span class="comment">//枚举所有可能的状态</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; n;j++)<span class="comment">//对于每个点j</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt;&gt; j &amp; <span class="number">1</span>)<span class="comment">//如果能从原点走到j，或者说走过的路径中包含j这个点</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>;k &lt; n;k++)<span class="comment">//枚举每一个点k</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(i &gt;&gt; k &amp; <span class="number">1</span>)<span class="comment">//如果又能从原点走到k，或者说走过的路径中也包含k这个点</span></span><br><span class="line">                    f[i][j] = <span class="built_in">min</span>(f[i][j],f[i - (<span class="number">1</span> &lt;&lt; j)][k] + a[k][j]);<span class="comment">//原点到j的距离最小值等于原点到k的距离，然后再加上k到j的距离取一个min</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[(<span class="number">1</span>&lt;&lt;n)<span class="number">-1</span>][n<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       
     </div>
@@ -626,7 +609,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">110</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
