@@ -1,37 +1,1333 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法总结," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Nakano Azure" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="浅谈Djikstra算法前言：前几天在算法笔记上看到了晴神对于最短路径算法Dijikstra的一个深入的分析，我感觉挺感兴趣的，顺便想借此机会来深入分析，顺带也是更新下博客了咳咳，顺带说一句我的博客看起来挺乱的，等有时间会做一个分类吧，但我不想把它变成单纯的一个技术博客，而是记录一个我的学习，生活，感悟，以及展示自己兴趣爱好的地方(虽然现在从哪方面看上去这人都挺low的) 好吧，那就开始我对Dji">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dijkstra">
+<meta property="og:url" content="https://hzqsns.github.io/2019/11/30/dijkstra/index.html">
+<meta property="og:site_name" content="Nakano Azure">
+<meta property="og:description" content="浅谈Djikstra算法前言：前几天在算法笔记上看到了晴神对于最短路径算法Dijikstra的一个深入的分析，我感觉挺感兴趣的，顺便想借此机会来深入分析，顺带也是更新下博客了咳咳，顺带说一句我的博客看起来挺乱的，等有时间会做一个分类吧，但我不想把它变成单纯的一个技术博客，而是记录一个我的学习，生活，感悟，以及展示自己兴趣爱好的地方(虽然现在从哪方面看上去这人都挺low的) 好吧，那就开始我对Dji">
+<meta property="og:locale">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/photo1.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/photo2.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example1.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example2.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example3.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example4.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example5.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example6.png">
+<meta property="og:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/example7.png">
+<meta property="article:published_time" content="2019-11-30T01:38:44.000Z">
+<meta property="article:modified_time" content="2020-03-03T12:07:54.561Z">
+<meta property="article:author" content="Nakano Azure">
+<meta property="article:tag" content="算法总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hzqsns.github.io/2019/11/30/dijkstra/photo1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://hzqsns.github.io/2019/11/30/dijkstra/"/>
+
+
+
+
+
+  <title>dijkstra | Nakano Azure</title>
+  
+
+
+
+
+
+
+
+
+  <script src="D:/Blog/AzureBlog/source/live2d-widget/autolload.js"></script>
+  
+<meta name="generator" content="Hexo 5.4.0"><!-- hexo-inject:begin --><!-- hexo-inject:end --></head>
+
+   <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+   <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+   <script type="text/javascript" src="/js/src/fireworks.js"></script>
+
+ 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Nakano Azure</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">人类的悲欢并不相通</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hzqsns.github.io/2019/11/30/dijkstra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/20200625170552.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nakano Azure">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">dijkstra</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-30T09:38:44+08:00">
+                2019-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/30/dijkstra/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/30/dijkstra/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浅谈Djikstra算法"><a href="#浅谈Djikstra算法" class="headerlink" title="浅谈Djikstra算法"></a><center>浅谈Djikstra算法</center></h1><p><strong>前言</strong>：前几天在算法笔记上看到了晴神对于最短路径算法Dijikstra的一个深入的分析，我感觉挺感兴趣的，顺便想借此机会来深入分析，<del>顺带也是更新下博客了</del><br>咳咳，顺带说一句我的博客看起来挺乱的，等有时间会做一个分类吧，但我不想把它变成单纯的一个技术博客，而是记录一个我的学习，生活，感悟，以及展示自己兴趣爱好的地方(<del>虽然现在从哪方面看上去这人都挺low的</del>)</p>
+<p>好吧，那就开始我对Djikstra算法的认识吧<br><span id="more"></span></p>
+<h1 id="从最短路径算法Djikstra初谈"><a href="#从最短路径算法Djikstra初谈" class="headerlink" title="从最短路径算法Djikstra初谈"></a><center>从最短路径算法Djikstra初谈</center></h1><h1 id="什么是Djikstra"><a href="#什么是Djikstra" class="headerlink" title="什么是Djikstra?"></a>什么是Djikstra?</h1><blockquote>
+<blockquote>
+<p>迪杰斯特拉(Dijkstra)算法是典型最短路径算法，用于计算一个节点到其他节点的最短路径。<br>它的主要特点是以起始点为中心向外层层扩展(广度优先搜索思想)，直到扩展到终点为止。</p>
+</blockquote>
+</blockquote>
+<p>这是百度百科上的定义，用我们生活中的例子来讲<br>就相当于我们每天在地图上用的导航，导航可以帮我们在错综复杂的街道上，找到一条从出发地到达终点的最短路径</p>
+<p>所以我们需要一个好的算法来干这事，而这种算法就叫做<strong>最短路算法</strong>(SSSP)</p>
+<p>而其中Djikstra算法就是最短路算法中的一种(<del>当然也是最简单的一种</del>)</p>
+<p>至于为什么叫Djikstra算法，因为Dijkstra算法是由一个叫Dijkstra的荷兰人发明的，故称此算法为Dijkstra算法。(<del>怎么这么多废话</del>)</p>
+<p>好了，那现在进入正题</p>
+<h1 id="Dijkstra算法的工作原理？"><a href="#Dijkstra算法的工作原理？" class="headerlink" title="Dijkstra算法的工作原理？"></a>Dijkstra算法的工作原理？</h1><p>因为这个算法是为了求出来在一系列限制条件下两个地方的最短路径，那么我们一般怎么找到从一个地方到另外一个地方的最短路呢？</p>
+<p>对，我们首先得有一张地图才行啊</p>
+<p>就拿我国庆去上海玩的经历来说吧</p>
+<p>你现在刚从火车站出来搭地铁到人民广场这个下站了，天色已经很晚了，，但是你突然想走去黄浦江边的外滩去看风景</p>
+<p><img src="/2019/11/30/dijkstra/photo1.png" alt="如图所示"></p>
+<p>你可能要问，诶我为什么不继续坐地铁到那个南京东路下站然后再走去外滩啊，<del>这样不是更近吗？</del><br>(<del>然鹅不幸的是国庆的前几天南京东站的晚上基本上都是被封的</del>)</p>
+<p>所以你只能选择走去外滩，当然你不可能像红色箭头这样飞过去了，不然警察叔叔会罚你 $10^{10} RMB的，所以你只能找到合适的道路走过去，也就是说你只能走那些<strong>标记为“路”的地方</strong></p>
+<p>于是我们就可以把每一个路口或建筑看作一个<strong>点</strong>，有些点与另一些点之间有<strong>边</strong>连接，这个边其实就是马路，连结了两个地方。</p>
+<p>当然，有些马路的车流量比较大，有些在比较小；于是有的马路通过需要花费的时间多，有的花费的时间少。我们把一条马路通过所需要花费的时间，称作这条边的<strong>权值</strong>。所有的点和边连在一起，就成为了一个<strong>图</strong>。<br>(<del>没错如果你想直接从人民广场直接直接走到外滩几乎是不可能的，人流量可以把你窒息死</del>)</p>
+<p>图这种东西大概长这样：</p>
+<p><img src="/2019/11/30/dijkstra/photo2.png" alt="一个简单的图的示意"></p>
+<p>一个圆就是一个<strong>点</strong>，圆上的数字是点的<strong>序号</strong>，绿色的线是<strong>边</strong>，边旁边的橙色数字是边的<strong>权值</strong>。之所以加上箭头，是因为我们假设所有马路都是单行线（<del>双向车道改成两条单向车道不就好了</del>）。</p>
+<p>具体的Dijikstra算法的证明过程在这里不再给出，具体的过程可以自行百度好了(<del>其实是我的证明水平还8太行</del>)</p>
+<p>但是djikstra算法不适用于有负边权的图，在这里不再赘述(<del>才不会告诉你别人已经有更好的解释了啦</del>)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Kprogram/article/details/81220702">戳这里</a></p>
+<p>对我的理解来说，Djikstra算法最直观的一个解释就是以起点开始寻找有没有其他中介点能够使起点到达其他顶点的距离能够变小</p>
+<h1 id="Djikstra算法的一个伪代码"><a href="#Djikstra算法的一个伪代码" class="headerlink" title="Djikstra算法的一个伪代码"></a>Djikstra算法的一个伪代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> vis[maxn] = &#123;<span class="literal">false</span>&#125;;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Djikstra</span><span class="params">(G, d[],s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    初始化</span><br><span class="line">    <span class="keyword">for</span>(循环n次)&#123;</span><br><span class="line">        u = 使d[u]最小的还未访问的顶点的标号</span><br><span class="line">        vis[u] = <span class="literal">true</span>;<span class="comment">//记下u已被访问</span></span><br><span class="line">        <span class="keyword">for</span>(从u出发能到达的所有顶点v)&#123;</span><br><span class="line">            <span class="keyword">if</span>(vis[v] == <span class="literal">false</span> &amp;&amp; 以u为中介点使s到达顶点v的最短距离d[v]更优)</span><br><span class="line">            &#123;</span><br><span class="line">               优化d[v];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中G为邻接矩阵，s为起点</p>
+<p>vis[i] == true时表示顶点Vi已被访问，vis[i] == false时表示顶点Vi还未访问</p>
+<p>d[]表示起点s到达顶点Vi的最短距离，初始化时除了起点的d[s]赋为0，其余的顶点都赋予一个很大的数(比如INT_MAX或者自己赋一个很大的INF)<br>(即相当于把除了起点与其他顶点的边权确认后，其余各个顶点之间的距离设为无穷大(即INF)，这样可以保证后来各个点的最短距离d[i]都是从起点s得来的)</p>
+<h1 id="举一个简单的例子"><a href="#举一个简单的例子" class="headerlink" title="举一个简单的例子"></a>举一个简单的例子</h1><p>拿一个简单的有向图来举例子吧</p>
+<p><img src="/2019/11/30/dijkstra/example1.png" alt></p>
+<p>起点的d[s] = 0，其余点的d[i] = INF;</p>
+<p><img src="/2019/11/30/dijkstra/example2.png" alt></p>
+<p>开始循环，起点1可以到达点3和点2<br>先把vis[1] = true;下次就不再循环到起点1<br>因为d[1] + weight[1][3] &lt; d[3]所以更新d[3]<br>d[3] = d[1] + weight[1][3] = 3;<br>同理d[1] + weight[1][2] &lt; d[2]所以更新d[2]<br>d[2] = d[1] + weight[1][2] = 6;</p>
+<p><img src="/2019/11/30/dijkstra/example3.png" alt><br>继续循环，寻找d[i]中最小的点(即离起点最近的)再开始计算<br>这时候d[3] = 3最小(因为d[1]已经被标记过了不再访问)<br>此时就以点3为中介点，看起点以它为中介点到达另外点的距离能不能变短<br>标记vis[3] = true;<br>此时d[3] + weight[3][2] &lt; d[2];<br>      3  +     2       &lt;   6<br>(即从1-&gt;3-&gt;2的距离比1-&gt;2的离更小)<br>所以更新d[2] = d[3] + weight[3][2] = 5;</p>
+<p>又以点3中介点可以到达点4<br>d[3] + weight[3][4] &lt; d[4];<br>  3  +     3       &lt;   INF<br>此时更新d[4] = d[3] + weight[3][4] = 6;</p>
+<p>同理以点3中介点可以到达点5<br>d[3] + weight[3][5] &lt; d[5];<br>  3  +     4       &lt;   INF<br>此时更新d[5] = d[3] + weight[3][5] = 7;</p>
+<p><img src="/2019/11/30/dijkstra/example4.png" alt></p>
+<p>此时还能访问的d[2] = 5,d[4] = 6,d[5] = 7,d[6] = INF;<br>然后继续循环发现d[2]最小，于是再以2为中介点进行寻找<br>vis[2] = true;<br>d[2] + weight[2][4] &gt; d[4];<br> 5   +      5       &gt;  6<br>此时不更新，由于2只能到达4所以结束循环</p>
+<p><img src="/2019/11/30/dijkstra/example5.png" alt><br>此时还能访问的d[4] = 6,d[5] = 7,d[6] = INF;<br>于是以点4为中介点进行循环<br>vis[4] = true;<br>由于点4可以到达点5和点6<br>d[4] + weight[4][5] &gt; d[5]<br> 6   +      2       &gt;  7<br>不更新，继续循环<br>d[4] + weight[4][6] &lt; d[6]<br> 6   +      3       &lt;  INF<br>所以d[6] = d[4] + weight[4][6] = 9;<br>然后结束循环</p>
+<p><img src="/2019/11/30/dijkstra/example6.png" alt></p>
+<p>此时还能访问的d[5] = 7,d[6] = 9;<br>以点5为中介点进行循环<br>vis[5] = true;<br>由于点5可以到达点6<br>d[5] + weight[5][6] &gt; d[6]<br> 7   +      5       &gt;  9<br>所以不更新，结束循环</p>
+<p><img src="/2019/11/30/dijkstra/example7.png" alt></p>
+<p>此时还能访问的d[6] = 9;<br>vis[6] = true;<br>最后发现除了6自己以外其他点都已访问过，所以结束循环</p>
+<p>最后的结果就是<br>d[1] = 0<br>d[2] = 5<br>d[3] = 3<br>d[4] = 6<br>d[5] = 7<br>d[6] = 9</p>
+<p>至此算法结束。如果您人脑模拟出来跟上面的图示有不一致的地方建议您重新阅读本拙文。<br>如果您还看不懂请<a target="_blank" rel="noopener" href="http://baidu.physton.com/?q=Dijkstra%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3">戳这里</a>。</p>
+<p>具体实现的代码，以邻接矩阵作为举例<br>这里是以<a target="_blank" rel="noopener" href="https://pintia.cn/problem-sets/994805342720868352/problems/994805523835109376">PAT1003</a>为举例<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">510</span>;<span class="comment">//最大的城市数</span></span><br><span class="line"><span class="comment">//N表示一共有N座城市 M表示一共有M条道路 C1 C2分别表示起点和终点</span></span><br><span class="line"><span class="keyword">int</span> N,M,C1,C2;</span><br><span class="line"><span class="keyword">bool</span> vis[maxn] = &#123;<span class="literal">false</span>&#125;;<span class="comment">//定义一个数组来判断城市是否被访问</span></span><br><span class="line"><span class="keyword">int</span> G[maxn][maxn];<span class="comment">//表示城市与城市之间的距离</span></span><br><span class="line"><span class="keyword">int</span> pre[maxn];<span class="comment">//存储前驱结点</span></span><br><span class="line"><span class="keyword">int</span> d[maxn];<span class="comment">//记录最短距离,d[u]表示从起点s到达顶点u的最短距离</span></span><br><span class="line"><span class="keyword">int</span> weight[maxn];<span class="comment">//每个点的权值</span></span><br><span class="line"><span class="keyword">int</span> w[maxn];<span class="comment">//记录起点到每个点的最大权值</span></span><br><span class="line"><span class="keyword">int</span> num[maxn];<span class="comment">//num[u]表示起点s到达顶点u的最短路径条数</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> s)</span><span class="comment">//s表示起点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    fill(d,d+N,INT_MAX);<span class="comment">//把所有点的距离都抹掉</span></span><br><span class="line">    d[s] = <span class="number">0</span>;<span class="comment">//把起点的最短距离设置为0</span></span><br><span class="line">    w[s] = weight[s];<span class="comment">//起点开始的权值即为起点的权值</span></span><br><span class="line">    num[s] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; N;i++)&#123; <span class="comment">//循环n次</span></span><br><span class="line">        <span class="keyword">int</span> u = <span class="number">-1</span>,MIN = INT_MAX;<span class="comment">//u设置为-1是为了方便当找不到可以连接的点时方便判断,MIN存放最小的d[u],</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j &lt; N;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//找到未访问顶点中d[]最小的顶点,因为从起点开始更新了后面的d[u],然后下次循环就要从这个点寻找能到达顶点中距离最小的那个点</span></span><br><span class="line">            <span class="keyword">if</span>(d[j] &lt; MIN &amp;&amp; vis[j] == <span class="literal">false</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                u = j;<span class="comment">//找到跟起点相距最短的那个点</span></span><br><span class="line">                MIN = d[j];<span class="comment">//更新最短的距离</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(u == <span class="number">-1</span>) <span class="keyword">return</span> ;<span class="comment">//如果找不到小于INT_MAX的d[]，意味着剩下的顶点和起点s不连通</span></span><br><span class="line">        vis[u] = <span class="literal">true</span>;<span class="comment">//标记为已访问</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>;v &lt; N;v++)</span><br><span class="line">        &#123;   <span class="comment">//如果u能到达v 且 v未访问 -&gt; 则以u为中介点到达v可以使d[v]更优</span></span><br><span class="line">            <span class="keyword">if</span>(G[u][v] != <span class="number">0</span> &amp;&amp; vis[v] == <span class="literal">false</span> )</span><br><span class="line">            &#123;</span><br><span class="line">               <span class="comment">//当以u为中介点的时候能使d[v]变小</span></span><br><span class="line">               <span class="keyword">if</span>(d[u] + G[u][v] &lt; d[v] )</span><br><span class="line">               &#123;</span><br><span class="line">                  d[v] = d[u] + G[u][v];<span class="comment">//覆盖d[v]</span></span><br><span class="line">                  w[v] = w[u] + weight[v];<span class="comment">//更新w[v]</span></span><br><span class="line">                  num[v] = num[u];<span class="comment">//覆盖num[v]</span></span><br><span class="line"></span><br><span class="line">               &#125;</span><br><span class="line">               <span class="keyword">else</span> <span class="keyword">if</span>(d[u] + G[u][v] == d[v])<span class="comment">//找到一条相同长度的路径后</span></span><br><span class="line">               &#123;</span><br><span class="line">                   <span class="keyword">if</span>(w[v] &lt; w[u] + weight[v])<span class="comment">//如果这条路径的点权之和更大</span></span><br><span class="line">                   &#123;</span><br><span class="line">                      w[v] = w[u] + weight[v];<span class="comment">//更新</span></span><br><span class="line">                   &#125;</span><br><span class="line">                   num[v] += num[u];<span class="comment">//有相同路径长度,则相加num[u],因为当d[u] + G[u][v] &lt; d[v]时候已经算出一个num[v]是符合条件的</span></span><br><span class="line">               &#125;                    <span class="comment">//那么当d[u] + G[u][v] == d[v]时之前d[u] + G[u][v] &lt; d[v]算的num[v]仍然符合条件,则继续加上现在相等时候的num[u]</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="分析算法的复杂度？"><a href="#分析算法的复杂度？" class="headerlink" title="分析算法的复杂度？"></a>分析算法的复杂度？</h1><p>从复杂度来看，主要是外层循环O(V)与内层循环(寻找最小的d[u]需要O(V)、枚举v需要O(V))产生的，总复杂度为O(V*(V+V)) = O(V^2).</p>
+<p>但其实Djikstra算法是可以优化到O(nlogn + m)的级别的<br>为什么？<br>因为必须把每个点都标记为已访问(即vis[i] = true)，所以外层循环的O(V)时间是无法避免的<br>但是寻找最小的d[u]的过程可以不必要一个一个重新循环去寻找最小的那个的d[u]<br>可以通过堆优化来降低复杂度，最简单的做法就是直接用STL中的优先队列priority_queue(<del>STL依赖症</del>)</p>
+<p>看了上面的代码你可能已经发现了一个问题，那就是如果题目除了最短路径还有其他的要求怎么办？<br>比如PAT1003里面就要求找到从起点到终点的最短路径的条数以及最短路径的数目之和<br>即最短的路径可能不止一条</p>
+<p><strong>于是有三种主要的方式来进行考察</strong><br><strong>①</strong>新增边权，即以新增的边权花费为例<br>cost[u][v]表示从u -&gt; v的花费，并增加一个数组c[]，令起点s到达顶点u的最少花费为c[u]同理初始化的时候c[s] = 0,其余均为INF<br>这样就可以在d[u] + G[u][v] &lt; d[v]时更新d[v]和c[v]<br>而当d[u] + G[u][v] == d[v]时且c[u] + cost[u][v] &lt; c[v]时更新c[v]<br>(即可以是s到v的最少花费更优时更新c[v])</p>
+<p>样例代码:<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>;v &lt; n;v++)&#123;</span><br><span class="line">   <span class="comment">//如果v未访问 &amp;&amp; u能到达v</span></span><br><span class="line">   <span class="keyword">if</span>(vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF)&#123;</span><br><span class="line">      <span class="keyword">if</span>(d[u] + G[u][v] &lt; d[v])&#123;</span><br><span class="line">         d[v] = d[u] + G[u][v];</span><br><span class="line">         c[v] = c[u] + cost[u][v];</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(d[u] + G[u][v] == d[v] &amp;&amp; c[v] &gt; c[u] + cost[u][v])&#123;</span><br><span class="line">         c[v] = c[u] + cost[u][v];</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>②</strong>新增点权，即以新增的点权代表城市能收集到的物资为例，用weight[u]表示城市u中的物资数目，并新增一个数组w[]，即从起点s到达顶点u可以收集到的最大的物资为w[u]，初始化的时候w[s] = weight[s],其余均为0，这样就可以在d[u] + G[u][v] &lt; d[v]时更新d[v]和w[v]<br>而当d[u] + G[u][v] == d[v]时且w[u] + weight[u][v] &gt; w[v]时更新w[v]<br>(即可以使s到v的最大物资更优)<br>代码与上面类似不再给出</p>
+<p><strong>③</strong>求最短路径条数，只需要增加一个数组num[]，令从起点s到达顶点u的最短路径条数为num[u]，初始化时num[s]为1，其余num[u]均为0<br>这样可以使当d[u] + G[u][v] &lt; d[v]使num[v]继承num[u]<br>而当d[u] + G[u][v] == d[v]时将num[u]加到num[v]上</p>
+<p>代码如下<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> v = <span class="number">0</span>;v &lt; n;v++)&#123;</span><br><span class="line">   <span class="comment">//如果v未访问 &amp;&amp; u能到达v</span></span><br><span class="line">   <span class="keyword">if</span>(vis[v] == <span class="literal">false</span> &amp;&amp; G[u][v] != INF)&#123;</span><br><span class="line">      <span class="keyword">if</span>(d[u] + G[u][v] &lt; d[v])&#123;</span><br><span class="line">         d[v] = d[u] + G[u][v];</span><br><span class="line">         num[v] = num[u];</span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span>(d[u] + G[u][v] == d[v])&#123;</span><br><span class="line">         num[v] += num[u];</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>鉴于时间关系暂时就先总结这么多，Dijikstra算法其实能扩展的东西还有很多，比如如果题目要求具体的最短路径的话还要另外增加一个记录前驱结点的数组之类的东西，等以后有时间我再来补齐吧!</p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93/" rel="tag"><i class="fa fa-tag"></i> 算法总结</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/20/20191120/" rel="next" title="20191120">
+                <i class="fa fa-chevron-left"></i> 20191120
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/09/20191209/" rel="prev" title="20191209">
+                20191209 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div id="music163player">
+    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=608667&auto=1&height=66"></iframe>
+    </div>
+
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/20200625170552.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hzqsns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/hzqsns-78/activities" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:787624681@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%85%E8%B0%88Djikstra%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">浅谈Djikstra算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84%E7%AE%97%E6%B3%95Djikstra%E5%88%9D%E8%B0%88"><span class="nav-number">2.</span> <span class="nav-text">从最短路径算法Djikstra初谈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDjikstra"><span class="nav-number">3.</span> <span class="nav-text">什么是Djikstra?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dijkstra%E7%AE%97%E6%B3%95%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">Dijkstra算法的工作原理？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Djikstra%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%80%E4%B8%AA%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">Djikstra算法的一个伪代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%BE%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">6.</span> <span class="nav-text">举一个简单的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6%EF%BC%9F"><span class="nav-number">7.</span> <span class="nav-text">分析算法的复杂度？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nakano Azure</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 阅读量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'FRiwnxfM1hjLdf14NrRtTuwN-gzGzoHsz',
+        appKey: 'sW5soMhJKkKK5H8n3LD4QGl0',
+        placeholder: '欢迎留下您的评论嗷('▿')ノ',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 --> 
+<script type="text/javascript" src="/js/src/love.js"></script>
